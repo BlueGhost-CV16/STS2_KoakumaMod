@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cb7faupvdidyf"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b84tre145rmub" path="res://BG_Koakuma/scenes/characters/spine/koakuma.atlas" id="1_fsb2x"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bnna857p36pbh" path="res://BG_Koakuma/scenes/characters/spine/koakuma.skel" id="2_jugsk"]
+
+[resource]
+atlas_res = ExtResource("1_fsb2x")
+skeleton_file_res = ExtResource("2_jugsk")

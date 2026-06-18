@@ -1,0 +1,8 @@
+{
+  "BG_KOAKUMA_POTION_BG_KOAKUMA_MAGIC_POTION.title": "魔力药水",
+  "BG_KOAKUMA_POTION_BG_KOAKUMA_MAGIC_POTION.description": "获得[blue]{Magic}[/blue]点{Magic:secondaryResourceIcons()}。",
+  "BG_KOAKUMA_POTION_BG_KOAKUMA_BOTTLED_BOMB.title": "瓶装爆弹",
+  "BG_KOAKUMA_POTION_BG_KOAKUMA_BOTTLED_BOMB.description": "将[blue]{Cards}[/blue]张[purple]魔力爆弹[/purple]加入你的手牌。",
+  "BG_KOAKUMA_POTION_BG_KOAKUMA_BOTTLED_WORDS.title": "瓶装文字",
+  "BG_KOAKUMA_POTION_BG_KOAKUMA_BOTTLED_WORDS.description": "将随机[gold]魔法书[/gold]牌加入你的手牌中，直至手牌上限。"
+}

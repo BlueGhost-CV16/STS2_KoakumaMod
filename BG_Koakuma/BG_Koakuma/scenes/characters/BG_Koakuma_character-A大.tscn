@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwu13a3wmgrif"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cb7faupvdidyf" path="res://BG_Koakuma/scenes/characters/spine/koakuma_spine.tres" id="1_55mnu"]
+
+[node name="BG_KoakumaCharacter" type="Node2D"]
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_55mnu")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+scale = Vector2(1.75, 1.75)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -136.0
+offset_top = -361.0
+offset_right = 135.0
+offset_bottom = 2.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(24, -224)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -96)
+
+[node name="TalkPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -184)

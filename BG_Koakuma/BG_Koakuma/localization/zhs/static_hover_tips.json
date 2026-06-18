@@ -1,0 +1,6 @@
+{
+  "BG_KOAKUMA_SECONDARY_RESOURCE_MAGIC.title": "魔力",
+  "BG_KOAKUMA_SECONDARY_RESOURCE_MAGIC.description": "部分卡牌会消耗[orange]魔力[/orange]触发额外效果；[orange]魔力[/orange]不足时卡牌仍可打出，但不会触发额外效果。",
+  "BG_KOAKUMA_MAGIC_COST.title": "魔力N",
+  "BG_KOAKUMA_MAGIC_COST.description": "消耗对应数量的[orange]魔力[/orange]来触发额外效果。"
+}

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://30jmdef0lq11"]
+
+[ext_resource type="Texture2D" uid="uid://ckmoyke7gau87" path="res://BG_Koakuma/images/characters/BG_Koakuma_icon.png" id="1_obd67"]
+
+[node name="KoakumaIcon" type="TextureRect"]
+offset_top = -3.0
+offset_right = 56.0
+offset_bottom = 53.0
+texture = ExtResource("1_obd67")

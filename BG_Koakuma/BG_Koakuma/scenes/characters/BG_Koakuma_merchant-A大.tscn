@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbs5e7ekqy4tj"]
+
+[ext_resource type="Texture2D" uid="uid://yypnukak58uu" path="res://BG_Koakuma/scenes/characters/koakuma_merchat.png" id="1_kcywj"]
+
+[node name="BG_KoakumaCharacterMerchant" type="Node2D"]
+
+[node name="Visuals" type="Sprite2D" parent="."]
+position = Vector2(-69, -246)
+scale = Vector2(0.34013155, 0.34013158)
+texture = ExtResource("1_kcywj")

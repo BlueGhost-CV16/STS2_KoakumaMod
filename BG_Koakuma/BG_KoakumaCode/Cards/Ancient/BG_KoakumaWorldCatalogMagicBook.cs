@@ -1,0 +1,30 @@
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using BG_Koakuma.Characters;
+using BG_Koakuma.Powers;
+using STS2RitsuLib.Interop.AutoRegistration;
+
+namespace BG_Koakuma.Cards;
+
+[RegisterCard(typeof(BG_KoakumaCardPool))]
+public sealed class BG_KoakumaWorldCatalogMagicBook : KoakumaAncientCard
+{
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => [AmountVar("Reads", 2)];
+
+    public BG_KoakumaWorldCatalogMagicBook() : base(0, CardType.Skill) { }
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        await KoakumaMechanics.PutDrawPileMagicBooksOnTop(this);
+        for (var i = 0; i < Amount("Reads"); i++)
+        {
+            await KoakumaMechanics.Read(choiceContext, this);
+        }
+    }
+
+    protected override void OnUpgrade() => UpgradeAmount("Reads", 1);
+}

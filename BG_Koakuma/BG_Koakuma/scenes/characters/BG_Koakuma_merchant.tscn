@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbs5e7ekqy4tj"]
+
+[ext_resource type="Texture2D" uid="uid://42fstrmcbm1f" path="res://BG_Koakuma/scenes/characters/use_image/小恶魔-预定立绘-修边？.png" id="1_kcywj"]
+
+[node name="BG_KoakumaCharacterMerchant" type="Node2D"]
+
+[node name="Visuals" type="Sprite2D" parent="."]
+position = Vector2(2.9999924, -241)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_kcywj")

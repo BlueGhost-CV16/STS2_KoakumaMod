@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwu13a3wmgrif"]
+
+[ext_resource type="Texture2D" uid="uid://42fstrmcbm1f" path="res://BG_Koakuma/scenes/characters/use_image/小恶魔-预定立绘-修边？.png" id="1_55mnu"]
+
+[node name="BG_KoakumaCharacter" type="Node2D"]
+
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(5.9604645e-08, -240)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_55mnu")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -210.0
+offset_top = -463.0
+offset_right = 211.0
+offset_bottom = 2.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(24, -424)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -246)
+
+[node name="TalkPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(24, -424)

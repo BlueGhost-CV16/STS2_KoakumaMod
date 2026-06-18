@@ -1,0 +1,21 @@
+{
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.aromaPrinciple": "[sine][blue]红魔馆的司书助手，翻开了新的魔法书。[/blue][/sine]",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.banter.alive.endTurnPing": "这回合先到这里。",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.banter.dead.endTurnPing": "我需要暂时退下。",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.cardsModifierDescription": "小恶魔的卡牌现在会出现在奖励和商店中。",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.cardsModifierTitle": "小恶魔卡牌",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.defeatMessage": "书页散落一地……下次会整理好的。",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.description": "红魔馆图书馆的使魔助手。通过[green]阅读[/green]、[purple]解读[/purple]、[gold]魔法书收集[/gold]与[orange]魔力[/orange]构筑战斗节奏。",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.eventDeathPrevention": "小恶魔撑住了最后一口气。",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.flavor": "她总是在帕秋莉的图书馆里忙碌，整理那些危险又迷人的魔法书。",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.goldMonologue": "这些经费应该足够采购新的书签。",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.possessiveAdjective": "她的",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.pronounObject": "她",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.pronounPossessive": "她的",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.pronounSubject": "她",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.selectMessage": "小恶魔准备就绪。",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.title": "小恶魔",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.titleObject": "小恶魔",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.unlockText": "用[pink]{Prerequisite}[/pink]进行一局游戏来解锁小恶魔。",
+  "BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.victoryMessage": "图书整理完成，战斗记录也归档完毕。"
+}

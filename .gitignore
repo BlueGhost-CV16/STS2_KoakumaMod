@@ -1,0 +1,28 @@
+# Godot
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+
+# Godot imported assets
+*.import
+
+# .NET / C#
+bin/
+obj/
+.dotnet-cli-home/
+
+# IDEs
+.vs/
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Logs and temporary files
+*.log
+log.txt
+*.tmp
+*.temp

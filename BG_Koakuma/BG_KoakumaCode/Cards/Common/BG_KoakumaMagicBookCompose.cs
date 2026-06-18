@@ -1,0 +1,43 @@
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
+using BG_Koakuma.Characters;
+using STS2RitsuLib.Interop.AutoRegistration;
+
+namespace BG_Koakuma.Cards;
+
+[RegisterCard(typeof(BG_KoakumaCardPool))]
+public sealed class BG_KoakumaMagicBookCompose : KoakumaInterpretableCommonCard, IKoakumaOnInterpretResolved
+{
+    public BG_KoakumaMagicBookCompose() : base(1, CardType.Attack, TargetType.AnyEnemy) { }
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DamageVar(10, ValueProp.Move)
+    ];
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+        await KoakumaMechanics.CollectMagicBook(choiceContext, this);
+        KoakumaMechanics.ConsumeInterpret(this);
+    }
+
+    public Task ResolveInterpret(PlayerChoiceContext choiceContext)
+    {
+        if (KoakumaMechanics.ConsumeInterpret(this))
+        {
+            EnergyCost.SetUntilPlayed(0);
+        }
+
+        return Task.CompletedTask;
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Damage.UpgradeValueBy(3);
+    }
+}
