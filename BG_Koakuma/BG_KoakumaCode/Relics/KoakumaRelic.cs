@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -13,6 +14,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Cards;
 using BG_Koakuma.Characters;
 using BG_Koakuma.Powers;
+using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Combat.SecondaryResources;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
@@ -32,6 +34,11 @@ public abstract class KoakumaRelic : ModRelicTemplate
         SecondaryResourceVars.For(name, KoakumaMagic.MagicId, value);
 
     protected int Amount(string name) => DynamicVars[name].IntValue;
+
+    protected virtual IEnumerable<string> ExtraKoakumaHoverTipIds => [];
+
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
+        KoakumaHoverTips.CreateMany(ExtraKoakumaHoverTipIds);
 
     protected async Task GainMagic(PlayerChoiceContext choiceContext, int amount)
     {

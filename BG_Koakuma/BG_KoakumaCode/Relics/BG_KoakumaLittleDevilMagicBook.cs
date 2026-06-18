@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Cards;
+using BG_Koakuma.Tooltips;
 using BG_Koakuma.Characters;
 using BG_Koakuma.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -23,6 +24,8 @@ namespace BG_Koakuma.Relics;
 [RegisterTouchOfOrobasRefinement(typeof(BG_KoakumaSevenLuminariesElementBook))]
 public sealed class BG_KoakumaLittleDevilMagicBook : KoakumaRelic, IKoakumaAfterRead
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.Read];
+
     public override RelicRarity Rarity => RelicRarity.Starter;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

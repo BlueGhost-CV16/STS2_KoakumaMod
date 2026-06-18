@@ -1,10 +1,12 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Characters;
 using BG_Koakuma.Powers;
+using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace BG_Koakuma.Cards;
@@ -12,6 +14,10 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaRuinsCross : KoakumaUncommonCard
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBurn];
+
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<ManaRefundPower>()];
+
     public BG_KoakumaRuinsCross() : base(2, CardType.Attack, TargetType.AnyEnemy) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -36,4 +42,3 @@ public sealed class BG_KoakumaRuinsCross : KoakumaUncommonCard
         UpgradeAmount("ManaRefund", 1);
     }
 }
-

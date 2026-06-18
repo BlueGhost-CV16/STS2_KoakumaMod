@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Characters;
+using BG_Koakuma.Tooltips;
 using BG_Koakuma.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
 
@@ -13,6 +14,8 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaFuelOnFire : KoakumaCommonCard
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBurn];
+
     public BG_KoakumaFuelOnFire() : base(1, CardType.Skill, TargetType.AllEnemies) { }
 
     public override bool GainsBlock => true;

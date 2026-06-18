@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BG_Koakuma.Characters;
 using BG_Koakuma.Powers;
@@ -11,6 +12,8 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaPocketUniverse : KoakumaUncommonCard
 {
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<PocketUniversePower>(), CardTip<BG_KoakumaMagicBomb>()];
+
     public BG_KoakumaPocketUniverse() : base(1, CardType.Power) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

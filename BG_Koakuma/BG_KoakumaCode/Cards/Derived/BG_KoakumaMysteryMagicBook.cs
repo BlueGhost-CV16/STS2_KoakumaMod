@@ -7,12 +7,14 @@ using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
 
+using BG_Koakuma.Tooltips;
 namespace BG_Koakuma.Cards;
 
 [RegisterCard(typeof(TokenCardPool))]
-public sealed class BG_KoakumaMysteryMagicBook : ModCardTemplate, IKoakumaInterpretableCard, IKoakumaMagicBookCard, IKoakumaOnInterpretResolved
+public sealed class BG_KoakumaMysteryMagicBook : KoakumaCard, IKoakumaInterpretableCard, IKoakumaMagicBookCard, IKoakumaOnInterpretResolved
 {
-    private const string MagicBookKeywordId = KoakumaCard.MagicBookKeywordId;
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];
+
     private const int BaseEnergyCost = 1;
     private const CardType CardKind = CardType.Skill;
     private const CardRarity CardRarityValue = CardRarity.Token;

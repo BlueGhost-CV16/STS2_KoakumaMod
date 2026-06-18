@@ -5,11 +5,14 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using STS2RitsuLib.Interop.AutoRegistration;
 
+using BG_Koakuma.Tooltips;
 namespace BG_Koakuma.Cards;
 
 [RegisterCard(typeof(TokenCardPool))]
 public sealed class BG_KoakumaRhodoniteBook : KoakumaMagicBookCard
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.Interpret];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         MagicVar("Magic", 6),

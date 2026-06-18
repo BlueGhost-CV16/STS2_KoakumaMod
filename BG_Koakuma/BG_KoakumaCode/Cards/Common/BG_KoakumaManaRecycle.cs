@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Characters;
@@ -12,6 +13,8 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaManaRecycle : KoakumaCommonCard
 {
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<KoakumaManaRecyclePower>()];
+
     public BG_KoakumaManaRecycle() : base(2, CardType.Skill) { }
 
     public override bool GainsBlock => true;
@@ -33,4 +36,3 @@ public sealed class BG_KoakumaManaRecycle : KoakumaCommonCard
         DynamicVars.Block.UpgradeValueBy(5);
     }
 }
-

@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using BG_Koakuma.Characters;
+using BG_Koakuma.Tooltips;
 using BG_Koakuma.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
 
@@ -13,6 +14,8 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaMidnightNap : KoakumaRareCard
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
+
     public BG_KoakumaMidnightNap() : base(1, CardType.Skill) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

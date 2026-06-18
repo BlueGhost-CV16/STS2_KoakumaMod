@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BG_Koakuma.Characters;
+using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace BG_Koakuma.Cards;
@@ -9,6 +10,8 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaMagicBookWriting : KoakumaInterpretableCommonCard
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.Interpret, KoakumaHoverTips.MagicBookCollection];
+
     public BG_KoakumaMagicBookWriting() : base(0, CardType.Skill)
     {
         SetMagicCost(1);

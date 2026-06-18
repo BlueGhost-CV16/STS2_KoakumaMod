@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Characters;
+using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace BG_Koakuma.Cards;
@@ -11,6 +12,8 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaChargingBarrier : KoakumaCommonCard
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
+
     public BG_KoakumaChargingBarrier() : base(1, CardType.Skill)
     {
         SetMagicCost(3);
@@ -20,7 +23,7 @@ public sealed class BG_KoakumaChargingBarrier : KoakumaCommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(7, ValueProp.Move | ValueProp.Unpowered),
+        new BlockVar(9, ValueProp.Move | ValueProp.Unpowered),
         MagicVar("MagicCost", 3)
     ];
 

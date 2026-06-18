@@ -11,11 +11,14 @@ using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
+using BG_Koakuma.Tooltips;
 namespace BG_Koakuma.Powers;
 
 [RegisterPower]
 public sealed class MagicBurnPower : KoakumaPower
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBurn];
+
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
 

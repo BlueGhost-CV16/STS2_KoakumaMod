@@ -7,11 +7,14 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 using STS2RitsuLib.Combat.SecondaryResources;
 using STS2RitsuLib.Interop.AutoRegistration;
 
+using BG_Koakuma.Tooltips;
 namespace BG_Koakuma.Cards;
 
 [RegisterCard(typeof(TokenCardPool))]
 public sealed class BG_KoakumaRhodoniteIsolation : KoakumaMagicBookCard
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.Interpret];
+
     public BG_KoakumaRhodoniteIsolation() : base(true) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

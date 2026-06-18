@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Characters;
+using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -14,6 +15,8 @@ namespace BG_Koakuma.Cards;
 [RegisterCharacterStarterCard(typeof(BG_KoakumaCharacter), 1, Order = 3)]
 public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpretableCard
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.Interpret, KoakumaHoverTips.MagicBookCollection];
+
     private const int BaseEnergyCost = 0;
     private const CardType CardKind = CardType.Attack;
     private const CardRarity CardRarityValue = CardRarity.Basic;

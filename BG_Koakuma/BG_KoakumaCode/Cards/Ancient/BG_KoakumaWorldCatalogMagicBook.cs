@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BG_Koakuma.Characters;
+using BG_Koakuma.Tooltips;
 using BG_Koakuma.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
 
@@ -11,6 +12,8 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaWorldCatalogMagicBook : KoakumaAncientCard
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBook, KoakumaHoverTips.Read];
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [AmountVar("Reads", 2)];

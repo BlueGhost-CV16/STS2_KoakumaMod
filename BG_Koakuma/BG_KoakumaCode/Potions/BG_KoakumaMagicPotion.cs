@@ -6,25 +6,23 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using BG_Koakuma.Cards;
+using BG_Koakuma.Tooltips;
 using BG_Koakuma.Characters;
 using STS2RitsuLib.Combat.SecondaryResources;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace BG_Koakuma.Potions;
 
 [RegisterPotion(typeof(BG_KoakumaPotionPool), StableEntryStem = "BG_KOAKUMA_MAGIC_POTION")]
-public sealed class BG_KoakumaMagicPotion : ModPotionTemplate
+public sealed class BG_KoakumaMagicPotion : KoakumaPotion
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
+
     public override PotionRarity Rarity => PotionRarity.Common;
 
     public override PotionUsage Usage => PotionUsage.CombatOnly;
 
     public override TargetType TargetType => TargetType.AnyPlayer;
-
-    public override PotionAssetProfile AssetProfile => new(
-        $"{Entry.ResPath}/images/potions/BG_KoakumaMagicPotion.png",
-        $"{Entry.ResPath}/images/potions/outline/BG_KoakumaMagicPotion.png");
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

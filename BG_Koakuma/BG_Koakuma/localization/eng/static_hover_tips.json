@@ -1,4 +1,14 @@
 {
+  "BG_KOAKUMA_SECONDARY_RESOURCE_MAGIC.title": "Magic",
+  "BG_KOAKUMA_SECONDARY_RESOURCE_MAGIC.description": "Some cards spend [orange]Magic[/orange] to trigger bonus effects. If you do not have enough [orange]Magic[/orange], the card can still be played, but the bonus effect will not trigger.",
   "BG_KOAKUMA_MAGIC_COST.title": "Magic Cost",
-  "BG_KOAKUMA_MAGIC_COST.description": "Spend that much [orange]Magic[/orange] to trigger the effect after the colon."
+  "BG_KOAKUMA_MAGIC_COST.description": "Spend that much [orange]Magic[/orange] to trigger the effect after the colon.",
+  "BG_KOAKUMA_TIP_READ.title": "Read",
+  "BG_KOAKUMA_TIP_READ.description": "Look at up to 3 cards from the top of your draw pile, choose 1 to put into your hand, then put 1 card from your hand on the bottom of your draw pile.",
+  "BG_KOAKUMA_TIP_INTERPRET.title": "Interpret",
+  "BG_KOAKUMA_TIP_INTERPRET.description": "An interpreted card gains a one-time interaction defined by that card or another effect. It loses interpreted status after leaving your hand.",
+  "BG_KOAKUMA_TIP_MAGIC_BOOK_COLLECTION.title": "Magic Book Collection",
+  "BG_KOAKUMA_TIP_MAGIC_BOOK_COLLECTION.description": "Choose cards from your exhaust pile and remove them from combat to discover or generate Magic Books. If there are no choices, create a Mystery Magic Book.",
+  "BG_KOAKUMA_TIP_MAGIC_BURN.title": "Magic Burn",
+  "BG_KOAKUMA_TIP_MAGIC_BURN.description": "Koakuma's burning debuff. Related cards and powers trigger extra effects based on [red]Magic Burn[/red] stacks."
 }

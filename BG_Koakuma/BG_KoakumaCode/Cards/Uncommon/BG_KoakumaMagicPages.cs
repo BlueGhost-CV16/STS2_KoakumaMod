@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using BG_Koakuma.Characters;
 using BG_Koakuma.Powers;
@@ -11,6 +12,8 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaMagicPages : KoakumaUncommonCard
 {
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<MagicPagesPower>()];
+
     public BG_KoakumaMagicPages() : base(1, CardType.Skill) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -28,4 +31,3 @@ public sealed class BG_KoakumaMagicPages : KoakumaUncommonCard
         UpgradeAmount("Power", 1);
     }
 }
-

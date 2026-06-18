@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Cards;
+using BG_Koakuma.Tooltips;
 using BG_Koakuma.Characters;
 using BG_Koakuma.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -21,6 +22,8 @@ namespace BG_Koakuma.Relics;
 [RegisterRelic(typeof(BG_KoakumaRelicPool))]
 public sealed class BG_KoakumaFeatherPen : KoakumaRelic
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];
+
     private int _remaining;
 
     public override RelicRarity Rarity => RelicRarity.Rare;

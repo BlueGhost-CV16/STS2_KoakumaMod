@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using BG_Koakuma.Characters;
+using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -11,6 +12,8 @@ namespace BG_Koakuma.Cards;
 [RegisterCharacterStarterCard(typeof(BG_KoakumaCharacter), 1, Order = 4)]
 public sealed class BG_KoakumaMagicBookOrganize : KoakumaCard, IKoakumaInterpretableCard
 {
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];
+
     private const int BaseEnergyCost = 0;
     private const CardType CardKind = CardType.Skill;
     private const CardRarity CardRarityValue = CardRarity.Basic;
