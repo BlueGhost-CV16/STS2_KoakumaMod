@@ -26,6 +26,7 @@ public sealed class BG_KoakumaPalmBomb : KoakumaCommonCard
     [
         new DamageVar(5, ValueProp.Move),
         AmountVar("Count", 1),
+        AmountVar("BonusCount", 1),
         MagicVar("MagicCost", 2)
     ];
 
@@ -36,7 +37,7 @@ public sealed class BG_KoakumaPalmBomb : KoakumaCommonCard
         var count = Amount("Count");
         if (KoakumaMechanics.MagicPaid(cardPlay))
         {
-            count++;
+            count += Amount("BonusCount");
         }
 
         for (var i = 0; i < count; i++)

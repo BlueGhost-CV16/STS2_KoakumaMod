@@ -1,34 +1,49 @@
-using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Models.Powers.Mocks;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.CardPools;
-using BG_Koakuma.Powers;
-using BG_Koakuma.Tooltips;
+using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
+using STS2RitsuLib.Keywords;
 
 namespace BG_Koakuma.Cards;
 
 [RegisterCard(typeof(TokenCardPool))]
 public sealed class BG_KoakumaLapisBook : KoakumaMagicBookCard
 {
-    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret, KoakumaHoverTips.Read];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [CardTip<BG_KoakumaLapisFantasyLibrary>()];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    public BG_KoakumaLapisBook() : base(true) { }
+
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
-        new CardsVar(1)
+        CardKeyword.Retain,
+        ModKeywordRegistry.GetCardKeyword(MagicBookKeywordId)
     ];
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override bool IsPlayable => false;
+
+    protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await KoakumaMechanics.Read(choiceContext, this);
-        await InterpretDraw(choiceContext);
+        return Task.CompletedTask;
+    }
+
+    public override async Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
+    {
+        await base.AfterCardChangedPiles(card, oldPileType, clonedBy);
+
+        if (card == this
+            || card.Owner != Owner
+            || Pile?.Type != PileType.Hand
+            || oldPileType == PileType.Hand
+            || card.Pile?.Type != PileType.Hand
+            || !KoakumaMechanics.IsMagicBook(card))
+        {
+            return;
+        }
+
+        await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Bottom);
+        await KoakumaMechanics.TransformToTrueName(card);
     }
 }

@@ -37,8 +37,19 @@ public abstract class KoakumaRelic : ModRelicTemplate
 
     protected virtual IEnumerable<string> ExtraKoakumaHoverTipIds => [];
 
+    protected virtual IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [];
+
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
-        KoakumaHoverTips.CreateMany(ExtraKoakumaHoverTipIds);
+        KoakumaHoverTips.CreateMany(ExtraKoakumaHoverTipIds).Concat(ExtraKoakumaHoverTips);
+
+    protected static IHoverTip CardTip<TCard>() where TCard : CardModel =>
+        HoverTipFactory.FromCard<TCard>();
+
+    protected static IHoverTip PowerTip<TPower>() where TPower : PowerModel =>
+        HoverTipFactory.FromPower<TPower>();
+
+    protected static IHoverTip KeywordTip(CardKeyword keyword) =>
+        HoverTipFactory.FromKeyword(keyword);
 
     protected async Task GainMagic(PlayerChoiceContext choiceContext, int amount)
     {

@@ -60,7 +60,12 @@ public sealed class BG_KoakumaCharacter : ModCharacterTemplate<BG_KoakumaCardPoo
             // 人物选择图标-锁定状态。
             CharacterSelectLockedIconPath: $"{ImageRoot}/BG_Koakuma_character_select_locked.png",
             // 地图上的角色标记图标、表情轮盘上的角色头像。
-            MapMarkerPath: $"{ImageRoot}/BG_Koakuma_map_marker.png"));
+            MapMarkerPath: $"{ImageRoot}/BG_Koakuma_map_marker.png"),
+        Multiplayer: new CharacterMultiplayerAssetSet(
+            ArmPointingTexturePath: $"{ImageRoot}/BG_Koakuma_character_armpointing.png",
+            ArmRockTexturePath: $"{ImageRoot}/BG_Koakuma_character_rock.png",
+            ArmPaperTexturePath: $"{ImageRoot}/BG_Koakuma_character_paper.png",
+            ArmScissorsTexturePath: $"{ImageRoot}/BG_Koakuma_character_scissors.png"));
 
     // 某个字段没写时，RitsuLib 会从占位角色配置里补齐。
     public override string? PlaceholderCharacterId => "ironclad";

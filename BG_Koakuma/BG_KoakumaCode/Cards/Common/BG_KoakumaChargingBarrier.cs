@@ -41,7 +41,7 @@ public sealed class BG_KoakumaChargingBarrier : KoakumaCommonCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(1);
+        DynamicVars.Block.UpgradeValueBy(3);
         AddKeyword(CardKeyword.Innate);
     }
 }
