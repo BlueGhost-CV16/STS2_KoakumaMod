@@ -17,7 +17,7 @@ namespace BG_Koakuma.Powers;
 [RegisterPower]
 public sealed class MagicBurnPower : KoakumaPower
 {
-    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBurn];
+    //protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBurn];
 
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -39,10 +39,10 @@ public sealed class MagicBurnPower : KoakumaPower
     {
         if (target == Owner && dealer != null && dealer != Owner && props.IsPoweredAttack())
         {
-            await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unpowered, dealer, cardSource);
+            await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unpowered, null, cardSource);
             if (dealer.GetPower<StackedInjuryPower>() is { } stackedInjury)
             {
-                await CreatureCmd.Damage(choiceContext, Owner, Amount * stackedInjury.Amount, ValueProp.Unpowered, dealer, cardSource);
+                await CreatureCmd.Damage(choiceContext, Owner, Amount * stackedInjury.Amount, ValueProp.Unpowered, null, cardSource);
             }
         }
     }
@@ -61,10 +61,10 @@ public sealed class MagicBurnPower : KoakumaPower
 
     private async Task TriggerBurnDamage(PlayerChoiceContext choiceContext, decimal amount, Creature? dealer, CardModel? cardSource)
     {
-        await CreatureCmd.Damage(choiceContext, Owner, amount, ValueProp.Unpowered, dealer, cardSource);
+        await CreatureCmd.Damage(choiceContext, Owner, amount, ValueProp.Unpowered, null, cardSource);
         if (dealer?.GetPower<StackedInjuryPower>() is { } stackedInjury)
         {
-            await CreatureCmd.Damage(choiceContext, Owner, amount * stackedInjury.Amount, ValueProp.Unpowered, dealer, cardSource);
+            await CreatureCmd.Damage(choiceContext, Owner, amount * stackedInjury.Amount, ValueProp.Unpowered, null, cardSource);
         }
     }
 }

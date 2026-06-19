@@ -17,7 +17,7 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.Interpret, KoakumaHoverTips.MagicBookCollection];
 
-    private const int BaseEnergyCost = 0;
+    private const int BaseEnergyCost = 1;
     private const CardType CardKind = CardType.Attack;
     private const CardRarity CardRarityValue = CardRarity.Basic;
     private const TargetType CardTarget = TargetType.AnyEnemy;
@@ -28,13 +28,13 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(5, ValueProp.Move),
-        MagicVar("MagicCost", 2)
+        new DamageVar(7, ValueProp.Move),
+        MagicVar("MagicCost", 3)
     ];
 
     public BG_KoakumaMagicBookCollect() : base(BaseEnergyCost, CardKind, CardRarityValue, CardTarget, ShowInCardLibrary)
     {
-        SetMagicCost(2);
+        SetMagicCost(3);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

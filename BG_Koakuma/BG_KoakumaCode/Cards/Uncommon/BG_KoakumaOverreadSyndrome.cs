@@ -12,11 +12,11 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaOverreadSyndrome : KoakumaUncommonCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<OverreadSyndromePower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<OverreadSyndromePower>(), PowerTip<MagicBurnPower>()];
 
     public BG_KoakumaOverreadSyndrome() : base(1, CardType.Power) { }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<OverreadSyndromePower>("Power", 1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<OverreadSyndromePower>("Power", 2)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

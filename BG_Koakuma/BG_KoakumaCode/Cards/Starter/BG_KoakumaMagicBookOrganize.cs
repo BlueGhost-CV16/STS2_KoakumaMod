@@ -40,6 +40,7 @@ public sealed class BG_KoakumaMagicBookOrganize : KoakumaCard, IKoakumaInterpret
     protected override void OnUpgrade()
     {
         AddKeyword(CardKeyword.Retain);
+        //EnergyCost.UpgradeBy(-1);
     }
 
     public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)

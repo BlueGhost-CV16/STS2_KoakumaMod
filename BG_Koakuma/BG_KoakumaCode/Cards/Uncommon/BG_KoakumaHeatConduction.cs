@@ -14,11 +14,11 @@ public sealed class BG_KoakumaHeatConduction : KoakumaUncommonCard
 {
     protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<HeatConductionPower>()];
 
-    public BG_KoakumaHeatConduction() : base(2, CardType.Power) { }
+    public BG_KoakumaHeatConduction() : base(1, CardType.Power) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<HeatConductionPower>("Power", 3)
+        new PowerVar<HeatConductionPower>("Power", 1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

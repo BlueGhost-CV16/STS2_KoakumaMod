@@ -31,12 +31,24 @@ public sealed class BG_KoakumaHalloweenFireworkPrank : KoakumaUncommonCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, DynamicVars.Damage, Owner.Creature, this);
-        await PowerCmd.Apply<MagicBurnPower>(choiceContext, CombatState.HittableEnemies, Amount("MagicBurn"), Owner.Creature, this);
+        if (CombatState == null)
+        {
+            return;
+        }
+
+        var enemies = CombatState.HittableEnemies.ToList();
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .TargetingAllOpponents(CombatState)
+            .Execute(choiceContext);
+        await PowerCmd.Apply<MagicBurnPower>(choiceContext, enemies, Amount("MagicBurn"), Owner.Creature, this);
         if (KoakumaMechanics.MagicPaid(cardPlay))
         {
-            await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, (DamageVar)DynamicVars["BonusDamage"], Owner.Creature, this);
-            await PowerCmd.Apply<MagicBurnPower>(choiceContext, CombatState.HittableEnemies, Amount("BonusMagicBurn"), Owner.Creature, this);
+            await DamageCmd.Attack(DynamicVars["BonusDamage"].BaseValue)
+                .FromCard(this)
+                .TargetingAllOpponents(CombatState)
+                .Execute(choiceContext);
+            await PowerCmd.Apply<MagicBurnPower>(choiceContext, enemies, Amount("BonusMagicBurn"), Owner.Creature, this);
         }
         else
         {

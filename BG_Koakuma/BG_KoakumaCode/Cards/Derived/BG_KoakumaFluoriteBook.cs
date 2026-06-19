@@ -24,7 +24,7 @@ public sealed class BG_KoakumaFluoriteBook : KoakumaMagicBookCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new EnergyVar(3),
+        new EnergyVar(2),
         new CardsVar(1)
     ];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

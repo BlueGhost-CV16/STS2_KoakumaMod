@@ -39,7 +39,7 @@ public sealed class BG_KoakumaJackBomb : KoakumaUncommonCard
     {
         DynamicVars.Damage.UpgradeValueBy(2);
         UpgradeAmount("MagicBurn", 1);
-        UpgradeAmount("Power", 1);
+        //UpgradeAmount("Power", 1);
     }
 }
 

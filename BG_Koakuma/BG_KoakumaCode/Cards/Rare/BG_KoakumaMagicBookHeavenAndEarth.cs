@@ -1,13 +1,9 @@
 using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Characters;
 using BG_Koakuma.Tooltips;
-using BG_Koakuma.Powers;
-using STS2RitsuLib.Combat.SecondaryResources;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace BG_Koakuma.Cards;
@@ -17,15 +13,13 @@ public sealed class BG_KoakumaMagicBookHeavenAndEarth : KoakumaInterpretableRare
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret, KoakumaHoverTips.MagicBook];
 
-    public BG_KoakumaMagicBookHeavenAndEarth() : base(3, CardType.Attack, TargetType.AllEnemies) { }
+    public BG_KoakumaMagicBookHeavenAndEarth() : base(3, CardType.Skill) { }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(16, ValueProp.Move)];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var enemies = CombatState?.HittableEnemies.ToList() ?? [];
-        await CreatureCmd.Damage(choiceContext, enemies, DynamicVars.Damage, Owner.Creature, this);
-        await KoakumaMechanics.FillHandWithRandomMagicBooks(choiceContext, this);
+        await KoakumaMechanics.FillHandWithRandomMagicBooks(choiceContext, this, IsUpgraded);
         KoakumaMechanics.ConsumeInterpret(this);
     }
 
@@ -39,5 +33,5 @@ public sealed class BG_KoakumaMagicBookHeavenAndEarth : KoakumaInterpretableRare
         return Task.CompletedTask;
     }
 
-    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
+    protected override void OnUpgrade() { }
 }

@@ -64,7 +64,7 @@ public sealed class BG_KoakumaSevenLuminariesElementBook : KoakumaRelic, IKoakum
         }
     }
 
-    public async Task AfterRead(PlayerChoiceContext choiceContext, CardModel readCard)
+    public async Task AfterRead(PlayerChoiceContext choiceContext, CardModel? readCard)
     {
         Flash();
         await GainMagic(choiceContext, Amount("Magic"));

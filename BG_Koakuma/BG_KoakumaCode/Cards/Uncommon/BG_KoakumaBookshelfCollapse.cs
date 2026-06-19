@@ -21,7 +21,15 @@ public sealed class BG_KoakumaBookshelfCollapse : KoakumaUncommonCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, DynamicVars.Damage, Owner.Creature, this);
+        if (CombatState == null)
+        {
+            return;
+        }
+
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .TargetingAllOpponents(CombatState)
+            .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

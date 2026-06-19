@@ -29,10 +29,14 @@ public sealed class BG_KoakumaLibraryPatrol : KoakumaUncommonCard
             select c;
         foreach (var item in enumerable)
         {
-            foreach (var card in KoakumaMechanics.CreateRandomMagicBooks(this, Amount("Cards")))
+            if (item.Player == null)
             {
-                if (item.Player != null)
-                    await KoakumaMechanics.AddGeneratedCardToHand(choiceContext, card, item.Player);
+                continue;
+            }
+
+            foreach (var card in KoakumaMechanics.CreateRandomMagicBooks(item.Player, Amount("Cards")))
+            {
+                await KoakumaMechanics.AddGeneratedCardToHand(choiceContext, card, item.Player);
             }
         }
     }

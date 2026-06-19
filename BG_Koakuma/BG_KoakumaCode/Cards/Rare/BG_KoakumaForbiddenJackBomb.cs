@@ -40,7 +40,7 @@ public sealed class BG_KoakumaForbiddenJackBomb : KoakumaRareCard
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (Pile?.Type != PileType.Exhaust ||
-            cardPlay.IsAutoPlay ||
+            //cardPlay.IsAutoPlay ||
             cardPlay.Card.Owner != Owner ||
             cardPlay.Card is not BG_KoakumaMagicBomb)
         {

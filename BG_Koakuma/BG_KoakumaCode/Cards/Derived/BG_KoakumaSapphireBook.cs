@@ -29,7 +29,7 @@ public sealed class BG_KoakumaSapphireBook : KoakumaMagicBookCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new PowerVar<SapphireProtectionPower>("Protection", 5),
-        new BlockVar(6, ValueProp.Move),
+        new BlockVar(4, ValueProp.Move),
         new CardsVar(1)
     ];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -41,6 +41,6 @@ public sealed class BG_KoakumaSapphireBook : KoakumaMagicBookCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(4);
+        DynamicVars.Block.UpgradeValueBy(3);
     }
 }

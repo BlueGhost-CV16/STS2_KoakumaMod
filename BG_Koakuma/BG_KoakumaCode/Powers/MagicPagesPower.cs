@@ -14,7 +14,7 @@ public sealed class MagicPagesPower : KoakumaPower
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public async Task AfterRead(PlayerChoiceContext choiceContext, CardModel readCard)
+    public async Task AfterRead(PlayerChoiceContext choiceContext, CardModel? readCard)
     {
         var drawPile = PileType.Draw.GetPile(Owner.Player);
         var bottom = drawPile.Cards.LastOrDefault();

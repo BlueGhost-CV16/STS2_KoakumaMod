@@ -19,7 +19,7 @@ public sealed class BG_KoakumaRhodoniteIsolation : KoakumaMagicBookCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        MagicVar("Magic", 3),
+        MagicVar("Magic", 2),
         //AmountVar("Choose", 1),
         //new EnergyVar("CostReduction", 1),
         new CardsVar(1)

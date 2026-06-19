@@ -27,4 +27,14 @@ public abstract class KoakumaMagicBookCard : KoakumaDerivedCard, IKoakumaMagicBo
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         base.CanonicalKeywords.Concat([ModKeywordRegistry.GetCardKeyword(MagicBookKeywordId)]);
+
+    public override async Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
+    {
+        await base.AfterCardChangedPiles(card, oldPileType, clonedBy);
+
+        if (card == this && oldPileType != PileType.Exhaust && Pile?.Type == PileType.Exhaust)
+        {
+            await KoakumaMechanics.RestoreTrueNameToNormalIfNeeded(this);
+        }
+    }
 }

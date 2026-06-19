@@ -21,8 +21,16 @@ public sealed class BG_KoakumaForbiddenBurningCatalog : KoakumaRareCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        if (CombatState == null)
+        {
+            return;
+        }
+
         var damage = DynamicVars.Damage.BaseValue + Amount("CollectionDamage") * KoakumaMechanics.GetMagicBookCollectionCount(Owner);
-        await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, damage, ValueProp.Move, Owner.Creature, this);
+        await DamageCmd.Attack(damage)
+            .FromCard(this)
+            .TargetingAllOpponents(CombatState)
+            .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

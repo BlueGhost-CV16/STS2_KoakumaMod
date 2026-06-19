@@ -25,7 +25,11 @@ public abstract class SapphireDamageReductionPower : KoakumaPower, IPowerExtraIc
     protected abstract int PercentPerStack { get; }
 
     public override PowerType Type => PowerType.Buff;
+    
     public override PowerStackType StackType => PowerStackType.Single;
+
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
+    
     public override int DisplayAmount => DamageReductionPercent;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -123,7 +127,7 @@ public abstract class SapphireDamageReductionPower : KoakumaPower, IPowerExtraIc
 
     public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)
     {
-        if (dealer == Owner && props.IsPoweredAttack() && result.UnblockedDamage + result.OverkillDamage > 0)
+        if (dealer == Owner && props.IsPoweredAttack())
         {
             ReduceReductionStacks(1);
             SyncDynamicVars();
@@ -135,7 +139,7 @@ public abstract class SapphireDamageReductionPower : KoakumaPower, IPowerExtraIc
         }
     }
 
-    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
         if (!participants.Contains(Owner))
         {

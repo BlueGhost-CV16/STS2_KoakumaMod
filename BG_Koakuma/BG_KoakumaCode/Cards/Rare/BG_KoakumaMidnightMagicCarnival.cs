@@ -42,7 +42,10 @@ public sealed class BG_KoakumaMidnightMagicCarnival : KoakumaRareCard
         }
 
         var enemies = CombatState.HittableEnemies.ToList();
-        await CreatureCmd.Damage(choiceContext, enemies, DynamicVars.Damage, Owner.Creature, this);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .TargetingAllOpponents(CombatState)
+            .Execute(choiceContext);
         await PowerCmd.Apply<MagicBurnPower>(choiceContext, enemies, Amount("MagicBurn"), Owner.Creature, this);
 
         var magic = cardPlay.SecondaryResources().Value(KoakumaMagic.MagicId);

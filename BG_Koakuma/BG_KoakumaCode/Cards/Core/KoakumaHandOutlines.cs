@@ -1,4 +1,5 @@
 using Godot;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib;
 using STS2RitsuLib.Combat.SecondaryResources;
@@ -45,7 +46,22 @@ internal static class KoakumaHandOutlines
             return InterpretedColor;
         }
 
+        if (HasSatisfiedCardCondition(card))
+        {
+            return MagicSatisfiedColor;
+        }
+
         return HasSatisfiedMagicCost(card) ? MagicSatisfiedColor : null;
+    }
+
+    private static bool HasSatisfiedCardCondition(CardModel card)
+    {
+        return card switch
+        {
+            BG_KoakumaChainBomb => KoakumaMechanics.HasPlayedMagicBombThisTurn(card.Owner),
+            BG_KoakumaMispageBurst => PileType.Draw.GetPile(card.Owner).Cards.LastOrDefault()?.EnergyCost.GetWithModifiers(CostModifiers.Local) == 0,
+            _ => false
+        };
     }
 
     private static bool HasSatisfiedMagicCost(CardModel card)

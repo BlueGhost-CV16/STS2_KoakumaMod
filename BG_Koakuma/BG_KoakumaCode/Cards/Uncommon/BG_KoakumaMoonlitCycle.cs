@@ -45,7 +45,11 @@ public sealed class BG_KoakumaMoonlitCycle : KoakumaUncommonCard
         await base.AfterCardChangedPiles(card, oldPileType, clonedBy);
         if (card == this && oldPileType == PileType.Play && Pile?.Type != PileType.Play)
         {
-            await CardCmd.TransformTo<BG_KoakumaMoonlitDance>(this);
+            var result = await CardCmd.TransformTo<BG_KoakumaMoonlitDance>(this);
+            if (IsUpgraded && result?.cardAdded != null)
+            {
+                CardCmd.Upgrade(result.Value.cardAdded);
+            }
         }
     }
 

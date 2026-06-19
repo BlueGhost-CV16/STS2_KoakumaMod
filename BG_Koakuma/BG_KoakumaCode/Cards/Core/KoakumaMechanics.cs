@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using BG_Koakuma.Powers;
+using STS2RitsuLib;
 using STS2RitsuLib.Combat.SecondaryResources;
 
 namespace BG_Koakuma.Cards;
@@ -19,6 +20,20 @@ internal static class KoakumaMechanics
     private static readonly Dictionary<Player, int> MagicBookCollections = new();
     private static readonly Dictionary<Player, int> Reads = new();
     private static readonly Dictionary<Player, HashSet<Type>> CollectedIdentifiedMagicBookTypes = new();
+
+    public static void Register()
+    {
+        RitsuLibFramework.SubscribeLifecycle<CombatStartingEvent>(_ => ClearCombatState(), replayCurrentState: false);
+        RitsuLibFramework.SubscribeLifecycle<CombatEndedEvent>(_ => ClearCombatState(), replayCurrentState: false);
+    }
+
+    private static void ClearCombatState()
+    {
+        InterpretedCards.Clear();
+        MagicBookCollections.Clear();
+        Reads.Clear();
+        CollectedIdentifiedMagicBookTypes.Clear();
+    }
 
     public static async Task Read(PlayerChoiceContext choiceContext, CardModel sourceCard)
     {
@@ -43,6 +58,7 @@ internal static class KoakumaMechanics
 
         if (selected == null)
         {
+            await CompleteRead(choiceContext, owner, null);
             return;
         }
 
@@ -74,8 +90,7 @@ internal static class KoakumaMechanics
             await TriggerAfterReadCardReturned(choiceContext, owner, returned, source);
         }
 
-        await TriggerAfterRead(choiceContext, owner, selected);
-        Reads[owner] = GetReadCount(owner) + 1;
+        await CompleteRead(choiceContext, owner, selected);
     }
 
     public static async Task CollectMagicBook(PlayerChoiceContext choiceContext, CardModel sourceCard)
@@ -114,6 +129,7 @@ internal static class KoakumaMechanics
         {
             var card = combatState.CreateCard(ModelDb.Card<BG_KoakumaMysteryMagicBook>(), owner);
             CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, owner));
+            await ResolveMagicBookCollection(choiceContext, owner, combatState, source);
             return;
         }
         
@@ -138,13 +154,7 @@ internal static class KoakumaMechanics
             await AddGeneratedCardToHand(choiceContext, copiedBook, owner);
         }
 
-        MagicBookCollections[owner] = GetMagicBookCollectionCount(owner) + 1;
-        ReduceMagicBookHeavyStrikeCosts(owner);
-
-        if (owner.Creature.GetPower<HeatConductionPower>() != null)
-        {
-            await PowerCmd.Apply<MagicBurnPower>(choiceContext, combatState.HittableEnemies, owner.Creature.GetPower<HeatConductionPower>()!.Amount, owner.Creature, source as CardModel);
-        }
+        await ResolveMagicBookCollection(choiceContext, owner, combatState, source);
     }
 
     public static int GetMagicBookCollectionCount(Player owner)
@@ -252,6 +262,14 @@ internal static class KoakumaMechanics
     public static bool IsBookSpell(CardModel card)
     {
         return BookSpellTypes.Contains(card.GetType());
+    }
+
+    public static bool HasPlayedMagicBombThisTurn(Player owner)
+    {
+        return CombatManager.Instance.History.CardPlaysFinished.Any(entry =>
+            entry.HappenedThisTurn(owner.Creature.CombatState) &&
+            entry.CardPlay.Card.Owner == owner &&
+            entry.CardPlay.Card is BG_KoakumaMagicBomb);
     }
 
     public static void ClearInterpret(CardModel card)
@@ -423,6 +441,29 @@ internal static class KoakumaMechanics
         await CardCmd.Transform(original, replacement);
     }
 
+    public static async Task RestoreTrueNameToNormalIfNeeded(CardModel original)
+    {
+        if (!NormalNameMap.TryGetValue(original.GetType(), out var normalNameType))
+        {
+            return;
+        }
+
+        var replacement = original.Owner.Creature.CombatState == null
+            ? null
+            : CreateCardOfType(original.Owner.Creature.CombatState, normalNameType, original.Owner);
+        if (replacement == null)
+        {
+            return;
+        }
+
+        if (original.IsUpgraded)
+        {
+            CardCmd.Upgrade(replacement);
+        }
+
+        await CardCmd.Transform(original, replacement);
+    }
+
     public static async Task TransformToTrueName(CardModel original, bool requireInterpreted)
     {
         if (!requireInterpreted || IsInterpreted(original))
@@ -465,7 +506,7 @@ internal static class KoakumaMechanics
         }
     }
 
-    public static async Task FillHandWithRandomMagicBooks(PlayerChoiceContext choiceContext, CardModel sourceCard)
+    public static async Task FillHandWithRandomMagicBooks(PlayerChoiceContext choiceContext, CardModel sourceCard, bool upgraded = false)
     {
         var owner = sourceCard.Owner;
         var combatState = owner.Creature.CombatState;
@@ -477,7 +518,13 @@ internal static class KoakumaMechanics
         while ((owner.PlayerCombatState?.Hand.Cards.Count ?? CardPile.MaxCardsInHand) < CardPile.MaxCardsInHand)
         {
             var type = IdentifiedMagicBookTypes[owner.RunState.Rng.CombatCardSelection.NextInt(IdentifiedMagicBookTypes.Length)];
-            await AddGeneratedCardToHand(choiceContext, CreateCardOfType(combatState, type, owner), owner);
+            var card = CreateCardOfType(combatState, type, owner);
+            if (upgraded)
+            {
+                CardCmd.Upgrade(card);
+            }
+
+            await AddGeneratedCardToHand(choiceContext, card, owner);
         }
     }
 
@@ -676,6 +723,7 @@ internal static class KoakumaMechanics
 
         if (selected == null)
         {
+            await CompleteRead(choiceContext, owner, null);
             return;
         }
 
@@ -712,8 +760,7 @@ internal static class KoakumaMechanics
             await TriggerAfterReadCardReturned(choiceContext, owner, returned, sourceCard);
         }
 
-        await TriggerAfterRead(choiceContext, owner, selected);
-        Reads[owner] = GetReadCount(owner) + 1;
+        await CompleteRead(choiceContext, owner, selected);
     }
 
     public static async Task ReadAndRewardReturnedCost(PlayerChoiceContext choiceContext, CardModel sourceCard, int bonusAmount)
@@ -729,6 +776,7 @@ internal static class KoakumaMechanics
         var selected = await ChooseReadCard(choiceContext, topCards, owner);
         if (selected == null)
         {
+            await CompleteRead(choiceContext, owner, null);
             return;
         }
 
@@ -754,8 +802,7 @@ internal static class KoakumaMechanics
             await GainMagic(owner, bonus, sourceCard);
         }
 
-        await TriggerAfterRead(choiceContext, owner, selected);
-        Reads[owner] = GetReadCount(owner) + 1;
+        await CompleteRead(choiceContext, owner, selected);
     }
 
     public static async Task AddRandomBookSpellToHand(PlayerChoiceContext choiceContext, CardModel sourceCard, bool retainAndExhaust)
@@ -782,7 +829,13 @@ internal static class KoakumaMechanics
         return CardSelectCmd.FromChooseACardScreen(choiceContext, topCards, owner, canSkip: true);
     }
 
-    private static async Task TriggerAfterRead(PlayerChoiceContext choiceContext, Player owner, CardModel readCard)
+    private static async Task CompleteRead(PlayerChoiceContext choiceContext, Player owner, CardModel? readCard)
+    {
+        await TriggerAfterRead(choiceContext, owner, readCard);
+        Reads[owner] = GetReadCount(owner) + 1;
+    }
+
+    private static async Task TriggerAfterRead(PlayerChoiceContext choiceContext, Player owner, CardModel? readCard)
     {
         var pages = owner.Creature.GetPower<MagicPagesPower>();
         if (pages != null)
@@ -858,6 +911,17 @@ internal static class KoakumaMechanics
         }
     }
 
+    private static async Task ResolveMagicBookCollection(PlayerChoiceContext choiceContext, Player owner, ICombatState combatState, AbstractModel source)
+    {
+        MagicBookCollections[owner] = GetMagicBookCollectionCount(owner) + 1;
+        ReduceMagicBookHeavyStrikeCosts(owner);
+
+        if (owner.Creature.GetPower<OverreadSyndromePower>() is { } overreadSyndrome)
+        {
+            await PowerCmd.Apply<MagicBurnPower>(choiceContext, combatState.HittableEnemies, overreadSyndrome.Amount, owner.Creature, source as CardModel);
+        }
+    }
+
     private static void RecordCollectedMagicBook(Player owner, Type bookType)
     {
         if (!IdentifiedMagicBookTypes.Contains(bookType))
@@ -908,6 +972,9 @@ internal static class KoakumaMechanics
         [typeof(BG_KoakumaAlexandriteBook)] = typeof(BG_KoakumaBrilliantAlexandrite)
     };
 
+    private static readonly Dictionary<Type, Type> NormalNameMap =
+        TrueNameMap.ToDictionary(pair => pair.Value, pair => pair.Key);
+
     private static readonly Type[] BookSpellTypes =
     [
         typeof(BG_KoakumaMagicBookCollect),
@@ -926,7 +993,7 @@ internal interface IKoakumaMagicBookCard;
 
 internal interface IKoakumaAfterRead
 {
-    Task AfterRead(PlayerChoiceContext choiceContext, CardModel readCard);
+    Task AfterRead(PlayerChoiceContext choiceContext, CardModel? readCard);
 }
 
 internal interface IKoakumaAfterReadCardReturned

@@ -21,9 +21,9 @@ public sealed class BG_KoakumaMidnightNap : KoakumaRareCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         AmountVar("Select", 1),
-        new CardsVar(2),
-        MagicVar("Magic", 2),
-        new EnergyVar(2)
+        new CardsVar(1),
+        MagicVar("Magic", 1),
+        new EnergyVar(1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

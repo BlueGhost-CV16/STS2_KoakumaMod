@@ -17,7 +17,8 @@ namespace BG_Koakuma.Powers;
 public sealed class KoakumaRadiancePower : KoakumaPower
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Counter;
+    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
@@ -26,6 +27,6 @@ public sealed class KoakumaRadiancePower : KoakumaPower
 
     public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource, CardPlay? cardPlay)
     {
-        return target == Owner ? block * 1.5m : block;
+        return target == Owner ? 1.5m : 1m;
     }
 }

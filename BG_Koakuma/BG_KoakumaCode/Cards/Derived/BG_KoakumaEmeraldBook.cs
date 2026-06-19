@@ -27,7 +27,7 @@ public sealed class BG_KoakumaEmeraldBook : KoakumaMagicBookCard
     [
         new PowerVar<WeakPower>("SelfWeak", 1),
         new PowerVar<WeakPower>("Weak", 1),
-        new BlockVar(8, ValueProp.Move),
+        new BlockVar(6, ValueProp.Move),
         new CardsVar(1)
     ];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -41,6 +41,6 @@ public sealed class BG_KoakumaEmeraldBook : KoakumaMagicBookCard
     protected override void OnUpgrade()
     {
         UpgradeAmount("Weak", 1);
-        DynamicVars.Block.UpgradeValueBy(4);
+        DynamicVars.Block.UpgradeValueBy(3);
     }
 }

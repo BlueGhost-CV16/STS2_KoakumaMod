@@ -30,10 +30,10 @@ public sealed class BG_KoakumaChainBomb : KoakumaUncommonCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        var hadMagicBomb = PileType.Hand.GetPile(Owner).Cards.Any(card => card is BG_KoakumaMagicBomb);
+        var hadPlayedMagicBomb = KoakumaMechanics.HasPlayedMagicBombThisTurn(Owner);
         await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this);
         await PowerCmd.Apply<MagicBurnPower>(choiceContext, cardPlay.Target, Amount("MagicBurn"), Owner.Creature, this);
-        if (hadMagicBomb)
+        if (hadPlayedMagicBomb)
         {
             await CardPileCmd.Draw(choiceContext, Amount("Cards"), Owner);
         }

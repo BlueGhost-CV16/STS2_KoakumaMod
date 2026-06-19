@@ -48,7 +48,7 @@ public sealed class BG_KoakumaLittleDevilMagicBook : KoakumaRelic, IKoakumaAfter
         }
     }
 
-    public async Task AfterRead(PlayerChoiceContext choiceContext, CardModel readCard)
+    public async Task AfterRead(PlayerChoiceContext choiceContext, CardModel? readCard)
     {
         Flash();
         await GainMagic(choiceContext, Amount("Magic"));

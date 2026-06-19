@@ -6,7 +6,7 @@
   "BG_KOAKUMA_TIP_READ.title": "阅读",
   "BG_KOAKUMA_TIP_READ.description": "从[gold]抽牌堆[/gold]顶查看至多3张牌。\n可以从中选择1张置入[gold]手牌[/gold]，如若此做，选择1张[gold]手牌[/gold]放到[gold]抽牌堆[/gold]底。",
   "BG_KOAKUMA_TIP_INTERPRET.title": "解读",
-  "BG_KOAKUMA_TIP_INTERPRET.description": "带有解读效果的牌通过阅读加入手牌时，进入解读状态。\n离开[gold]手牌[/gold]后会失去解读状态。",
+  "BG_KOAKUMA_TIP_INTERPRET.description": "带有解读效果的牌通过阅读加入手牌时，进入解读状态。\n若非特殊说明，会在打出后触发解读中的额外效果。\n离开[gold]手牌[/gold]后会失去解读状态。",
   "BG_KOAKUMA_TIP_MAGIC_BOOK_COLLECTION.title": "魔法书收集",
   "BG_KOAKUMA_TIP_MAGIC_BOOK_COLLECTION.description": "从[gold]消耗牌堆[/gold]中随机展示[blue]7[/blue]张牌，从中选择最多[blue]3[/blue]张牌移出游戏。展示选择数量的魔法书牌，从中选择[blue]1[/blue]张洗入抽牌堆中。\n如果没有牌可以移出游戏或者没有进行选择，改为洗入[blue]1[/blue]张「谜之魔法书」。",
   "BG_KOAKUMA_TIP_MAGIC_BURN.title": "魔力烧灼",

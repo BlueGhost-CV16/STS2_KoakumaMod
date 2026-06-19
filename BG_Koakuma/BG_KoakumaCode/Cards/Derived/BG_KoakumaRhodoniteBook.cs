@@ -15,7 +15,7 @@ public sealed class BG_KoakumaRhodoniteBook : KoakumaMagicBookCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        MagicVar("Magic", 6),
+        MagicVar("Magic", 4),
         new CardsVar(1)
     ];
 

@@ -25,14 +25,14 @@ public sealed class BG_KoakumaFluoriteAfterimage : KoakumaMagicBookCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<MockExtraTurnPower>("ExtraTurn", 1),
+        new PowerVar<FluoriteAfterimagePower>("ExtraTurn", 1),
         AmountVar("ExhaustSelf", 1),
         new CardsVar(1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<MockExtraTurnPower>(choiceContext, Owner.Creature, Amount("ExtraTurn"), Owner.Creature, this);
+        await PowerCmd.Apply<FluoriteAfterimagePower>(choiceContext, Owner.Creature, Amount("ExtraTurn"), Owner.Creature, this);
         if (Amount("ExhaustSelf") > 0)
         {
             PlayerCmd.EndTurn(Owner, canBackOut: false);

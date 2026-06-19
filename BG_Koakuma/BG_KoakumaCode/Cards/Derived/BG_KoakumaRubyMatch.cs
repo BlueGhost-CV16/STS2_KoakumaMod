@@ -27,9 +27,9 @@ public sealed class BG_KoakumaRubyMatch : KoakumaMagicBookCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<DexterityPower>("Dexterity", 2),
-        new PowerVar<StrengthPower>("Strength", 2),
-        new BlockVar(11, ValueProp.Move),
+        new PowerVar<DexterityPower>("Dexterity", 1),
+        new PowerVar<StrengthPower>("Strength", 1),
+        new BlockVar(10, ValueProp.Move),
         new CardsVar(1)
     ];
 
@@ -45,6 +45,6 @@ public sealed class BG_KoakumaRubyMatch : KoakumaMagicBookCard
     {
         UpgradeAmount("Dexterity", 1);
         UpgradeAmount("Strength", 1);
-        DynamicVars.Block.UpgradeValueBy(4);
+        DynamicVars.Block.UpgradeValueBy(3);
     }
 }

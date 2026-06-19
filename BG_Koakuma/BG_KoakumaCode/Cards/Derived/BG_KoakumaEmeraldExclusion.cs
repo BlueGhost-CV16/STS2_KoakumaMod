@@ -29,9 +29,9 @@ public sealed class BG_KoakumaEmeraldExclusion : KoakumaMagicBookCard
     [
         new PowerVar<WeakPower>("SelfWeak", 1),
         new PowerVar<VulnerablePower>("SelfVulnerable", 1),
-        new PowerVar<WeakPower>("Weak", 3),
-        new PowerVar<VulnerablePower>("Vulnerable", 3),
-        new BlockVar(13, ValueProp.Move),
+        new PowerVar<WeakPower>("Weak", 2),
+        new PowerVar<VulnerablePower>("Vulnerable", 2),
+        new BlockVar(11, ValueProp.Move),
         new CardsVar(1)
     ];
 
@@ -49,6 +49,6 @@ public sealed class BG_KoakumaEmeraldExclusion : KoakumaMagicBookCard
     {
         UpgradeAmount("Weak", 1);
         UpgradeAmount("Vulnerable", 1);
-        DynamicVars.Block.UpgradeValueBy(4);
+        DynamicVars.Block.UpgradeValueBy(3);
     }
 }

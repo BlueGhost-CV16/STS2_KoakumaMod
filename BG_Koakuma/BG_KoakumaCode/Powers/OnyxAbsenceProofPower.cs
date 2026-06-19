@@ -19,6 +19,8 @@ public sealed class OnyxAbsenceProofPower : KoakumaPower
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Single;
 
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
+
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (target == Owner)
