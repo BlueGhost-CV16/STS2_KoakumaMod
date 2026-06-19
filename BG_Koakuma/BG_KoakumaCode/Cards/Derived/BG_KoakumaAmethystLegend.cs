@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
@@ -20,6 +21,8 @@ namespace BG_Koakuma.Cards;
 public sealed class BG_KoakumaAmethystLegend : KoakumaMagicBookCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];
+
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<IntangiblePower>()];
 
     public BG_KoakumaAmethystLegend() : base(true) { }
 

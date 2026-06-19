@@ -18,6 +18,7 @@ internal static class KoakumaMechanics
     private static readonly HashSet<CardModel> InterpretedCards = new();
     private static readonly Dictionary<Player, int> MagicBookCollections = new();
     private static readonly Dictionary<Player, int> Reads = new();
+    private static readonly Dictionary<Player, HashSet<Type>> CollectedIdentifiedMagicBookTypes = new();
 
     public static async Task Read(PlayerChoiceContext choiceContext, CardModel sourceCard)
     {
@@ -129,6 +130,7 @@ internal static class KoakumaMechanics
             : await CardSelectCmd.FromChooseACardScreen(choiceContext, offeredBooks, owner);
 
         chosenBook ??= offeredBooks[0];
+        RecordCollectedMagicBook(owner, chosenBook.GetType());
         CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(chosenBook, PileType.Draw, owner, CardPilePosition.Random));
         if (owner.Creature.GetPower<MagicCopierPower>() != null)
         {
@@ -142,11 +144,6 @@ internal static class KoakumaMechanics
         if (owner.Creature.GetPower<HeatConductionPower>() != null)
         {
             await PowerCmd.Apply<MagicBurnPower>(choiceContext, combatState.HittableEnemies, owner.Creature.GetPower<HeatConductionPower>()!.Amount, owner.Creature, source as CardModel);
-        }
-
-        if (owner.Creature.GetPower<LibrarianContractPower>() != null)
-        {
-            await Read(choiceContext, owner, source);
         }
     }
 
@@ -244,6 +241,12 @@ internal static class KoakumaMechanics
     public static bool IsMagicBook(CardModel card)
     {
         return card is IKoakumaMagicBookCard || card is BG_KoakumaMysteryMagicBook;
+    }
+
+    public static bool HasCollectedAllIdentifiedMagicBooks(Player owner)
+    {
+        return CollectedIdentifiedMagicBookTypes.TryGetValue(owner, out var collected)
+            && IdentifiedMagicBookTypes.All(collected.Contains);
     }
 
     public static bool IsBookSpell(CardModel card)
@@ -375,6 +378,12 @@ internal static class KoakumaMechanics
 
     public static async Task TransformToTrueName(CardModel original)
     {
+        if (original is BG_KoakumaLapisBook)
+        {
+            await TransformLapisBookToFantasyLibraryIfComplete(original);
+            return;
+        }
+
         if (!TrueNameMap.TryGetValue(original.GetType(), out var trueNameType))
         {
             return;
@@ -394,6 +403,24 @@ internal static class KoakumaMechanics
         {
             MarkInterpreted(result.Value.cardAdded);
         }
+    }
+
+    public static async Task TransformLapisBookToFantasyLibraryIfComplete(CardModel original)
+    {
+        if (original is not BG_KoakumaLapisBook || !HasCollectedAllIdentifiedMagicBooks(original.Owner))
+        {
+            return;
+        }
+
+        var replacement = original.Owner.Creature.CombatState == null
+            ? null
+            : CreateCardOfType(original.Owner.Creature.CombatState, typeof(BG_KoakumaLapisFantasyLibrary), original.Owner);
+        if (replacement == null)
+        {
+            return;
+        }
+
+        await CardCmd.Transform(original, replacement);
     }
 
     public static async Task TransformToTrueName(CardModel original, bool requireInterpreted)
@@ -829,6 +856,22 @@ internal static class KoakumaMechanics
         {
             card.EnergyCost.AddThisCombat(-1, reduceOnly: true);
         }
+    }
+
+    private static void RecordCollectedMagicBook(Player owner, Type bookType)
+    {
+        if (!IdentifiedMagicBookTypes.Contains(bookType))
+        {
+            return;
+        }
+
+        if (!CollectedIdentifiedMagicBookTypes.TryGetValue(owner, out var collected))
+        {
+            collected = [];
+            CollectedIdentifiedMagicBookTypes[owner] = collected;
+        }
+
+        collected.Add(bookType);
     }
 
     private static readonly Type[] IdentifiedMagicBookTypes =

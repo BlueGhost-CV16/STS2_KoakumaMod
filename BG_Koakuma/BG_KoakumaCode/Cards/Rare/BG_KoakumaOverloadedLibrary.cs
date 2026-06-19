@@ -21,13 +21,13 @@ public sealed class BG_KoakumaOverloadedLibrary : KoakumaRareCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        MagicVar("Magic", 3),
-        new PowerVar<MagicBurnPower>("MagicBurn", 1)
+        MagicVar("Magic", 2),
+        new PowerVar<MagicBurnPower>("MagicBurn", 2)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<OverloadedLibraryPower>(choiceContext, Owner.Creature, Amount("Magic"), Owner.Creature, this);
+        await PowerCmd.Apply<OverloadedLibraryPower>(choiceContext, Owner.Creature, Amount("MagicBurn"), Owner.Creature, this);
     }
 
     protected override void OnUpgrade() => AddKeyword(CardKeyword.Innate);

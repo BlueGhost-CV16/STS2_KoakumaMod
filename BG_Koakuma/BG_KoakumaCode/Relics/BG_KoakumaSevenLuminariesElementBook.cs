@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -22,7 +23,9 @@ namespace BG_Koakuma.Relics;
 [RegisterRelic(typeof(BG_KoakumaRelicPool))]
 public sealed class BG_KoakumaSevenLuminariesElementBook : KoakumaRelic, IKoakumaAfterRead
 {
-    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.Read, KoakumaHoverTips.MagicBook];
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.Read];
+
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [CardTip<BG_KoakumaLittleDevilContract>(), CardTip<BG_KoakumaLibrarianContract>()];
 
     public override RelicRarity Rarity => RelicRarity.Starter;
 

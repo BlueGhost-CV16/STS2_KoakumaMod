@@ -36,7 +36,7 @@ public sealed class BG_KoakumaLibrarianContract : KoakumaDerivedCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var selected = await CardSelectCmd.FromHand(choiceContext, Owner, new CardSelectorPrefs(SelectionScreenPrompt, 0, Amount("Return")) { Cancelable = true }, card => card != this, this);
+        var selected = await CardSelectCmd.FromHand(choiceContext, Owner, new CardSelectorPrefs(SelectionScreenPrompt, 1, 1), card => card != this, this);
         foreach (var card in selected)
         {
             await CardCmd.Exhaust(choiceContext, card);
