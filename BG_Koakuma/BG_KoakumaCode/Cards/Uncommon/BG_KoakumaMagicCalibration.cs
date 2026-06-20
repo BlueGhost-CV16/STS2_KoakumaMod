@@ -36,7 +36,7 @@ public sealed class BG_KoakumaMagicCalibration : KoakumaUncommonCard
             {
                 Cancelable = true
             }, card => card != this, this)).FirstOrDefault();
-            selected?.EnergyCost.SetThisTurn(0);
+            selected?.EnergyCost.SetUntilPlayed(0);
         }
 
         await KoakumaMechanics.GainMagic(Owner, Amount("Magic"), this);

@@ -23,7 +23,7 @@ public sealed class BG_KoakumaMagicBulwark : KoakumaCommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(9, ValueProp.Move),
+        new BlockVar(8, ValueProp.Move),
         MagicVar("MagicCost", 3)
     ];
 

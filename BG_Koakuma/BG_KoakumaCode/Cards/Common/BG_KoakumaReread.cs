@@ -18,7 +18,7 @@ public sealed class BG_KoakumaReread : KoakumaCommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        MagicVar("Magic", 3),
+        MagicVar("Magic", 2),
         new CardsVar(2)
     ];
 

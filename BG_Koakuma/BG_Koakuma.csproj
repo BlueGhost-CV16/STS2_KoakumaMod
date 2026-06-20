@@ -63,6 +63,8 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="BG_Koakuma\i18n\settings_ui\eng.json" />
+        <Content Include="BG_Koakuma\i18n\settings_ui\zhs.json" />
         <Content Include="local.props" Condition="Exists('local.props')"/>
     </ItemGroup>
 
