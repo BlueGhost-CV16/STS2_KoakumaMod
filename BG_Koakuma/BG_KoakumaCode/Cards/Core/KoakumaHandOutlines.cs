@@ -1,6 +1,7 @@
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
+using BG_Koakuma.Powers;
 using STS2RitsuLib;
 using STS2RitsuLib.Combat.SecondaryResources;
 using STS2RitsuLib.Scaffolding.Cards.HandOutline;
@@ -59,6 +60,7 @@ internal static class KoakumaHandOutlines
         return card switch
         {
             BG_KoakumaChainBomb => KoakumaMechanics.HasPlayedMagicBombThisTurn(card.Owner),
+            BG_KoakumaFuelOnFire => card.Owner.Creature.CombatState?.HittableEnemies.Any(enemy => enemy.GetPower<MagicBurnPower>() != null) == true,
             BG_KoakumaMispageBurst => PileType.Draw.GetPile(card.Owner).Cards.LastOrDefault()?.EnergyCost.GetWithModifiers(CostModifiers.Local) == 0,
             _ => false
         };

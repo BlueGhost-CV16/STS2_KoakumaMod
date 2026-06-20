@@ -1,0 +1,11 @@
+{
+  "settings.page.title": "设置",
+  "settings.mod_display_name": "BG_Koakuma",
+  "settings.easy_mode.title": "简易模式",
+  "settings.easy_magic_book_collection.label": "简易魔法书收集",
+  "settings.easy_magic_book_collection.description": "开启后，魔法书收集自动移除最低稀有度随机牌，并随机生成魔法书洗入抽牌堆。",
+  "settings.easy_read_look.label": "简易阅读-展示",
+  "settings.easy_read_look.description": "开启后，阅读不再展示抽牌堆顶至多3张牌，而是默认选择抽牌堆顶的牌。",
+  "settings.easy_read_put.label": "简易阅读-放回",
+  "settings.easy_read_put.description": "开启后，阅读后放回抽牌堆底时不再选择，默认放回手牌中最左侧的可选牌。"
+}

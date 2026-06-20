@@ -45,6 +45,7 @@ public sealed class BG_KoakumaManaRadiationWave : KoakumaUncommonCard
 
     protected override void OnUpgrade()
     {
+        DynamicVars.Damage.UpgradeValueBy(1);
         UpgradeAmount("MagicBurn", 1);
     }
 }

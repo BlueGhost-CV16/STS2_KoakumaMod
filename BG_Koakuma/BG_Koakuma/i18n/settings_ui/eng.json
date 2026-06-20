@@ -1,0 +1,11 @@
+{
+  "settings.page.title": "Settings",
+  "settings.mod_display_name": "BG_Koakuma",
+  "settings.easy_mode.title": "Simple Mode",
+  "settings.easy_magic_book_collection.label": "Simple Magic Book Collection",
+  "settings.easy_magic_book_collection.description": "When enabled, Magic Book Collection automatically removes a random card from the lowest rarity group and shuffles a random Magic Book into your draw pile.",
+  "settings.easy_read_look.label": "Simple Read - Look",
+  "settings.easy_read_look.description": "When enabled, Read no longer shows up to 3 cards from the top of your draw pile, and instead chooses the top card by default.",
+  "settings.easy_read_put.label": "Simple Read - Return",
+  "settings.easy_read_put.description": "When enabled, Read no longer asks which card to return to the bottom of your draw pile, and instead returns the leftmost eligible card in your hand."
+}

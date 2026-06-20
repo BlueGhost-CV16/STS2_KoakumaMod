@@ -46,24 +46,24 @@ public static class KoakumaSettingsPage
             autoCreateIfMissing: true);
 
         RitsuLibFramework.RegisterModSettings(Entry.ModId, page => page
-            .WithTitle(ModSettingsText.Literal("设置"))
-            .WithModDisplayName(ModSettingsText.Literal("BG_Koakuma"))
+            .WithTitle(KoakumaSettingsText.Text("settings.page.title", "设置"))
+            .WithModDisplayName(KoakumaSettingsText.Text("settings.mod_display_name", "BG_Koakuma"))
             .AddSection("easy_mode", section => section
-                .WithTitle(ModSettingsText.Literal("简易模式"))
+                .WithTitle(KoakumaSettingsText.Text("settings.easy_mode.title", "简易模式"))
                 .AddToggle(
                     "easy_magic_book_collection",
-                    ModSettingsText.Literal("简易魔法书收集"),
+                    KoakumaSettingsText.Text("settings.easy_magic_book_collection.label", "简易魔法书收集"),
                     EasyMagicBookCollectionBinding,
-                    ModSettingsText.Literal("开启后，魔法书收集自动移除最低稀有度随机牌，并随机生成魔法书洗入抽牌堆。"))
+                    KoakumaSettingsText.Text("settings.easy_magic_book_collection.description", "开启后，魔法书收集自动移除最低稀有度随机牌，并随机生成魔法书洗入抽牌堆。"))
                 .AddToggle(
                     "easy_read_look",
-                    ModSettingsText.Literal("简易阅读-展示"),
+                    KoakumaSettingsText.Text("settings.easy_read_look.label", "简易阅读-展示"),
                     EasyReadLookBinding,
-                    ModSettingsText.Literal("开启后，阅读不再展示抽牌堆顶至多3张牌，而是默认选择抽牌堆顶的牌。"))
+                    KoakumaSettingsText.Text("settings.easy_read_look.description", "开启后，阅读不再展示抽牌堆顶至多3张牌，而是默认选择抽牌堆顶的牌。"))
                 .AddToggle(
                     "easy_read_put",
-                    ModSettingsText.Literal("简易阅读-放回"),
+                    KoakumaSettingsText.Text("settings.easy_read_put.label", "简易阅读-放回"),
                     EasyReadPutBinding,
-                    ModSettingsText.Literal("开启后，阅读后放回抽牌堆底时不再选择，默认放回手牌中最左侧的可选牌。"))));
+                    KoakumaSettingsText.Text("settings.easy_read_put.description", "开启后，阅读后放回抽牌堆底时不再选择，默认放回手牌中最左侧的可选牌。"))));
     }
 }
