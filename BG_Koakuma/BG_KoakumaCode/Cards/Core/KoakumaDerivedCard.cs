@@ -27,8 +27,13 @@ public abstract class KoakumaDerivedCard : KoakumaCard, IKoakumaInterpretableCar
 
     public override CardAssetProfile AssetProfile => new(PortraitPath: $"{Entry.ResPath}/images/cards/{GetType().Name}.png");
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords =>
-        _baseRetain ? [CardKeyword.Exhaust, CardKeyword.Retain] : [CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => Type switch
+    {
+        CardType.Power when _baseRetain => [CardKeyword.Retain],
+        CardType.Power => [],
+        _ when _baseRetain => [CardKeyword.Exhaust, CardKeyword.Retain],
+        _ => [CardKeyword.Exhaust]
+    };
 
     public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
     {

@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using BG_Koakuma.Powers;
+using BG_Koakuma.Settings;
 using STS2RitsuLib;
 using STS2RitsuLib.Combat.SecondaryResources;
 
@@ -72,16 +73,7 @@ internal static class KoakumaMechanics
         var handCards = PileType.Hand.GetPile(owner).Cards
             //.Where(card => card != selected && card != sourceCard)
             .ToList();
-        var returned = (await CardSelectCmd.FromHand(
-            choiceContext,
-            owner,
-            new CardSelectorPrefs(new LocString("cards", "BG_KOAKUMA_MECHANIC_READ_RETURN"), 1, 1)
-            {
-                Cancelable = true,
-                RequireManualConfirmation = true
-            },
-            handCards.Contains,
-            source)).FirstOrDefault();
+        var returned = await ChooseReadReturnCard(choiceContext, owner, handCards.Contains, source);
 
         if (returned != null)
         {
@@ -103,6 +95,12 @@ internal static class KoakumaMechanics
         var combatState = owner.Creature.CombatState;
         if (combatState == null)
         {
+            return;
+        }
+
+        if (KoakumaSettingsPage.EasyMagicBookCollectionEnabled)
+        {
+            await CollectMagicBookAutomatically(choiceContext, owner, combatState, source);
             return;
         }
 
@@ -155,6 +153,54 @@ internal static class KoakumaMechanics
         }
 
         await ResolveMagicBookCollection(choiceContext, owner, combatState, source);
+    }
+
+    private static async Task CollectMagicBookAutomatically(PlayerChoiceContext choiceContext, Player owner, ICombatState combatState, AbstractModel source)
+    {
+        var removed = ChooseLowestRarityExhaustCard(owner);
+        if (removed != null)
+        {
+            await CardPileCmd.RemoveFromCombat(removed);
+        }
+
+        var generatedBook = removed == null
+            ? combatState.CreateCard<BG_KoakumaMysteryMagicBook>(owner)
+            : CreateRandomMagicBooks(owner, 1).FirstOrDefault()
+              ?? combatState.CreateCard<BG_KoakumaMysteryMagicBook>(owner);
+
+        RecordCollectedMagicBook(owner, generatedBook.GetType());
+        CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(generatedBook, PileType.Draw, owner, CardPilePosition.Random));
+
+        if (owner.Creature.GetPower<MagicCopierPower>() != null)
+        {
+            var copiedBook = CreateCardOfType(combatState, generatedBook.GetType(), owner);
+            await AddGeneratedCardToHand(choiceContext, copiedBook, owner);
+        }
+
+        await ResolveMagicBookCollection(choiceContext, owner, combatState, source);
+    }
+
+    private static CardModel? ChooseLowestRarityExhaustCard(Player owner)
+    {
+        return PileType.Exhaust.GetPile(owner).Cards
+            .GroupBy(card => MagicBookCollectionRarityRank(card.Rarity))
+            .OrderBy(group => group.Key)
+            .FirstOrDefault()
+            ?.OrderBy(_ => owner.RunState.Rng.CombatCardSelection.NextInt())
+            .FirstOrDefault();
+    }
+
+    private static int MagicBookCollectionRarityRank(CardRarity rarity)
+    {
+        return rarity switch
+        {
+            CardRarity.Basic => 1,
+            CardRarity.Common => 2,
+            CardRarity.Uncommon => 3,
+            CardRarity.Rare => 4,
+            CardRarity.Ancient => 5,
+            _ => 0
+        };
     }
 
     public static int GetMagicBookCollectionCount(Player owner)
@@ -738,16 +784,7 @@ internal static class KoakumaMechanics
         var handCards = PileType.Hand.GetPile(owner).Cards
             //.Where(card => card != selected && card != sourceCard)
             .ToList();
-        var returned = (await CardSelectCmd.FromHand(
-            choiceContext,
-            owner,
-            new CardSelectorPrefs(new LocString("cards", "BG_KOAKUMA_MECHANIC_READ_RETURN"), 1, 1)
-            {
-                Cancelable = true,
-                RequireManualConfirmation = true
-            },
-            card => handCards.Contains(card),
-            sourceCard)).FirstOrDefault();
+        var returned = await ChooseReadReturnCard(choiceContext, owner, handCards.Contains, sourceCard);
 
         if (returned != null)
         {
@@ -787,11 +824,7 @@ internal static class KoakumaMechanics
         }
         await ResolveInterpretIfNeeded(choiceContext, selected);
 
-        var returned = (await CardSelectCmd.FromHand(choiceContext, owner, new CardSelectorPrefs(new LocString("cards", "BG_KOAKUMA_MECHANIC_READ_RETURN"), 1, 1)
-        {
-            Cancelable = true,
-            RequireManualConfirmation = true
-        }, card => card != sourceCard, sourceCard)).FirstOrDefault();
+        var returned = await ChooseReadReturnCard(choiceContext, owner, card => card != sourceCard, sourceCard);
 
         if (returned != null)
         {
@@ -826,7 +859,31 @@ internal static class KoakumaMechanics
 
     private static Task<CardModel?> ChooseReadCard(PlayerChoiceContext choiceContext, IReadOnlyList<CardModel> topCards, Player owner)
     {
+        if (KoakumaSettingsPage.EasyReadLookEnabled)
+        {
+            return Task.FromResult(topCards.FirstOrDefault());
+        }
+
         return CardSelectCmd.FromChooseACardScreen(choiceContext, topCards, owner, canSkip: true);
+    }
+
+    private static async Task<CardModel?> ChooseReadReturnCard(PlayerChoiceContext choiceContext, Player owner, Func<CardModel, bool> predicate, AbstractModel source)
+    {
+        if (KoakumaSettingsPage.EasyReadPutEnabled)
+        {
+            return PileType.Hand.GetPile(owner).Cards.FirstOrDefault(predicate);
+        }
+
+        return (await CardSelectCmd.FromHand(
+            choiceContext,
+            owner,
+            new CardSelectorPrefs(new LocString("cards", "BG_KOAKUMA_MECHANIC_READ_RETURN"), 1, 1)
+            {
+                Cancelable = true,
+                RequireManualConfirmation = true
+            },
+            predicate,
+            source)).FirstOrDefault();
     }
 
     private static async Task CompleteRead(PlayerChoiceContext choiceContext, Player owner, CardModel? readCard)

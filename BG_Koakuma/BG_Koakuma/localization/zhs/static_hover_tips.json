@@ -4,11 +4,11 @@
   "BG_KOAKUMA_MAGIC_COST.title": "魔力N",
   "BG_KOAKUMA_MAGIC_COST.description": "[gold]消耗[/gold]对应数量的[orange]魔力[/orange]来触发额外效果。",
   "BG_KOAKUMA_TIP_READ.title": "阅读",
-  "BG_KOAKUMA_TIP_READ.description": "从[gold]抽牌堆[/gold]顶查看至多3张牌。\n可以从中选择1张置入[gold]手牌[/gold]，如若此做，选择1张[gold]手牌[/gold]放到[gold]抽牌堆[/gold]底。",
+  "BG_KOAKUMA_TIP_READ.description": "从[gold]抽牌堆[/gold]顶查看至多3张牌。\n可以从中选择1张置入[gold]手牌[/gold]，如若此做，选择1张[gold]手牌[/gold]放到[gold]抽牌堆[/gold]底。\n开启简易阅读设置时，查看和放回步骤会按设置自动处理。",
   "BG_KOAKUMA_TIP_INTERPRET.title": "解读",
   "BG_KOAKUMA_TIP_INTERPRET.description": "带有解读效果的牌通过阅读加入手牌时，进入解读状态。\n若非特殊说明，会在打出后触发解读中的额外效果。\n离开[gold]手牌[/gold]后会失去解读状态。",
   "BG_KOAKUMA_TIP_MAGIC_BOOK_COLLECTION.title": "魔法书收集",
-  "BG_KOAKUMA_TIP_MAGIC_BOOK_COLLECTION.description": "从[gold]消耗牌堆[/gold]中随机展示[blue]7[/blue]张牌，从中选择最多[blue]3[/blue]张牌移出游戏。展示选择数量的魔法书牌，从中选择[blue]1[/blue]张洗入抽牌堆中。\n如果没有牌可以移出游戏或者没有进行选择，改为洗入[blue]1[/blue]张「谜之魔法书」。",
+  "BG_KOAKUMA_TIP_MAGIC_BOOK_COLLECTION.description": "从[gold]消耗牌堆[/gold]中随机展示[blue]7[/blue]张牌，从中选择最多[blue]3[/blue]张牌移出游戏。展示选择数量的魔法书牌，从中选择[blue]1[/blue]张洗入抽牌堆中。\n如果没有牌可以移出游戏或者没有进行选择，改为洗入[blue]1[/blue]张「谜之魔法书」。\n开启简易魔法书收集时，自动随机移除最低稀有度的[blue]1[/blue]张牌，并随机生成[blue]1[/blue]张魔法书洗入[gold]抽牌堆[/gold]。",
   "BG_KOAKUMA_TIP_MAGIC_BURN.title": "魔力烧灼",
   "BG_KOAKUMA_TIP_MAGIC_BURN.description": "被攻击时、被施加时受到等同于层数的伤害。\n回合结束时减少[blue]1[/blue]/[blue]3[/blue]。"
 }

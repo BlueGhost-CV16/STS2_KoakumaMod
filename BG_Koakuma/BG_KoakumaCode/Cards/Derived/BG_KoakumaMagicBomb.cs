@@ -46,6 +46,18 @@ public sealed class BG_KoakumaMagicBomb : KoakumaDerivedCard
         }
     }
 
+    public override (PileType, CardPilePosition) ModifyCardPlayResultPileTypeAndPosition(
+        CardModel card,
+        bool isAutoPlay,
+        ResourceInfo resources,
+        PileType pileType,
+        CardPilePosition position)
+    {
+        return card == this && isAutoPlay
+            ? (PileType.None, position)
+            : base.ModifyCardPlayResultPileTypeAndPosition(card, isAutoPlay, resources, pileType, position);
+    }
+
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(1);

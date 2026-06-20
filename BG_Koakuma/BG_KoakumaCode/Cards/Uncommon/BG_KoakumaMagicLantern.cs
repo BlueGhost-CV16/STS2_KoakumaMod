@@ -23,11 +23,12 @@ public sealed class BG_KoakumaMagicLantern : KoakumaUncommonCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<ManaRecycleEnginePower>(choiceContext, Owner.Creature, Amount("Power"), Owner.Creature, this);
+        await PowerCmd.Apply<ManaRecycleEnginePower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        UpgradeAmount("Power", -1);
+        AddKeyword(CardKeyword.Retain);
+        //UpgradeAmount("Power", -1);
     }
 }
