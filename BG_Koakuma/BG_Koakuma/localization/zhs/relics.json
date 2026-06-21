@@ -1,7 +1,7 @@
 {
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_LITTLE_DEVIL_MAGIC_BOOK.title": "小恶魔魔法书",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_LITTLE_DEVIL_MAGIC_BOOK.description": "每回合开始时，进行[blue]{Reads}[/blue]次[green]阅读[/green]。\n每次[green]阅读[/green]后，获得{Magic:secondaryResourceIcons()}。",
-  "BG_KOAKUMA_RELIC_BG_KOAKUMA_LITTLE_DEVIL_MAGIC_BOOK.flavor": "被反复翻阅的基础魔法书，页角留下了小恶魔的爪印。",
+  "BG_KOAKUMA_RELIC_BG_KOAKUMA_LITTLE_DEVIL_MAGIC_BOOK.flavor": "被反复翻阅的基础[gold]魔法书[/gold]，页角留下了小恶魔的爪印。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_SEVEN_LUMINARIES_ELEMENT_BOOK.title": "七曜元素之书",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_SEVEN_LUMINARIES_ELEMENT_BOOK.description": "战斗开始时，从[purple]小恶魔契约[/purple]和[purple]司书契约[/purple]中选择[blue]{Cards}[/blue]张加入手中。\n每回合开始时，进行[blue]{Reads}[/blue]次[green]阅读[/green]。\n每次[green]阅读[/green]后，获得{Magic:secondaryResourceIcons()}。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_SEVEN_LUMINARIES_ELEMENT_BOOK.flavor": "封面上的七色符号会随着翻页改变排列。",

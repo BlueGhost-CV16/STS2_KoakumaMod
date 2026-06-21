@@ -42,6 +42,12 @@ public partial class Entry
         KoakumaMechanics.Register();
         KoakumaMagic.Register();
         KoakumaHandOutlines.Register();
+        RitsuLibFramework.CreateContentPack(ModId)
+            .SharedCardPool<BG_KoakumaMagicBookCardPool>()
+            .CardLibraryCompendiumSharedPoolFilter<BG_KoakumaMagicBookCardPool>(
+                "MAGIC_BOOKS",
+                $"{ResPath}/images/characters/MagicBook.png")
+            .Apply();
 
         Logger.Info("BG_Koakuma initialized.");
     }

@@ -9,7 +9,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.Powers.Mocks;
 using MegaCrit.Sts2.Core.ValueProps;
-using MegaCrit.Sts2.Core.Models.CardPools;
 using BG_Koakuma.Powers;
 using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -17,7 +16,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace BG_Koakuma.Cards;
 
-[RegisterCard(typeof(TokenCardPool))]
+[RegisterCard(typeof(BG_KoakumaMagicBookCardPool))]
 public sealed class BG_KoakumaOnyxAbsence : KoakumaMagicBookCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];

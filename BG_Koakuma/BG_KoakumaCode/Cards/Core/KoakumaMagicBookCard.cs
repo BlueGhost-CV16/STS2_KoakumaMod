@@ -21,7 +21,7 @@ public abstract class KoakumaMagicBookCard : KoakumaDerivedCard, IKoakumaMagicBo
         bool baseRetain = false,
         CardType cardType = CardType.Skill,
         TargetType targetType = TargetType.Self)
-        : base(0, cardType, targetType, baseRetain)
+        : base(0, cardType, targetType, baseRetain, showInCardLibrary: true)
     {
     }
 

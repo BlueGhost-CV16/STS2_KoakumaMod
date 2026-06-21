@@ -19,8 +19,13 @@ public abstract class KoakumaDerivedCard : KoakumaCard, IKoakumaInterpretableCar
 {
     private readonly bool _baseRetain;
 
-    protected KoakumaDerivedCard(int cost, CardType type, TargetType target = TargetType.Self, bool baseRetain = false)
-        : base(cost, type, CardRarity.Token, target, false)
+    protected KoakumaDerivedCard(
+        int cost,
+        CardType type,
+        TargetType target = TargetType.Self,
+        bool baseRetain = false,
+        bool showInCardLibrary = false)
+        : base(cost, type, CardRarity.Token, target, showInCardLibrary)
     {
         _baseRetain = baseRetain;
     }

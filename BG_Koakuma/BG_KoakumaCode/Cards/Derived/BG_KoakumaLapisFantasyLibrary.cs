@@ -3,18 +3,17 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.CardPools;
 using BG_Koakuma.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace BG_Koakuma.Cards;
 
-[RegisterCard(typeof(TokenCardPool))]
+[RegisterCard(typeof(BG_KoakumaMagicBookCardPool))]
 public sealed class BG_KoakumaLapisFantasyLibrary : KoakumaDerivedCard
 {
     protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<LapisFantasyLibraryPower>()];
 
-    public BG_KoakumaLapisFantasyLibrary() : base(0, CardType.Power) { }
+    public BG_KoakumaLapisFantasyLibrary() : base(0, CardType.Power, showInCardLibrary: true) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<LapisFantasyLibraryPower>("Power", 1)];
 

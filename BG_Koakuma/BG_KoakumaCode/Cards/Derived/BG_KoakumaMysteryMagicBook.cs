@@ -2,7 +2,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.CardPools;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
@@ -10,7 +9,7 @@ using STS2RitsuLib.Scaffolding.Content;
 using BG_Koakuma.Tooltips;
 namespace BG_Koakuma.Cards;
 
-[RegisterCard(typeof(TokenCardPool))]
+[RegisterCard(typeof(BG_KoakumaMagicBookCardPool))]
 public sealed class BG_KoakumaMysteryMagicBook : KoakumaCard, IKoakumaInterpretableCard, IKoakumaMagicBookCard, IKoakumaOnInterpretResolved
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];
@@ -19,7 +18,7 @@ public sealed class BG_KoakumaMysteryMagicBook : KoakumaCard, IKoakumaInterpreta
     private const CardType CardKind = CardType.Skill;
     private const CardRarity CardRarityValue = CardRarity.Token;
     private const TargetType CardTarget = TargetType.Self;
-    private const bool ShowInCardLibrary = false;
+    private const bool ShowInCardLibrary = true;
 
     public override CardAssetProfile AssetProfile => new(
         PortraitPath: $"{Entry.ResPath}/images/cards/{GetType().Name}.png");
