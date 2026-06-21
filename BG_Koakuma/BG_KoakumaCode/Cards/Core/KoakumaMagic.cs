@@ -84,8 +84,6 @@ internal static class KoakumaMagic
             },
             ctx => ctx.Node.Refresh(ctx)
         );
-        
-        registry.AlwaysShowInCombatUiForCharacter<Characters.BG_KoakumaCharacter>(LocalId);
     }
 
     public static int Get(Player player)

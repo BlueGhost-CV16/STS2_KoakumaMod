@@ -26,5 +26,5 @@ public sealed class BG_KoakumaWasteHeatReturn : KoakumaRareCard
         await PowerCmd.Apply<WasteHeatReturnPower>(choiceContext, Owner.Creature, Amount("Power"), Owner.Creature, this);
     }
 
-    protected override void OnUpgrade() => AddKeyword(CardKeyword.Retain);
+    protected override void OnUpgrade() => UpgradeAmount("Power", 1);
 }

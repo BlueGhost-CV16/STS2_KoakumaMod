@@ -676,7 +676,12 @@ internal static class KoakumaMechanics
         return generated;
     }
 
-    public static async Task<IReadOnlyList<CardModel>> ChooseGeneratedCards(PlayerChoiceContext choiceContext, IReadOnlyList<CardModel> options, Player owner, int chooseCount)
+    public static async Task<IReadOnlyList<CardModel>> ChooseGeneratedCards(
+        PlayerChoiceContext choiceContext,
+        IReadOnlyList<CardModel> options,
+        Player owner,
+        int chooseCount,
+        bool canSkip = true)
     {
         var selected = new List<CardModel>();
         var remaining = options.ToList();
@@ -687,10 +692,10 @@ internal static class KoakumaMechanics
                 .Skip(offerStart)
                 .Take(3)
                 .ToList();
-            var chosen = await CardSelectCmd.FromChooseACardScreen(choiceContext, offered, owner, canSkip: true);
+            var chosen = await CardSelectCmd.FromChooseACardScreen(choiceContext, offered, owner, canSkip: canSkip);
             if (chosen == null)
             {
-                offerStart += offered.Count;
+                offerStart += canSkip ? offered.Count : 0;
                 continue;
             }
 

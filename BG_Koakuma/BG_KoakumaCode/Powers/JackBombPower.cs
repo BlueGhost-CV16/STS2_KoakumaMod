@@ -25,8 +25,7 @@ public sealed class JackBombPower : KoakumaPower
     {
         if (cardPlay.IsAutoPlay ||
             cardPlay.Card.Owner != Owner.Player ||
-            //cardPlay.Card is BG_KoakumaMagicBomb ||
-            cardPlay.Card.EnergyCost.GetWithModifiers(CostModifiers.Local) != 0)
+            cardPlay.Card is not BG_KoakumaMagicBomb)
         {
             return;
         }

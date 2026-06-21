@@ -40,9 +40,10 @@ public sealed class BG_KoakumaForbiddenJackBomb : KoakumaRareCard
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (Pile?.Type != PileType.Exhaust ||
-            //cardPlay.IsAutoPlay ||
+            cardPlay.IsAutoPlay ||
             cardPlay.Card.Owner != Owner ||
-            cardPlay.Card is not BG_KoakumaMagicBomb)
+            !cardPlay.Card.Keywords.Contains(CardKeyword.Exhaust) ||
+            cardPlay.Card.EnergyCost.GetWithModifiers(CostModifiers.Local) != 0)
         {
             return;
         }
@@ -58,5 +59,9 @@ public sealed class BG_KoakumaForbiddenJackBomb : KoakumaRareCard
         await CardCmd.AutoPlay(choiceContext, this, enemy);
     }
 
-    protected override void OnUpgrade() => UpgradeAmount("MagicBurn", 1);
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Damage.UpgradeValueBy(2);
+        UpgradeAmount("MagicBurn", 1);
+    }
 }

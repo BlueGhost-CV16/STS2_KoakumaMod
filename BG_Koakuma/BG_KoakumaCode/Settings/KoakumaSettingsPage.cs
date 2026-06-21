@@ -1,5 +1,6 @@
 using STS2RitsuLib;
 using STS2RitsuLib.Data;
+using STS2RitsuLib.RunData;
 using STS2RitsuLib.Settings;
 using STS2RitsuLib.Utils.Persistence;
 
@@ -8,6 +9,13 @@ namespace BG_Koakuma.Settings;
 public static class KoakumaSettingsPage
 {
     private const string DataKey = "settings";
+    private const string RunSettingsKey = "host_settings";
+
+    private static readonly RunSavedData<KoakumaSettings> HostRunSettings = RunSavedDataStore
+        .For(Entry.ModId)
+        .Register<KoakumaSettings>(RunSettingsKey);
+
+    private static KoakumaSettings? CurrentRunSettings;
 
     private static readonly ModSettingsValueBinding<KoakumaSettings, bool> EasyMagicBookCollectionBinding = new(
         Entry.ModId,
@@ -30,11 +38,11 @@ public static class KoakumaSettingsPage
         static settings => settings.EasyReadPut,
         static (settings, value) => settings.EasyReadPut = value);
 
-    public static bool EasyMagicBookCollectionEnabled => EasyMagicBookCollectionBinding.Read();
+    public static bool EasyMagicBookCollectionEnabled => ReadSettings().EasyMagicBookCollection;
 
-    public static bool EasyReadLookEnabled => EasyReadLookBinding.Read();
+    public static bool EasyReadLookEnabled => ReadSettings().EasyReadLook;
 
-    public static bool EasyReadPutEnabled => EasyReadPutBinding.Read();
+    public static bool EasyReadPutEnabled => ReadSettings().EasyReadPut;
 
     public static void Register()
     {
@@ -65,5 +73,41 @@ public static class KoakumaSettingsPage
                     KoakumaSettingsText.Text("settings.easy_read_put.label", "简易阅读-放回"),
                     EasyReadPutBinding,
                     KoakumaSettingsText.Text("settings.easy_read_put.description", "开启后，阅读后放回抽牌堆底时不再选择，默认放回手牌中最左侧的可选牌。"))));
+
+        RitsuLibFramework.SubscribeLifecycle<RunSavedDataLobbyStagingEvent>(StageHostSettings, replayCurrentState: false);
+        RitsuLibFramework.SubscribeLifecycle<RunSavedDataPreparingEvent>(UsePreparedRunSettings, replayCurrentState: false);
+        RitsuLibFramework.SubscribeLifecycle<RunEndedEvent>(_ => CurrentRunSettings = null, replayCurrentState: false);
+    }
+
+    private static KoakumaSettings ReadSettings()
+    {
+        return CurrentRunSettings ?? ReadLocalSettings();
+    }
+
+    private static KoakumaSettings ReadLocalSettings()
+    {
+        return new KoakumaSettings
+        {
+            EasyMagicBookCollection = EasyMagicBookCollectionBinding.Read(),
+            EasyReadLook = EasyReadLookBinding.Read(),
+            EasyReadPut = EasyReadPutBinding.Read()
+        };
+    }
+
+    private static void StageHostSettings(RunSavedDataLobbyStagingEvent evt)
+    {
+        if (!evt.IsMultiplayer || !evt.IsHost)
+        {
+            return;
+        }
+
+        HostRunSettings.Lobby.Set(evt.Lobby, ReadLocalSettings());
+    }
+
+    private static void UsePreparedRunSettings(RunSavedDataPreparingEvent evt)
+    {
+        CurrentRunSettings = evt.IsMultiplayer
+            ? HostRunSettings.Get(evt.RunState)
+            : null;
     }
 }

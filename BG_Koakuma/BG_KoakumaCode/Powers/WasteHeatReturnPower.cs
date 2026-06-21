@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -19,7 +20,7 @@ public sealed class WasteHeatReturnPower : KoakumaPower
     {
         if (applier == Owner && power is MagicBurnPower && amount > 0)
         {
-            await CardPileCmd.Draw(choiceContext, Amount, Owner.Player);
+            await CreatureCmd.GainBlock(Owner, Amount * amount, ValueProp.Unpowered, null);
         }
     }
 }

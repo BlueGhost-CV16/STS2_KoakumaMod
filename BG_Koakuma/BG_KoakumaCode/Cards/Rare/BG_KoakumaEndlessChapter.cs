@@ -29,7 +29,7 @@ public sealed class BG_KoakumaEndlessChapter : KoakumaInterpretableRareCard, IKo
         await base.AfterCardChangedPiles(card, oldPileType, clonedBy);
         if (card == this && Pile?.Type == PileType.Hand && oldPileType != PileType.Hand)
         {
-            await CardPileCmd.Draw(new ThrowingPlayerChoiceContext(), Amount("Cards"), Owner);
+            await CardPileCmd.Draw(new BlockingPlayerChoiceContext(), Amount("Cards"), Owner);
             await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Bottom);
         }
     }

@@ -31,7 +31,7 @@ public sealed class OverloadedLibraryPower : KoakumaPower, ISecondaryResourceHoo
     {
         if (context.Player == Owner.Player && KoakumaMagic.IsMagic(context.Definition))
         {
-            await PowerCmd.Apply<MagicBurnPower>(new ThrowingPlayerChoiceContext(), Owner.CombatState.HittableEnemies, Amount, Owner, null);
+            await PowerCmd.Apply<MagicBurnPower>(new BlockingPlayerChoiceContext(), Owner.CombatState.HittableEnemies, Amount, Owner, null);
         }
     }
 }

@@ -30,7 +30,7 @@ public sealed class BG_KoakumaGhostCrystalBook : KoakumaMagicBookCard
     ];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await KoakumaMechanics.ExhaustHandCardAndChooseReplacement(choiceContext, this, false, Amount("Show"), Amount("Choose"), useGeneratedChoiceScreen: true);
+        await KoakumaMechanics.ExhaustHandCardAndChooseReplacement(choiceContext, this, false, Amount("Show"), Amount("Choose"), useGeneratedChoiceScreen: false);
         await InterpretDraw(choiceContext);
     }
 

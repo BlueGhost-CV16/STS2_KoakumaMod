@@ -15,7 +15,7 @@ internal sealed class OptionalMagicCostListener : ISecondaryResourceHookListener
         }
 
         await KoakumaMechanics.AfterMagicSpent(
-            new ThrowingPlayerChoiceContext(),
+            new BlockingPlayerChoiceContext(),
             context.Player,
             context.Amount,
             context.Source);
