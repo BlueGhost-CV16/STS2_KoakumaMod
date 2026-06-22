@@ -19,7 +19,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace BG_Koakuma.Relics;
 
 [RegisterRelic(typeof(BG_KoakumaRelicPool))]
-public sealed class BG_KoakumaPortableBookmark : KoakumaRelic, IKoakumaAfterReadCardReturned
+public sealed class BG_KoakumaPortableBookmark : KoakumaRelic, IKoakumaAfterRead, IKoakumaAfterReadCardReturned
 {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
 
@@ -28,13 +28,22 @@ public sealed class BG_KoakumaPortableBookmark : KoakumaRelic, IKoakumaAfterRead
         new DamageVar(4, ValueProp.Move)
     ];
 
+    public async Task AfterRead(PlayerChoiceContext choiceContext, CardModel? readCard)
+    {
+        if (readCard != null)
+        {
+            await DamageForCardCost(choiceContext, readCard);
+        }
+    }
+
     public async Task AfterReadCardReturned(PlayerChoiceContext choiceContext, CardModel returned, AbstractModel source)
     {
-        var cost = returned.EnergyCost.GetWithModifiers(CostModifiers.Local);
-        if (cost <= 0)
-        {
-            return;
-        }
+        await DamageForCardCost(choiceContext, returned);
+    }
+
+    private async Task DamageForCardCost(PlayerChoiceContext choiceContext, CardModel card)
+    {
+        var cost = Math.Max(1, card.EnergyCost.GetWithModifiers(CostModifiers.Local));
 
         var enemies = Owner.Creature.CombatState?.HittableEnemies.ToList();
         if (enemies == null || enemies.Count == 0)

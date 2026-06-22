@@ -61,5 +61,7 @@ public sealed class BG_KoakumaHalloweenFireworkPrank : KoakumaUncommonCard
     {
         DynamicVars.Damage.UpgradeValueBy(4);
         DynamicVars["BonusDamage"].UpgradeValueBy(2);
+        UpgradeAmount("MagicBurn", 2);
+        UpgradeAmount("BonusMagicBurn", 1);
     }
 }

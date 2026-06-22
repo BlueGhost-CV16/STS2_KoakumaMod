@@ -9,7 +9,7 @@
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_ORDINARY_MAGIC_BOOK.description": "At the start of each combat, add [blue]{Cards}[/blue] random [gold]Magic Book[/gold] card to your hand.",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_ORDINARY_MAGIC_BOOK.flavor": "It is ordinary in a deeply suspicious way.",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_PORTABLE_BOOKMARK.title": "Portable Bookmark",
-  "BG_KOAKUMA_RELIC_BG_KOAKUMA_PORTABLE_BOOKMARK.description": "For each {energyPrefix:energyIcons(1)} cost of a card returned to the bottom of your draw pile by [green]Read[/green]ing, deal [blue]{Damage}[/blue] damage to all enemies.",
+  "BG_KOAKUMA_RELIC_BG_KOAKUMA_PORTABLE_BOOKMARK.description": "For each {energyPrefix:energyIcons(1)} cost of a card added to your hand or returned to the bottom of your draw pile by [green]Read[/green]ing, deal [blue]{Damage}[/blue] damage to all enemies. Cards that cost less than {energyPrefix:energyIcons(1)} count as {energyPrefix:energyIcons(1)}.",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_PORTABLE_BOOKMARK.flavor": "It keeps your place, and a small charge of unruly magic.",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_EFFICIENT_MANA_CIRCUIT.title": "Efficient Mana Circuit",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_EFFICIENT_MANA_CIRCUIT.description": "Whenever you spend [orange]Magic[/orange] {MagicCost}, gain [blue]{Block}[/blue] Block.",
