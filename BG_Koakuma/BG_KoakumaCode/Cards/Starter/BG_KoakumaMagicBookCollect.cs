@@ -28,13 +28,13 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(7, ValueProp.Move),
-        MagicVar("MagicCost", 3)
+        new DamageVar(8, ValueProp.Move),
+        MagicVar("MagicCost", 2)
     ];
 
     public BG_KoakumaMagicBookCollect() : base(BaseEnergyCost, CardKind, CardRarityValue, CardTarget, ShowInCardLibrary)
     {
-        SetMagicCost(3);
+        SetMagicCost(2);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -50,7 +50,7 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
 
         if (KoakumaMechanics.MagicPaid(cardPlay))
         {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue / 2)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)
                 .Execute(choiceContext);
@@ -58,7 +58,7 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
 
         if (KoakumaMechanics.ConsumeInterpret(this))
         {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue / 2)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)
                 .Execute(choiceContext);

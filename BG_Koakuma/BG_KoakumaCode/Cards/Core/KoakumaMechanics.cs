@@ -399,6 +399,30 @@ internal static class KoakumaMechanics
         }
     }
 
+    public static async Task ChooseGeneratedMagicBookOffersToHand(PlayerChoiceContext choiceContext, CardModel sourceCard, int offerCount, int offerSize, bool markInterpreted)
+    {
+        var owner = sourceCard.Owner;
+        for (var i = 0; i < offerCount; i++)
+        {
+            var books = CreateRandomMagicBooks(sourceCard, offerSize);
+            if (books.Count == 0)
+            {
+                return;
+            }
+
+            var chosen = books.Count == 1
+                ? books[0]
+                : await CardSelectCmd.FromChooseACardScreen(choiceContext, books, owner, canSkip: false);
+            chosen ??= books[0];
+
+            if (markInterpreted)
+            {
+                await MarkInterpretedAndResolve(choiceContext, chosen);
+            }
+            await AddGeneratedCardToHand(choiceContext, chosen, owner);
+        }
+    }
+
     public static async Task AddGeneratedCardToHand(PlayerChoiceContext choiceContext, CardModel card, Player owner)
     {
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, owner);
@@ -1026,7 +1050,8 @@ internal static class KoakumaMechanics
         [typeof(BG_KoakumaApatiteBook)] = typeof(BG_KoakumaApatiteSloth),
         [typeof(BG_KoakumaRhodoniteBook)] = typeof(BG_KoakumaRhodoniteIsolation),
         [typeof(BG_KoakumaBlackPearlBook)] = typeof(BG_KoakumaBlackPearlCourtship),
-        [typeof(BG_KoakumaFluoriteBook)] = typeof(BG_KoakumaFluoriteAfterimage),
+        [typeof(BG_KoakumaFluoriteBook)] = typeof(BG_KoakumaFluoriteSloth),
+        [typeof(BG_KoakumaFluoriteSloth)] = typeof(BG_KoakumaFluoriteAfterimage),
         [typeof(BG_KoakumaWhitePearlBook)] = typeof(BG_KoakumaWhitePearlFoam),
         [typeof(BG_KoakumaGhostCrystalBook)] = typeof(BG_KoakumaGhostCrystalChain),
         [typeof(BG_KoakumaObsidianBook)] = typeof(BG_KoakumaObsidianCatalog),
@@ -1034,8 +1059,23 @@ internal static class KoakumaMechanics
         [typeof(BG_KoakumaAlexandriteBook)] = typeof(BG_KoakumaBrilliantAlexandrite)
     };
 
-    private static readonly Dictionary<Type, Type> NormalNameMap =
-        TrueNameMap.ToDictionary(pair => pair.Value, pair => pair.Key);
+    private static readonly Dictionary<Type, Type> NormalNameMap = new()
+    {
+        [typeof(BG_KoakumaEmeraldExclusion)] = typeof(BG_KoakumaEmeraldBook),
+        [typeof(BG_KoakumaRubyMatch)] = typeof(BG_KoakumaRubyBook),
+        [typeof(BG_KoakumaSapphireProof)] = typeof(BG_KoakumaSapphireBook),
+        [typeof(BG_KoakumaAmethystLegend)] = typeof(BG_KoakumaAmethystBook),
+        [typeof(BG_KoakumaApatiteSloth)] = typeof(BG_KoakumaApatiteBook),
+        [typeof(BG_KoakumaRhodoniteIsolation)] = typeof(BG_KoakumaRhodoniteBook),
+        [typeof(BG_KoakumaBlackPearlCourtship)] = typeof(BG_KoakumaBlackPearlBook),
+        [typeof(BG_KoakumaFluoriteSloth)] = typeof(BG_KoakumaFluoriteBook),
+        [typeof(BG_KoakumaFluoriteAfterimage)] = typeof(BG_KoakumaFluoriteBook),
+        [typeof(BG_KoakumaWhitePearlFoam)] = typeof(BG_KoakumaWhitePearlBook),
+        [typeof(BG_KoakumaGhostCrystalChain)] = typeof(BG_KoakumaGhostCrystalBook),
+        [typeof(BG_KoakumaObsidianCatalog)] = typeof(BG_KoakumaObsidianBook),
+        [typeof(BG_KoakumaOnyxAbsence)] = typeof(BG_KoakumaOnyxBook),
+        [typeof(BG_KoakumaBrilliantAlexandrite)] = typeof(BG_KoakumaAlexandriteBook)
+    };
 
     private static readonly Type[] BookSpellTypes =
     [

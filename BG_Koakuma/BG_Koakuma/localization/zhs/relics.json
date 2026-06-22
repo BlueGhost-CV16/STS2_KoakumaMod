@@ -9,7 +9,7 @@
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_ORDINARY_MAGIC_BOOK.description": "在每场战斗开始时，向手中置入[blue]{Cards}[/blue]张随机[gold]魔法书[/gold]牌。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_ORDINARY_MAGIC_BOOK.flavor": "它普通得有些可疑。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_PORTABLE_BOOKMARK.title": "便携书签",
-  "BG_KOAKUMA_RELIC_BG_KOAKUMA_PORTABLE_BOOKMARK.description": "在[green]阅读[/green]中放回[gold]抽牌堆[/gold]底的牌每有{energyPrefix:energyIcons(1)}，就对所有敌人造成[blue]{Damage}[/blue]点伤害。",
+  "BG_KOAKUMA_RELIC_BG_KOAKUMA_PORTABLE_BOOKMARK.description": "在[green]阅读[/green]中加入手牌或放回[gold]抽牌堆[/gold]底的牌每有{energyPrefix:energyIcons(1)}，就对所有敌人造成[blue]{Damage}[/blue]点伤害。费用小于1的牌也视为{energyPrefix:energyIcons(1)}。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_PORTABLE_BOOKMARK.flavor": "夹住页脚，也夹住一簇不安分的魔力。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_EFFICIENT_MANA_CIRCUIT.title": "高效魔力回路",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_EFFICIENT_MANA_CIRCUIT.description": "每[gold]消耗[/gold][orange]魔力[/orange]{MagicCost}，获得[blue]{Block}[/blue]点[gold]格挡[/gold]。",

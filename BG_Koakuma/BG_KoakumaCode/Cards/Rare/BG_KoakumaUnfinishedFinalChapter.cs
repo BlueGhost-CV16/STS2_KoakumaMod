@@ -19,7 +19,7 @@ public sealed class BG_KoakumaUnfinishedFinalChapter : KoakumaInterpretableRareC
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await KoakumaMechanics.ChooseGeneratedMagicBooksToHand(choiceContext, this, Amount("Choose"), KoakumaMechanics.ConsumeInterpret(this));
+        await KoakumaMechanics.ChooseGeneratedMagicBookOffersToHand(choiceContext, this, Amount("Choose"), 3, KoakumaMechanics.ConsumeInterpret(this));
     }
 
     protected override void OnUpgrade() => UpgradeAmount("Choose", 1);

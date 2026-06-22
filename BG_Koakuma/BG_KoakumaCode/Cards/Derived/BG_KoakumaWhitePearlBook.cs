@@ -29,7 +29,12 @@ public sealed class BG_KoakumaWhitePearlBook : KoakumaMagicBookCard
     ];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await KoakumaMechanics.MoveRandomExhaustCardsToHand(choiceContext, this, Amount("Show"), Amount("Choose"), card => card is not BG_KoakumaWhitePearlBook and not BG_KoakumaWhitePearlFoam);
+        await KoakumaMechanics.MoveRandomExhaustCardsToHand(
+            choiceContext,
+            this,
+            Amount("Show"),
+            Amount("Choose"),
+            card => card is not BG_KoakumaWhitePearlBook and not BG_KoakumaWhitePearlFoam && card.Rarity != CardRarity.Rare);
         await InterpretDraw(choiceContext);
     }
 

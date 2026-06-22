@@ -31,7 +31,7 @@ public sealed class BG_KoakumaCharacter : ModCharacterTemplate<BG_KoakumaCardPoo
     public override CharacterGender Gender => CharacterGender.Neutral;
 
     // 初始血量和金币。
-    public override int StartingHp => 75;
+    public override int StartingHp => 66;
     public override int StartingGold => 99;
 
     // CharacterAssetProfile 按类别拆分。你只写需要替换的部分，其他字段会保留回退。
