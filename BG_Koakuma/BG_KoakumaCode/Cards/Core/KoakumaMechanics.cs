@@ -426,11 +426,10 @@ internal static class KoakumaMechanics
     public static async Task AddGeneratedCardToHand(PlayerChoiceContext choiceContext, CardModel card, Player owner)
     {
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, owner);
-        if (IsMagicBook(card) && owner.Creature.GetPower<LapisFantasyLibraryPower>() != null)
+        if (CanTransformToTrueName(card) && owner.Creature.GetPower<LapisFantasyLibraryPower>() != null)
         {
             await TransformToTrueName(card);
         }
-        await TriggerMagicBookCorridorIfNeeded(choiceContext, card);
     }
 
     public static async Task AutoPlayMagicBomb(PlayerChoiceContext choiceContext, Player owner, Creature target, bool skipCardPileVisuals = false)
@@ -540,6 +539,59 @@ internal static class KoakumaMechanics
         {
             await TransformToTrueName(original);
         }
+    }
+
+    public static bool CanTransformToTrueName(CardModel card)
+    {
+        return TrueNameMap.ContainsKey(card.GetType())
+            || card is BG_KoakumaLapisBook && HasCollectedAllIdentifiedMagicBooks(card.Owner);
+    }
+
+    public static async Task ChooseGeneratedMagicBookToDrawPile(PlayerChoiceContext choiceContext, CardModel sourceCard, bool addInterpretedCopyToTop, bool upgraded)
+    {
+        var owner = sourceCard.Owner;
+        var combatState = owner.Creature.CombatState;
+        if (combatState == null)
+        {
+            return;
+        }
+
+        var books = IdentifiedMagicBookTypes.Select(type => CreateCardOfType(combatState, type, owner)).ToList();
+        if (upgraded)
+        {
+            foreach (var book in books.Where(book => !book.IsUpgraded))
+            {
+                CardCmd.Upgrade(book);
+            }
+        }
+
+        var selected = (await CardSelectCmd.FromSimpleGrid(
+            choiceContext,
+            books,
+            owner,
+            new CardSelectorPrefs(sourceCard.SelectionScreenPrompt, 1, 1)
+            {
+                Cancelable = true,
+                RequireManualConfirmation = true
+            })).FirstOrDefault();
+        if (selected == null)
+        {
+            return;
+        }
+
+        await CardPileCmd.AddGeneratedCardToCombat(selected, PileType.Draw, owner, CardPilePosition.Bottom);
+        if (!addInterpretedCopyToTop)
+        {
+            return;
+        }
+
+        var topCopy = CreateCardOfType(combatState, selected.GetType(), owner);
+        if (selected.IsUpgraded && !topCopy.IsUpgraded)
+        {
+            CardCmd.Upgrade(topCopy);
+        }
+
+        await CardPileCmd.AddGeneratedCardToCombat(topCopy, PileType.Draw, owner, CardPilePosition.Top);
     }
 
     public static async Task PutDrawPileMagicBooksOnTop(CardModel sourceCard)

@@ -14,7 +14,7 @@ public sealed class BG_KoakumaBombInterleaf : KoakumaUncommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [CardTip<BG_KoakumaMagicBomb>(), KeywordTip(CardKeyword.Retain)];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [CardTip<BG_KoakumaMagicBomb>()];
 
     public BG_KoakumaBombInterleaf() : base(1, CardType.Skill)
     {
@@ -23,18 +23,21 @@ public sealed class BG_KoakumaBombInterleaf : KoakumaUncommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        AmountVar("Count", 2),
+        AmountVar("Count", 3),
         MagicVar("MagicCost", 2)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        var combatState = CombatState;
+        ArgumentNullException.ThrowIfNull(combatState);
+
         for (var i = 0; i < Amount("Count"); i++)
         {
-            var bomb = CombatState.CreateCard<BG_KoakumaMagicBomb>(Owner);
+            var bomb = combatState.CreateCard<BG_KoakumaMagicBomb>(Owner);
             if (KoakumaMechanics.MagicPaid(cardPlay))
             {
-                CardCmd.ApplyKeyword(bomb, CardKeyword.Retain);
+                CardCmd.Upgrade(bomb);
             }
             await CardPileCmd.AddGeneratedCardToCombat(bomb, PileType.Hand, Owner);
         }

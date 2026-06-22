@@ -37,7 +37,7 @@ public sealed class BG_KoakumaLapisBook : KoakumaMagicBookCard
             || Pile?.Type != PileType.Hand
             || oldPileType == PileType.Hand
             || card.Pile?.Type != PileType.Hand
-            || !KoakumaMechanics.IsMagicBook(card))
+            || !KoakumaMechanics.CanTransformToTrueName(card))
         {
             return;
         }

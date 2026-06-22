@@ -14,31 +14,25 @@ public sealed class BG_KoakumaMagicBulwark : KoakumaCommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
 
-    public BG_KoakumaMagicBulwark() : base(1, CardType.Skill)
-    {
-        SetMagicCost(3);
-    }
+    public BG_KoakumaMagicBulwark() : base(1, CardType.Skill) { }
 
     public override bool GainsBlock => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(8, ValueProp.Move),
-        MagicVar("MagicCost", 3)
+        MagicVar("Magic", 1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var block = DynamicVars.Block;
-        await CreatureCmd.GainBlock(Owner.Creature, block, cardPlay);
-        if (KoakumaMechanics.MagicPaid(cardPlay))
-        {
-            await CreatureCmd.GainBlock(Owner.Creature, block, cardPlay);
-        }
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        await KoakumaMechanics.GainMagic(Owner, Amount("Magic"), this);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(2);
+        UpgradeAmount("Magic", 1);
     }
 }

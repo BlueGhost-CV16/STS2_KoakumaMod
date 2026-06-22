@@ -33,7 +33,7 @@ public sealed class BG_KoakumaObsidianBook : KoakumaMagicBookCard
             choiceContext,
             Owner,
             new CardSelectorPrefs(SelectionScreenPrompt, Amount("Min"), Amount("Max")) { Cancelable = true, RequireManualConfirmation = true },
-            card => card != this && card is IKoakumaMagicBookCard,
+            card => card != this && KoakumaMechanics.CanTransformToTrueName(card),
             this);
         foreach (var card in selected)
         {

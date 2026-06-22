@@ -30,13 +30,13 @@ public sealed class BG_KoakumaObsidianCatalog : KoakumaMagicBookCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        foreach (var card in PileType.Hand.GetPile(Owner).Cards.Where(card => card != this && card is IKoakumaMagicBookCard).ToList())
+        foreach (var card in PileType.Hand.GetPile(Owner).Cards.Where(card => card != this && KoakumaMechanics.CanTransformToTrueName(card)).ToList())
         {
             await KoakumaMechanics.TransformToTrueName(card);
         }
         if (Amount("IncludeDrawPile") > 0)
         {
-            foreach (var card in PileType.Draw.GetPile(Owner).Cards.Where(card => card is IKoakumaMagicBookCard).ToList())
+            foreach (var card in PileType.Draw.GetPile(Owner).Cards.Where(KoakumaMechanics.CanTransformToTrueName).ToList())
             {
                 await KoakumaMechanics.TransformToTrueName(card);
             }

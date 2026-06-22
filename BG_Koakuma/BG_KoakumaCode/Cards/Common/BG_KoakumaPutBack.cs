@@ -22,9 +22,10 @@ public sealed class BG_KoakumaPutBack : KoakumaCommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(8, ValueProp.Move),
+        new BlockVar(9, ValueProp.Move),
         AmountVar("Return", 1),
-        MagicVar("MagicBonus", 0)
+        MagicVar("Magic", 1),
+        MagicVar("MagicBonus", 1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -41,7 +42,6 @@ public sealed class BG_KoakumaPutBack : KoakumaCommonCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2);
-        UpgradeAmount("MagicBonus", 1);
+        DynamicVars.Block.UpgradeValueBy(3);
     }
 }

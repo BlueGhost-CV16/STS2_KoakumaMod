@@ -19,7 +19,11 @@ public sealed class BG_KoakumaSpellCircuit : KoakumaRareCard
 
     public BG_KoakumaSpellCircuit() : base(1, CardType.Power) { }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<SpellCircuitPower>("Block", 3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        MagicVar("Magic", 1),
+        new PowerVar<SpellCircuitPower>("Block", 3)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

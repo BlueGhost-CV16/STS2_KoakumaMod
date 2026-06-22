@@ -22,7 +22,7 @@ public sealed class BG_KoakumaManaRecycle : KoakumaCommonCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(14, ValueProp.Move),
-        new PowerVar<KoakumaManaRecyclePower>("Power", 1)
+        MagicVar("Power", 1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

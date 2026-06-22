@@ -21,19 +21,19 @@ public sealed class BG_KoakumaMagicChant : KoakumaUncommonCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new EnergyVar(1),
-        new PowerVar<GainMagicNextTurnPower>("Power", 3)
+        MagicVar("NextTurnMagic", 3)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await KoakumaSingleTurnRetainPower.Retain(choiceContext, Owner, this);
         await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, Owner.Creature, Amount("Energy"), Owner.Creature, this);
-        await PowerCmd.Apply<GainMagicNextTurnPower>(choiceContext, Owner.Creature, Amount("Power"), Owner.Creature, this);
+        await PowerCmd.Apply<GainMagicNextTurnPower>(choiceContext, Owner.Creature, Amount("NextTurnMagic"), Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         UpgradeAmount("Energy", 1);
-        UpgradeAmount("Power", 1);
+        UpgradeAmount("NextTurnMagic", 1);
     }
 }

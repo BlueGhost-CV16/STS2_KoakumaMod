@@ -10,7 +10,7 @@ using STS2RitsuLib.Interop.AutoRegistration;
 namespace BG_Koakuma.Cards;
 
 [RegisterCard(typeof(BG_KoakumaCardPool))]
-public sealed class BG_KoakumaMagicPages : KoakumaUncommonCard
+public sealed class BG_KoakumaMagicPages : KoakumaCommonCard
 {
     protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<MagicPagesPower>()];
 

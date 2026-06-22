@@ -34,7 +34,6 @@ public sealed class BG_KoakumaReread : KoakumaCommonCard
 
     protected override void OnUpgrade()
     {
-        //UpgradeAmount("Magic", 2);
-        DynamicVars.Cards.UpgradeValueBy(1);
+        UpgradeAmount("Magic", 1);
     }
 }

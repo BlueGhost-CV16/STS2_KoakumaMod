@@ -21,4 +21,15 @@ public sealed class MagicBookCorridorEtoilePower : KoakumaPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
+
+    public override async Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
+    {
+        if (card.Owner == Owner.Player
+            && oldPileType != PileType.Hand
+            && card.Pile?.Type == PileType.Hand
+            && KoakumaMechanics.IsMagicBook(card))
+        {
+            await KoakumaMechanics.MarkInterpretedAndResolve(new BlockingPlayerChoiceContext(), card);
+        }
+    }
 }

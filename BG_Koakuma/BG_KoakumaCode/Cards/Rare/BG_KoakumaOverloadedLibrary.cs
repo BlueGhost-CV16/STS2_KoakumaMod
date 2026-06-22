@@ -22,6 +22,7 @@ public sealed class BG_KoakumaOverloadedLibrary : KoakumaRareCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         MagicVar("Magic", 2),
+        MagicVar("MagicCost", 1),
         new PowerVar<MagicBurnPower>("MagicBurn", 2)
     ];
 

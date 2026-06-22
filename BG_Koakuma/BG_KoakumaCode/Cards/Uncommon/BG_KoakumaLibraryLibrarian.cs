@@ -18,7 +18,7 @@ public sealed class BG_KoakumaLibraryLibrarian : KoakumaUncommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<LibraryLibrarianPower>("Power", 1)
+        MagicVar("Power", 1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

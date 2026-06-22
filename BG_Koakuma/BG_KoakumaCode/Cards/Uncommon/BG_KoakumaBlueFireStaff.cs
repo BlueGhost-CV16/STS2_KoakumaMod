@@ -13,7 +13,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaBlueFireStaff : KoakumaUncommonCard
 {
-    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.MagicBurn];
 
     public override int MaxUpgradeLevel => int.MaxValue;
 
@@ -38,13 +38,12 @@ public sealed class BG_KoakumaBlueFireStaff : KoakumaUncommonCard
         for (var i = 0; i < hits; i++)
         {
             await PowerCmd.Apply<MagicBurnPower>(choiceContext, cardPlay.Target, Amount("MagicBurn"), Owner.Creature, this);
+
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+                .FromCard(this)
+                .Targeting(cardPlay.Target)
+                .Execute(choiceContext);
         }
-        
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .WithHitCount(hits)
-            .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
 
         if (KoakumaMechanics.MagicPaid(cardPlay))
         {

@@ -16,7 +16,7 @@ public sealed class BG_KoakumaWitchAssistant : KoakumaUncommonCard
 
     public BG_KoakumaWitchAssistant() : base(1, CardType.Power) { }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ManaAnnotationPower>("Power", 1)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [MagicVar("Power", 1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

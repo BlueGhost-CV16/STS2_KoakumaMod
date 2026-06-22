@@ -20,6 +20,7 @@ public sealed class BG_KoakumaFluoriteSloth : KoakumaMagicBookCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new PowerVar<FluoriteSlothPower>("Power", 1),
+        new EnergyVar("TurnEnergy", 1),
         new EnergyVar(0),
         new CardsVar(1)
     ];

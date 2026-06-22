@@ -8,20 +8,22 @@ using STS2RitsuLib.Interop.AutoRegistration;
 namespace BG_Koakuma.Cards;
 
 [RegisterCard(typeof(BG_KoakumaCardPool))]
-public sealed class BG_KoakumaMagicBookWriting : KoakumaInterpretableCommonCard
+public sealed class BG_KoakumaMagicBookWriting : KoakumaInterpretableUncommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.Interpret, KoakumaHoverTips.MagicBookCollection];
 
     public BG_KoakumaMagicBookWriting() : base(0, CardType.Skill)
     {
-        SetMagicCost(1);
+        SetMagicCost(2);
     }
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => IsUpgraded
+        ? [CardKeyword.Exhaust, CardKeyword.Retain]
+        : [CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        MagicVar("MagicCost", 1)
+        MagicVar("MagicCost", 2)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -39,6 +41,6 @@ public sealed class BG_KoakumaMagicBookWriting : KoakumaInterpretableCommonCard
 
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Exhaust);
+        AddKeyword(CardKeyword.Retain);
     }
 }

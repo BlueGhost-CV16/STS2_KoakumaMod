@@ -18,7 +18,7 @@ public sealed class BG_KoakumaMagicLantern : KoakumaUncommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<ManaRecycleEnginePower>("Power", 5)
+        MagicVar("Power", 5)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

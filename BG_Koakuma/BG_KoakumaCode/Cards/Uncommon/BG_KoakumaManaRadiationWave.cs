@@ -30,16 +30,15 @@ public sealed class BG_KoakumaManaRadiationWave : KoakumaUncommonCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
         var hits = ResolveEnergyXValue();
-        
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .WithHitCount(hits)
-            .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .Execute(choiceContext);
 
         for (var i = 0; i < hits; i++)
         {
             await PowerCmd.Apply<MagicBurnPower>(choiceContext, cardPlay.Target, Amount("MagicBurn"), Owner.Creature, this);
+
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+                .FromCard(this)
+                .Targeting(cardPlay.Target)
+                .Execute(choiceContext);
         }
     }
 

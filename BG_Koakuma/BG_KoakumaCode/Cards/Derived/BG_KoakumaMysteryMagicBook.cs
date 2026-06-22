@@ -57,12 +57,6 @@ public sealed class BG_KoakumaMysteryMagicBook : KoakumaCard, IKoakumaInterpreta
 
     public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
     {
-        if (card == this && Pile?.Type == PileType.Hand && oldPileType != PileType.Hand
-            && Owner.Creature.GetPower<Powers.MagicBookCorridorEtoilePower>() != null)
-        {
-            KoakumaMechanics.MarkInterpreted(this);
-        }
-
         if (card == this && oldPileType == PileType.Hand && Pile?.Type is not (PileType.Hand or PileType.Play))
         {
             KoakumaMechanics.ClearInterpret(this);
