@@ -1,6 +1,6 @@
 {
   "BG_KOAKUMA_CARD_BG_KOAKUMA_MAGIC_BOOK_COLLECT.title": "书符「魔法书收集」",
-  "BG_KOAKUMA_CARD_BG_KOAKUMA_MAGIC_BOOK_COLLECT.description": "造成{Damage:diff()}点伤害，进行1次[gold]魔法书收集[/gold]。\n[orange]魔力[/orange]{MagicCost}：额外造成{Damage:diff()}点伤害。\n[purple]解读[/purple]：额外造成{Damage:diff()}点伤害。",
+  "BG_KOAKUMA_CARD_BG_KOAKUMA_MAGIC_BOOK_COLLECT.description": "造成{Damage:diff()}点伤害，进行1次[gold]魔法书收集[/gold]。\n[orange]魔力[/orange]{MagicCost}：额外造成{ManaDamage:diff()}点伤害。\n[purple]解读[/purple]：额外造成{ManaDamage:diff()}点伤害。",
   "BG_KOAKUMA_CARD_BG_KOAKUMA_MAGIC_BOOK_ORGANIZE.title": "书符「魔法书整理」",
   "BG_KOAKUMA_CARD_BG_KOAKUMA_MAGIC_BOOK_ORGANIZE.description": "进行1次[green]阅读[/green]。\n[purple]解读[/purple]：进行1次[green]阅读[/green]。",
   "BG_KOAKUMA_CARD_BG_KOAKUMA_MYSTERY_MAGIC_BOOK.title": "「谜之魔法书」",

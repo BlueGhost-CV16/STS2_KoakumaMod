@@ -29,6 +29,7 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(8, ValueProp.Move),
+        new DamageVar("ManaDamage", 4, ValueProp.Move),
         MagicVar("MagicCost", 2)
     ];
 
@@ -50,7 +51,7 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
 
         if (KoakumaMechanics.MagicPaid(cardPlay))
         {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue / 2)
+            await DamageCmd.Attack(DynamicVars["ManaDamage"].BaseValue)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)
                 .Execute(choiceContext);
@@ -58,7 +59,7 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
 
         if (KoakumaMechanics.ConsumeInterpret(this))
         {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue / 2)
+            await DamageCmd.Attack(DynamicVars["ManaDamage"].BaseValue)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)
                 .Execute(choiceContext);
@@ -78,5 +79,6 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars["ManaDamage"].UpgradeValueBy(1);
     }
 }
