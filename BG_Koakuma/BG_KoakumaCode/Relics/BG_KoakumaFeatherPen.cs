@@ -52,6 +52,6 @@ public sealed class BG_KoakumaFeatherPen : KoakumaRelic
 
         _remaining--;
         Flash();
-        await KoakumaMechanics.MarkInterpretedAndResolve(choiceContext, card);
+        await KoakumaMechanics.MarkInterpretedAndResolveAfterHandEntry(choiceContext, card);
     }
 }

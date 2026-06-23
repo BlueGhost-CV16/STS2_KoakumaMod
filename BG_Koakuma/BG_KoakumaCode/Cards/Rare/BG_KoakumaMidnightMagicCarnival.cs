@@ -30,7 +30,7 @@ public sealed class BG_KoakumaMidnightMagicCarnival : KoakumaRareCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(20, ValueProp.Move),
+        new DamageVar(15, ValueProp.Move),
         new PowerVar<MagicBurnPower>("MagicBurn", 3)
     ];
 

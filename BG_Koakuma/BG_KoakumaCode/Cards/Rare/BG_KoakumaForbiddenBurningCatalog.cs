@@ -16,7 +16,7 @@ public sealed class BG_KoakumaForbiddenBurningCatalog : KoakumaRareCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(10, ValueProp.Move),
-        AmountVar("CollectionDamage", 2)
+        AmountVar("CollectionDamage", 4)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -36,6 +36,6 @@ public sealed class BG_KoakumaForbiddenBurningCatalog : KoakumaRareCard
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2);
-        UpgradeAmount("CollectionDamage", 1);
+        UpgradeAmount("CollectionDamage", 2);
     }
 }

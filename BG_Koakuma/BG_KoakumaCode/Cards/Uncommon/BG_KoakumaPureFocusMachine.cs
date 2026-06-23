@@ -21,7 +21,7 @@ public sealed class BG_KoakumaPureFocusMachine : KoakumaUncommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<PureFocusMachinePower>("Power", 4),
+        new PowerVar<PureFocusMachinePower>("Power", 5),
         MagicVar("MagicCost", 1)
     ];
 

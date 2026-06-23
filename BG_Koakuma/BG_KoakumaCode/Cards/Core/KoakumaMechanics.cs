@@ -64,11 +64,7 @@ internal static class KoakumaMechanics
         }
 
         await CardPileCmd.Add(selected, PileType.Hand, CardPilePosition.Bottom);
-        if (MarkInterpretedIfSupported(selected))
-        {
-            await TriggerAfterInterpreted(choiceContext, selected);
-        }
-        await ResolveInterpretIfNeeded(choiceContext, selected);
+        await MarkInterpretedAndResolveAfterHandEntry(choiceContext, selected);
 
         var handCards = PileType.Hand.GetPile(owner).Cards
             //.Where(card => card != selected && card != sourceCard)
@@ -243,6 +239,10 @@ internal static class KoakumaMechanics
         {
             await relic.AfterMagicSpent(choiceContext, amount, source);
         }
+        foreach (var power in owner.Creature.Powers.OfType<IKoakumaAfterMagicSpent>().ToList())
+        {
+            await power.AfterMagicSpent(choiceContext, amount, source);
+        }
     }
 
     public static bool MagicPaid(CardPlay cardPlay)
@@ -263,6 +263,14 @@ internal static class KoakumaMechanics
     public static Task<int> LoseMagic(Player owner, int amount, AbstractModel? source = null)
     {
         return KoakumaMagic.Lose(owner, amount, source);
+    }
+
+    public static Task<int> SetMagic(Player owner, int amount, AbstractModel? source = null)
+    {
+        var current = GetMagic(owner);
+        return amount >= current
+            ? GainMagic(owner, amount - current, source)
+            : LoseMagic(owner, current - amount, source);
     }
 
     public static bool ConsumeInterpret(CardModel card)
@@ -287,6 +295,11 @@ internal static class KoakumaMechanics
 
     public static async Task MarkInterpretedAndResolve(PlayerChoiceContext choiceContext, CardModel card)
     {
+        if (IsInterpreted(card))
+        {
+            return;
+        }
+
         if (MarkInterpretedIfSupported(card))
         {
             await TriggerAfterInterpreted(choiceContext, card);
@@ -294,9 +307,23 @@ internal static class KoakumaMechanics
         await ResolveInterpretIfNeeded(choiceContext, card);
     }
 
+    public static Task MarkInterpretedAndResolveAfterHandEntry(PlayerChoiceContext choiceContext, CardModel card)
+    {
+        return MagicBookCorridorWillHandleHandEntry(card)
+            ? Task.CompletedTask
+            : MarkInterpretedAndResolve(choiceContext, card);
+    }
+
     public static bool IsMagicBook(CardModel card)
     {
         return card is IKoakumaMagicBookCard || card is BG_KoakumaMysteryMagicBook;
+    }
+
+    private static bool MagicBookCorridorWillHandleHandEntry(CardModel card)
+    {
+        return card.Pile?.Type == PileType.Hand
+            && IsMagicBook(card)
+            && card.Owner.Creature.GetPower<MagicBookCorridorEtoilePower>() != null;
     }
 
     public static bool HasCollectedAllIdentifiedMagicBooks(Player owner)
@@ -391,11 +418,7 @@ internal static class KoakumaMechanics
 
         foreach (var card in selected)
         {
-            if (markInterpreted)
-            {
-                await MarkInterpretedAndResolve(choiceContext, card);
-            }
-            await AddGeneratedCardToHand(choiceContext, card, owner);
+            await AddGeneratedCardToHand(choiceContext, card, owner, markInterpreted);
         }
     }
 
@@ -415,17 +438,17 @@ internal static class KoakumaMechanics
                 : await CardSelectCmd.FromChooseACardScreen(choiceContext, books, owner, canSkip: false);
             chosen ??= books[0];
 
-            if (markInterpreted)
-            {
-                await MarkInterpretedAndResolve(choiceContext, chosen);
-            }
-            await AddGeneratedCardToHand(choiceContext, chosen, owner);
+            await AddGeneratedCardToHand(choiceContext, chosen, owner, markInterpreted);
         }
     }
 
-    public static async Task AddGeneratedCardToHand(PlayerChoiceContext choiceContext, CardModel card, Player owner)
+    public static async Task AddGeneratedCardToHand(PlayerChoiceContext choiceContext, CardModel card, Player owner, bool markInterpretedAfterHandEntry = false)
     {
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, owner);
+        if (markInterpretedAfterHandEntry)
+        {
+            await MarkInterpretedAndResolveAfterHandEntry(choiceContext, card);
+        }
         if (CanTransformToTrueName(card) && owner.Creature.GetPower<LapisFantasyLibraryPower>() != null)
         {
             await TransformToTrueName(card);
@@ -620,11 +643,11 @@ internal static class KoakumaMechanics
 
         foreach (var card in selected)
         {
+            await CardPileCmd.Add(card, PileType.Hand, CardPilePosition.Bottom);
             if (markInterpreted)
             {
-                await MarkInterpretedAndResolve(choiceContext, card);
+                await MarkInterpretedAndResolveAfterHandEntry(choiceContext, card);
             }
-            await CardPileCmd.Add(card, PileType.Hand, CardPilePosition.Bottom);
         }
     }
 
@@ -856,11 +879,7 @@ internal static class KoakumaMechanics
 
         CardCmd.Upgrade(selected);
         await CardPileCmd.Add(selected, PileType.Hand, CardPilePosition.Bottom);
-            if (MarkInterpretedIfSupported(selected))
-            {
-                await TriggerAfterInterpreted(choiceContext, selected);
-            }
-            await ResolveInterpretIfNeeded(choiceContext, selected);
+        await MarkInterpretedAndResolveAfterHandEntry(choiceContext, selected);
 
         var handCards = PileType.Hand.GetPile(owner).Cards
             //.Where(card => card != selected && card != sourceCard)
@@ -899,11 +918,7 @@ internal static class KoakumaMechanics
         }
 
         await CardPileCmd.Add(selected, PileType.Hand, CardPilePosition.Bottom);
-        if (MarkInterpretedIfSupported(selected))
-        {
-            await TriggerAfterInterpreted(choiceContext, selected);
-        }
-        await ResolveInterpretIfNeeded(choiceContext, selected);
+        await MarkInterpretedAndResolveAfterHandEntry(choiceContext, selected);
 
         var returned = await ChooseReadReturnCard(choiceContext, owner, card => card != sourceCard, sourceCard);
 
@@ -998,7 +1013,11 @@ internal static class KoakumaMechanics
     {
         if (card is IKoakumaInterpretableCard)
         {
-            InterpretedCards.Add(card);
+            if (!InterpretedCards.Add(card))
+            {
+                return false;
+            }
+
             if (card is IKoakumaOnInterpreted onInterpreted)
             {
                 onInterpreted.OnInterpreted();
@@ -1014,11 +1033,7 @@ internal static class KoakumaMechanics
     {
         if (IsMagicBook(card) && card.Owner.Creature.GetPower<MagicBookCorridorEtoilePower>() != null)
         {
-            if (MarkInterpretedIfSupported(card))
-            {
-                await TriggerAfterInterpreted(choiceContext, card);
-            }
-            await ResolveInterpretIfNeeded(choiceContext, card);
+            await MarkInterpretedAndResolve(choiceContext, card);
         }
     }
 
@@ -1101,6 +1116,7 @@ internal static class KoakumaMechanics
         [typeof(BG_KoakumaAmethystBook)] = typeof(BG_KoakumaAmethystLegend),
         [typeof(BG_KoakumaApatiteBook)] = typeof(BG_KoakumaApatiteSloth),
         [typeof(BG_KoakumaRhodoniteBook)] = typeof(BG_KoakumaRhodoniteIsolation),
+        [typeof(BG_KoakumaRhodoniteIsolation)] = typeof(BG_KoakumaRhodoniteFinalCycle),
         [typeof(BG_KoakumaBlackPearlBook)] = typeof(BG_KoakumaBlackPearlCourtship),
         [typeof(BG_KoakumaFluoriteBook)] = typeof(BG_KoakumaFluoriteSloth),
         [typeof(BG_KoakumaFluoriteSloth)] = typeof(BG_KoakumaFluoriteAfterimage),
@@ -1119,6 +1135,7 @@ internal static class KoakumaMechanics
         [typeof(BG_KoakumaAmethystLegend)] = typeof(BG_KoakumaAmethystBook),
         [typeof(BG_KoakumaApatiteSloth)] = typeof(BG_KoakumaApatiteBook),
         [typeof(BG_KoakumaRhodoniteIsolation)] = typeof(BG_KoakumaRhodoniteBook),
+        [typeof(BG_KoakumaRhodoniteFinalCycle)] = typeof(BG_KoakumaRhodoniteBook),
         [typeof(BG_KoakumaBlackPearlCourtship)] = typeof(BG_KoakumaBlackPearlBook),
         [typeof(BG_KoakumaFluoriteSloth)] = typeof(BG_KoakumaFluoriteBook),
         [typeof(BG_KoakumaFluoriteAfterimage)] = typeof(BG_KoakumaFluoriteBook),

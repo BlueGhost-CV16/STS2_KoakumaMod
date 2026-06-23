@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.Powers.Mocks;
 using MegaCrit.Sts2.Core.ValueProps;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using BG_Koakuma.Characters;
 using BG_Koakuma.Powers;
 using BG_Koakuma.Tooltips;
 using BG_Koakuma.Relics;
@@ -18,20 +19,20 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace BG_Koakuma.Cards;
 
-[RegisterCard(typeof(TokenCardPool))]
+[RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaMagicBomb : KoakumaDerivedCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];
 
     protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<MagicBurnPower>()];
 
-    public BG_KoakumaMagicBomb() : base(0, CardType.Attack, TargetType.AnyEnemy)
+    public BG_KoakumaMagicBomb() : base(0, CardType.Attack, TargetType.AnyEnemy, showInCardLibrary: true)
     {
     }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(3, ValueProp.Move),
+        new DamageVar(2, ValueProp.Move),
         new PowerVar<MagicBurnPower>("MagicBurn", 1)
     ];
 

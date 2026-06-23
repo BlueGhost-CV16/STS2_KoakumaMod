@@ -45,7 +45,7 @@
   "BG_KOAKUMA_POWER_KOAKUMA_MANA_RECYCLE_POWER.description": "本回合每受到[blue]1[/blue]次攻击，获得[blue]1[/blue]点[orange]魔力[/orange]。",
   "BG_KOAKUMA_POWER_KOAKUMA_MANA_RECYCLE_POWER.smartDescription": "本回合每受到[blue]1[/blue]次攻击，获得{Amount}点[orange]魔力[/orange]。",
   "BG_KOAKUMA_POWER_PURE_FOCUS_MACHINE_POWER.title": "纯净聚焦机",
-  "BG_KOAKUMA_POWER_PURE_FOCUS_MACHINE_POWER.description": "打出攻击牌时，[orange]魔力[/orange][blue]1[/blue]：额外造成[blue]4[/blue]点伤害。",
+  "BG_KOAKUMA_POWER_PURE_FOCUS_MACHINE_POWER.description": "打出攻击牌时，[orange]魔力[/orange][blue]1[/blue]：额外造成[blue]5[/blue]点伤害。",
   "BG_KOAKUMA_POWER_PURE_FOCUS_MACHINE_POWER.smartDescription": "打出攻击牌时，[orange]魔力[/orange][blue]1[/blue]：额外造成[blue]{Amount}[/blue]点伤害。",
   "BG_KOAKUMA_POWER_WASTE_HEAT_RETURN_POWER.title": "废热回导",
   "BG_KOAKUMA_POWER_WASTE_HEAT_RETURN_POWER.description": "每施加[blue]1[/blue]层[red]魔力烧灼[/red]时，获得[blue]1[/blue]点[gold]格挡[/gold]。",
@@ -117,8 +117,8 @@
   "BG_KOAKUMA_POWER_MAGIC_COPIER_POWER.description": "每回合第[blue]1[/blue]次进行[gold]魔法书收集[/gold]后，将其的[blue]1[/blue]张复制加入[gold]手牌[/gold]中。",
   "BG_KOAKUMA_POWER_MAGIC_COPIER_POWER.smartDescription": "每回合第[blue]1[/blue]次进行[gold]魔法书收集[/gold]后，将其的[blue]{Amount}[/blue]张复制加入[gold]手牌[/gold]中。",
   "BG_KOAKUMA_POWER_REVERSE_INDEX_POWER.title": "反向索引",
-  "BG_KOAKUMA_POWER_REVERSE_INDEX_POWER.description": "每回合开始时，展示[gold]抽牌堆[/gold]底的[blue]3[/blue]张牌，从中选择[blue]1[/blue]张加入[gold]手牌[/gold]。",
-  "BG_KOAKUMA_POWER_REVERSE_INDEX_POWER.smartDescription": "每回合开始时，展示[gold]抽牌堆[/gold]底的[blue]3[/blue]张牌，从中选择[blue]1[/blue]张加入[gold]手牌[/gold]。",
+  "BG_KOAKUMA_POWER_REVERSE_INDEX_POWER.description": "每回合开始时，展示[gold]抽牌堆[/gold]底的[blue]3[/blue]张牌，可以从中选择[blue]1[/blue]张加入[gold]手牌[/gold]。",
+  "BG_KOAKUMA_POWER_REVERSE_INDEX_POWER.smartDescription": "每回合开始时，展示[gold]抽牌堆[/gold]底的[blue]3[/blue]张牌，可以从中选择[blue]1[/blue]张加入[gold]手牌[/gold]。",
   "BG_KOAKUMA_POWER_OVERREAD_SYNDROME_POWER.title": "过读症候",
   "BG_KOAKUMA_POWER_OVERREAD_SYNDROME_POWER.description": "每次[gold]魔法书收集[/gold]后，向所有敌人施加[blue]2[/blue]层[red]魔力烧灼[/red]。",
   "BG_KOAKUMA_POWER_OVERREAD_SYNDROME_POWER.smartDescription": "每次[gold]魔法书收集[/gold]后，向所有敌人施加[blue]{Amount}[/blue]层[red]魔力烧灼[/red]。",
@@ -133,5 +133,8 @@
   "BG_KOAKUMA_POWER_FLUORITE_SLOTH_POWER.smartDescription": "在你的回合开始时，获得{Amount:energyIcons()}。",
   "BG_KOAKUMA_POWER_OVERLOADED_LIBRARY_POWER.title": "过载书库",
   "BG_KOAKUMA_POWER_OVERLOADED_LIBRARY_POWER.description": "每回合开始时获得[orange]魔力[/orange]；当你[gold]消耗[/gold][orange]魔力[/orange]时，对所有敌人施加[blue]3[/blue]层[red]魔力烧灼[/red]。",
-  "BG_KOAKUMA_POWER_OVERLOADED_LIBRARY_POWER.smartDescription": "每回合开始时获得[orange]魔力[/orange]；当你[gold]消耗[/gold][orange]魔力[/orange]时，对所有敌人施加[blue]{Amount}[/blue]层[red]魔力烧灼[/red]。"
+  "BG_KOAKUMA_POWER_OVERLOADED_LIBRARY_POWER.smartDescription": "每回合开始时获得[orange]魔力[/orange]；当你[gold]消耗[/gold][orange]魔力[/orange]时，对所有敌人施加[blue]{Amount}[/blue]层[red]魔力烧灼[/red]。",
+  "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.title": "芙蓉石的终焉轮回",
+  "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.description": "本回合内，你的{Magic:secondaryResourceIcons()}锁定为[blue]999[/blue]。回合结束时，将其清0。",
+  "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.smartDescription": "本回合内，你的{Magic:secondaryResourceIcons()}锁定为[blue]999[/blue]。回合结束时，将其清0。"
 }

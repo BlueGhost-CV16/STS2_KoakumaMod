@@ -23,12 +23,14 @@ public sealed class BG_KoakumaApatiteBook : KoakumaMagicBookCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(1)
+        new CardsVar(1),
+        AmountVar("InterpretCards", 1)
     ];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CardPileCmd.Draw(choiceContext, Amount("Cards"), Owner);
-        await InterpretDraw(choiceContext);
+        await KoakumaMechanics.DrawIfInterpreted(choiceContext, this, Amount("InterpretCards"));
     }
 
     protected override void OnUpgrade()

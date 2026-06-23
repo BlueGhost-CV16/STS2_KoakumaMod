@@ -30,7 +30,7 @@ public sealed class BG_KoakumaReverseReading : KoakumaInterpretableUncommonCard,
         if (selected != null)
         {
             await CardPileCmd.Add(selected, PileType.Hand, CardPilePosition.Bottom);
-            await KoakumaMechanics.MarkInterpretedAndResolve(choiceContext, selected);
+            await KoakumaMechanics.MarkInterpretedAndResolveAfterHandEntry(choiceContext, selected);
         }
     }
 

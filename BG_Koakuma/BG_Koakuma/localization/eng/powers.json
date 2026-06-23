@@ -48,7 +48,7 @@
   "BG_KOAKUMA_POWER_KOAKUMA_MANA_RECYCLE_POWER.description": "Gain [orange]Magic[/orange] whenever attacked this turn.",
   "BG_KOAKUMA_POWER_KOAKUMA_MANA_RECYCLE_POWER.smartDescription": "Gain [orange]Magic[/orange] whenever attacked this turn.",
   "BG_KOAKUMA_POWER_PURE_FOCUS_MACHINE_POWER.title": "纯净聚焦机",
-  "BG_KOAKUMA_POWER_PURE_FOCUS_MACHINE_POWER.description": "Whenever you play an Attack,\n[orange]Magic[/orange] [blue]1[/blue]: deal [blue]4[/blue] additional damage.",
+  "BG_KOAKUMA_POWER_PURE_FOCUS_MACHINE_POWER.description": "Whenever you play an Attack,\n[orange]Magic[/orange] [blue]1[/blue]: deal [blue]5[/blue] additional damage.",
   "BG_KOAKUMA_POWER_PURE_FOCUS_MACHINE_POWER.smartDescription": "Whenever you play an Attack,\n[orange]Magic[/orange] [blue]1[/blue]: deal [blue]{Amount}[/blue] additional damage.",
   "BG_KOAKUMA_POWER_WASTE_HEAT_RETURN_POWER.title": "废热回导",
   "BG_KOAKUMA_POWER_WASTE_HEAT_RETURN_POWER.description": "施加[red]魔力烧灼[/red]后，抽牌。",
@@ -136,5 +136,8 @@
   "BG_KOAKUMA_POWER_FLUORITE_SLOTH_POWER.smartDescription": "At the start of your turn, gain {Amount:energyIcons()}.",
   "BG_KOAKUMA_POWER_OVERLOADED_LIBRARY_POWER.title": "Overloaded Library",
   "BG_KOAKUMA_POWER_OVERLOADED_LIBRARY_POWER.description": "At the start of each turn, gain [orange]Magic[/orange]. Whenever you spend [orange]Magic[/orange], apply [red]Magic Burn[/red] to all enemies.",
-  "BG_KOAKUMA_POWER_OVERLOADED_LIBRARY_POWER.smartDescription": "At the start of each turn, gain [orange]Magic[/orange]. Whenever you spend [orange]Magic[/orange], apply [red]Magic Burn[/red] to all enemies."
+  "BG_KOAKUMA_POWER_OVERLOADED_LIBRARY_POWER.smartDescription": "At the start of each turn, gain [orange]Magic[/orange]. Whenever you spend [orange]Magic[/orange], apply [red]Magic Burn[/red] to all enemies.",
+  "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.title": "Rhodonite Final Cycle",
+  "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.description": "This turn, lock your {Magic:secondaryResourceIcons()} at [blue]999[/blue]. At end of turn, set it to 0.",
+  "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.smartDescription": "This turn, lock your {Magic:secondaryResourceIcons()} at [blue]999[/blue]. At end of turn, set it to 0."
 }

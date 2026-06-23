@@ -19,7 +19,7 @@ public sealed class BG_KoakumaMagicBookConductor : KoakumaRareCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new CalculationBaseVar(12),
-        new ExtraDamageVar(8),
+        new ExtraDamageVar(6),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier(static (CardModel card, Creature? _) => KoakumaMechanics.GetReadCount(card.Owner))
     ];
 

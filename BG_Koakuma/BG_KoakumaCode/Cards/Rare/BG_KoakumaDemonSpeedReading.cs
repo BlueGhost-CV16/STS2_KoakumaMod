@@ -36,7 +36,7 @@ public sealed class BG_KoakumaDemonSpeedReading : KoakumaRareCard
         {
             foreach (var card in PileType.Hand.GetPile(Owner).Cards.Where(card => !before.Contains(card)))
             {
-                await KoakumaMechanics.MarkInterpretedAndResolve(choiceContext, card);
+                await KoakumaMechanics.MarkInterpretedAndResolveAfterHandEntry(choiceContext, card);
             }
         }
     }
