@@ -11,7 +11,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaMagicBookCardPool))]
 public sealed class BG_KoakumaLapisFantasyLibrary : KoakumaDerivedCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<LapisFantasyLibraryPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<LapisFantasyLibraryPower>();
 
     public BG_KoakumaLapisFantasyLibrary() : base(0, CardType.Power, showInCardLibrary: false) { }
 

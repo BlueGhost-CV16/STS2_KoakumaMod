@@ -16,7 +16,7 @@ namespace BG_Koakuma.Powers;
 public sealed class BloodMarkPower : KoakumaPower
 {
     public override PowerType Type => PowerType.Debuff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
     public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {

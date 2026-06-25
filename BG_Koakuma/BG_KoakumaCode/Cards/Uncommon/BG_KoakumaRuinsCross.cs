@@ -16,7 +16,7 @@ public sealed class BG_KoakumaRuinsCross : KoakumaUncommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBurn];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<ManaRefundPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<ManaRefundPower>();
 
     public BG_KoakumaRuinsCross() : base(2, CardType.Attack, TargetType.AnyEnemy) { }
 

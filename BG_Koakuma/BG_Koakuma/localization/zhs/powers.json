@@ -12,7 +12,7 @@
   "BG_KOAKUMA_POWER_SAPPHIRE_PROTECTION_POWER.description": "造成和受到的伤害降低[blue]50%[/blue]。\n自身每次造成伤害后失效[blue]10%[/blue]。\n持续[blue]2[/blue]回合。",
   "BG_KOAKUMA_POWER_SAPPHIRE_PROTECTION_POWER.smartDescription": "造成和受到的伤害降低[blue]{DamageReduction:percentLess()}%[/blue]。\n自身每次造成伤害后失效[blue]10%[/blue]。\n持续[blue]{Turns}[/blue]回合。",
   "BG_KOAKUMA_POWER_SAPPHIRE_PROOF_POWER.title": "蓝宝石的存在证明",
-  "BG_KOAKUMA_POWER_SAPPHIRE_PROOF_POWER.description": "造成和受到的伤害降低[blue]90%[/blue]。\n自身每次造成伤害后失效[blue]5%[/blue]。\n持续[blue]2[/blue]回合。\n完全失效时获得[gold]耀眼的光辉[/gold]。",
+  "BG_KOAKUMA_POWER_SAPPHIRE_PROOF_POWER.description": "造成和受到的伤害降低[blue]90%[/blue]。\n自身每次造成伤害后失效[blue]5%[/blue]。\n持续[blue]2[/blue]回合。",
   "BG_KOAKUMA_POWER_SAPPHIRE_PROOF_POWER.smartDescription": "造成和受到的伤害降低[blue]{DamageReduction:percentLess()}%[/blue]。\n自身每次造成伤害后失效[blue]5%[/blue]。\n持续[blue]{Turns}[/blue]回合。",
   "BG_KOAKUMA_POWER_KOAKUMA_RADIANCE_POWER.title": "耀眼的光辉",
   "BG_KOAKUMA_POWER_KOAKUMA_RADIANCE_POWER.description": "受到的伤害降低[blue]20%[/blue]，额外获得[blue]50%[/blue]的[gold]格挡[/gold]。",
@@ -136,5 +136,8 @@
   "BG_KOAKUMA_POWER_OVERLOADED_LIBRARY_POWER.smartDescription": "每回合开始时获得[orange]魔力[/orange]；当你[gold]消耗[/gold][orange]魔力[/orange]时，对所有敌人施加[blue]{Amount}[/blue]层[red]魔力烧灼[/red]。",
   "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.title": "芙蓉石的终焉轮回",
   "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.description": "本回合内，你的{Magic:secondaryResourceIcons()}锁定为[blue]999[/blue]。回合结束时，将其清0。",
-  "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.smartDescription": "本回合内，你的{Magic:secondaryResourceIcons()}锁定为[blue]999[/blue]。回合结束时，将其清0。"
+  "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.smartDescription": "本回合内，你的{Magic:secondaryResourceIcons()}锁定为[blue]999[/blue]。回合结束时，将其清0。",
+  "BG_KOAKUMA_POWER_AMETHYST_SHIELD_POWER.title": "紫水晶的遮蔽",
+  "BG_KOAKUMA_POWER_AMETHYST_SHIELD_POWER.description": "阻止下[blue]1[/blue]次你受到的生命值损伤。\n回合开始时解除。",
+  "BG_KOAKUMA_POWER_AMETHYST_SHIELD_POWER.smartDescription": "阻止下[blue]{Amount}[/blue]次你受到的生命值损伤。\n回合开始时解除。"
 }

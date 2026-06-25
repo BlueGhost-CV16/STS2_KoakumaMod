@@ -13,7 +13,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaScarletDevilGarden : KoakumaUncommonCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<ManaOverdrivePower>(), PowerTip<StrengthPower>(), PowerTip<DexterityPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [.. PowerExtraTips<ManaOverdrivePower>(), PowerTip<StrengthPower>(), PowerTip<DexterityPower>()];
 
     public BG_KoakumaScarletDevilGarden() : base(1, CardType.Power) { }
 

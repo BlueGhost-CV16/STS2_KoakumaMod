@@ -12,7 +12,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaLibraryLibrarian : KoakumaUncommonCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<LibraryLibrarianPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<LibraryLibrarianPower>();
 
     public BG_KoakumaLibraryLibrarian() : base(1, CardType.Power) { }
 

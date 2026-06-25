@@ -13,7 +13,7 @@ public sealed class BG_KoakumaMagicBookHeavenAndEarth : KoakumaInterpretableRare
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret, KoakumaHoverTips.MagicBook];
 
-    public BG_KoakumaMagicBookHeavenAndEarth() : base(3, CardType.Skill) { }
+    public BG_KoakumaMagicBookHeavenAndEarth() : base(4, CardType.Skill) { }
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 

@@ -4,15 +4,15 @@
   "pck_name": "BG_Koakuma",
   "author": "Author",
   "description": "小恶魔是力量较弱的恶魔，被帕秋莉召唤出来并成为了她的使魔。性格沉稳，负责安排帕秋莉日常作息。但是，她也有性格任性，喜欢恶作剧，不经过深思熟虑就展开行动的一面。目前担任红魔馆里大图书馆的管理员。",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "has_pck": true,
   "has_dll": true,
   "affects_gameplay": true,
-  "min_game_version": "0.106.0",
+  "min_game_version": "0.107.0",
   "dependencies": [
     {
       "id": "STS2-RitsuLib",
-      "version": "0.4.34"
+      "version": "0.4.36"
     }
   ]
 }

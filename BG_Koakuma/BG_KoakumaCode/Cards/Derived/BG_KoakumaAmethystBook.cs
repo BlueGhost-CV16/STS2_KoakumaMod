@@ -4,15 +4,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Localization;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Models.Powers.Mocks;
-using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Powers;
 using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace BG_Koakuma.Cards;
 
@@ -21,16 +15,16 @@ public sealed class BG_KoakumaAmethystBook : KoakumaMagicBookCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<BufferPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<AmethystShieldPower>()];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<BufferPower>("Buffer", 1),
+        new PowerVar<AmethystShieldPower>("Buffer", 1),
         new CardsVar(1)
     ];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<BufferPower>(choiceContext, Owner.Creature, Amount("Buffer"), Owner.Creature, this);
+        await PowerCmd.Apply<AmethystShieldPower>(choiceContext, Owner.Creature, Amount("Buffer"), Owner.Creature, this);
         await InterpretDraw(choiceContext);
     }
 

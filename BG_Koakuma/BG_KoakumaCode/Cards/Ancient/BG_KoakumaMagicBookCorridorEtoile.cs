@@ -12,7 +12,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaMagicBookCorridorEtoile : KoakumaAncientCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<MagicBookCorridorEtoilePower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<MagicBookCorridorEtoilePower>();
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<MagicBookCorridorEtoilePower>("Power", 1)];
 

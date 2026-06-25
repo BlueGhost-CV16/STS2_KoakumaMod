@@ -12,7 +12,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCharacterStarterCard(typeof(BG_KoakumaCharacter), 1, Order = 4)]
 public sealed class BG_KoakumaMagicBookOrganize : KoakumaCard, IKoakumaInterpretableCard
 {
-    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret, KoakumaHoverTips.Read];
 
     private const int BaseEnergyCost = 0;
     private const CardType CardKind = CardType.Skill;

@@ -14,7 +14,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaMagicChant : KoakumaUncommonCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [KeywordTip(CardKeyword.Retain), PowerTip<GainMagicNextTurnPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [KeywordTip(CardKeyword.Retain), .. PowerExtraTips<GainMagicNextTurnPower>()];
 
     public BG_KoakumaMagicChant() : base(1, CardType.Skill) { }
 

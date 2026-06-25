@@ -18,7 +18,7 @@ public sealed class BG_KoakumaMagicRose : KoakumaRareCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<LoseMagicNextTurnPower>()];
+    //protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<LoseMagicNextTurnPower>()];
 
     public BG_KoakumaMagicRose() : base(1, CardType.Skill) { }
 

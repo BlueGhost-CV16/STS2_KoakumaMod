@@ -19,6 +19,9 @@ public abstract class KoakumaPower : ModPowerTemplate
     protected override IEnumerable<IHoverTip> AdditionalHoverTips =>
         KoakumaHoverTips.CreateMany(ExtraKoakumaHoverTipIds).Concat(ExtraKoakumaHoverTips);
 
+    internal static IEnumerable<IHoverTip> CreateAdditionalHoverTips<TPower>() where TPower : KoakumaPower, new() =>
+        new TPower().AdditionalHoverTips;
+
     protected static IHoverTip CardTip<TCard>() where TCard : CardModel =>
         HoverTipFactory.FromCard<TCard>();
 

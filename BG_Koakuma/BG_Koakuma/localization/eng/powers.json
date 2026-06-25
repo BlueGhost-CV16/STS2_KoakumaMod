@@ -139,5 +139,8 @@
   "BG_KOAKUMA_POWER_OVERLOADED_LIBRARY_POWER.smartDescription": "At the start of each turn, gain [orange]Magic[/orange]. Whenever you spend [orange]Magic[/orange], apply [red]Magic Burn[/red] to all enemies.",
   "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.title": "Rhodonite Final Cycle",
   "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.description": "This turn, lock your {Magic:secondaryResourceIcons()} at [blue]999[/blue]. At end of turn, set it to 0.",
-  "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.smartDescription": "This turn, lock your {Magic:secondaryResourceIcons()} at [blue]999[/blue]. At end of turn, set it to 0."
+  "BG_KOAKUMA_POWER_RHODONITE_FINAL_CYCLE_POWER.smartDescription": "This turn, lock your {Magic:secondaryResourceIcons()} at [blue]999[/blue]. At end of turn, set it to 0.",
+  "BG_KOAKUMA_POWER_AMETHYST_SHIELD_POWER.title": "Amethyst Veil",
+  "BG_KOAKUMA_POWER_AMETHYST_SHIELD_POWER.description": "Prevent the next [blue]1[/blue] HP loss you would take.\nRemoved at start of turn.",
+  "BG_KOAKUMA_POWER_AMETHYST_SHIELD_POWER.smartDescription": "Prevent the next [blue]{Amount}[/blue] HP loss you would take.\nRemoved at start of turn."
 }

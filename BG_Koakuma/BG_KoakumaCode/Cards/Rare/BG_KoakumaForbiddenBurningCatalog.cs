@@ -15,8 +15,7 @@ public sealed class BG_KoakumaForbiddenBurningCatalog : KoakumaRareCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(10, ValueProp.Move),
-        AmountVar("CollectionDamage", 4)
+        new DamageVar(13, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -26,16 +25,22 @@ public sealed class BG_KoakumaForbiddenBurningCatalog : KoakumaRareCard
             return;
         }
 
-        var damage = DynamicVars.Damage.BaseValue + Amount("CollectionDamage") * KoakumaMechanics.GetMagicBookCollectionCount(Owner);
-        await DamageCmd.Attack(damage)
+        var attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .TargetingAllOpponents(CombatState)
             .Execute(choiceContext);
+
+        var hitCount = attack.Results
+            .SelectMany(static results => results)
+            .Count(static result => result.TotalDamage + result.OverkillDamage > 0);
+        for (var i = 0; i < hitCount; i++)
+        {
+            await KoakumaMechanics.CollectMagicBook(choiceContext, this);
+        }
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
-        UpgradeAmount("CollectionDamage", 2);
+        DynamicVars.Damage.UpgradeValueBy(3);
     }
 }

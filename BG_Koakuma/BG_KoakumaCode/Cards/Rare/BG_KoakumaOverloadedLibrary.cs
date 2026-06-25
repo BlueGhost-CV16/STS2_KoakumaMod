@@ -15,7 +15,7 @@ public sealed class BG_KoakumaOverloadedLibrary : KoakumaRareCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<OverloadedLibraryPower>(), PowerTip<MagicBurnPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<OverloadedLibraryPower>();
 
     public BG_KoakumaOverloadedLibrary() : base(2, CardType.Power) { }
 

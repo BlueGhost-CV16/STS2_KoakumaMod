@@ -12,7 +12,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaMagicCopier : KoakumaRareCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<MagicCopierPower>(), KeywordTip(CardKeyword.Retain)];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [.. PowerExtraTips<MagicCopierPower>(), KeywordTip(CardKeyword.Retain)];
 
     public BG_KoakumaMagicCopier() : base(1, CardType.Power) { }
 

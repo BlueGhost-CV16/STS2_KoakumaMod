@@ -44,5 +44,5 @@ public sealed class BG_KoakumaReverseReading : KoakumaInterpretableUncommonCard,
         return Task.CompletedTask;
     }
 
-    protected override void OnUpgrade() => UpgradeAmount("Show", 1);
+    protected override void OnUpgrade() => AddKeyword(CardKeyword.Retain);
 }

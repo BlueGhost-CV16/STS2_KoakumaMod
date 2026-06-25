@@ -12,7 +12,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaWasteHeatReturn : KoakumaRareCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<WasteHeatReturnPower>(), KeywordTip(CardKeyword.Retain)];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [.. PowerExtraTips<WasteHeatReturnPower>(), KeywordTip(CardKeyword.Retain)];
 
     public BG_KoakumaWasteHeatReturn() : base(1, CardType.Power) { }
 

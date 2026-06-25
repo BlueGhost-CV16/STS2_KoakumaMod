@@ -257,20 +257,58 @@ internal static class KoakumaMechanics
 
     public static Task<int> GainMagic(Player owner, int amount, AbstractModel? source = null)
     {
+        if (IsMagicLockedByFinalCycle(owner))
+        {
+            return Task.FromResult(GetMagic(owner));
+        }
+
         return KoakumaMagic.Gain(owner, amount, source);
     }
 
     public static Task<int> LoseMagic(Player owner, int amount, AbstractModel? source = null)
     {
+        if (IsMagicLockedByFinalCycle(owner))
+        {
+            return Task.FromResult(GetMagic(owner));
+        }
+
         return KoakumaMagic.Lose(owner, amount, source);
     }
 
     public static Task<int> SetMagic(Player owner, int amount, AbstractModel? source = null)
     {
+        if (IsMagicLockedByFinalCycle(owner))
+        {
+            if (CanSetMagicWhileFinalCycleLocked(amount, source))
+            {
+                return SecondaryResourceCmd.Set(owner, KoakumaMagic.MagicId, amount, source);
+            }
+
+            return EnsureFinalCycleMagicLock(owner);
+        }
+
         var current = GetMagic(owner);
         return amount >= current
             ? GainMagic(owner, amount - current, source)
             : LoseMagic(owner, current - amount, source);
+    }
+
+    private static Task<int> EnsureFinalCycleMagicLock(Player owner)
+    {
+        return GetMagic(owner) == RhodoniteFinalCyclePower.LockedMagicAmount
+            ? Task.FromResult(RhodoniteFinalCyclePower.LockedMagicAmount)
+            : SecondaryResourceCmd.Set(owner, KoakumaMagic.MagicId, RhodoniteFinalCyclePower.LockedMagicAmount, owner.Creature.GetPower<RhodoniteFinalCyclePower>());
+    }
+
+    private static bool IsMagicLockedByFinalCycle(Player owner)
+    {
+        return owner.Creature.GetPower<RhodoniteFinalCyclePower>() != null;
+    }
+
+    private static bool CanSetMagicWhileFinalCycleLocked(int amount, AbstractModel? source)
+    {
+        return amount == RhodoniteFinalCyclePower.LockedMagicAmount
+            || source is RhodoniteFinalCyclePower;
     }
 
     public static bool ConsumeInterpret(CardModel card)

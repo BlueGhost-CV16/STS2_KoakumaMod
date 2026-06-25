@@ -15,7 +15,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaSpellCircuit : KoakumaRareCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<SpellCircuitPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<SpellCircuitPower>();
 
     public BG_KoakumaSpellCircuit() : base(1, CardType.Power) { }
 

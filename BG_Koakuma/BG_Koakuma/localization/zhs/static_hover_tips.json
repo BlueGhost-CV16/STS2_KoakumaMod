@@ -4,7 +4,7 @@
   "BG_KOAKUMA_MAGIC_COST.title": "魔力N",
   "BG_KOAKUMA_MAGIC_COST.description": "[gold]消耗[/gold]对应数量的[orange]魔力[/orange]来触发额外效果。",
   "BG_KOAKUMA_TIP_READ.title": "阅读",
-  "BG_KOAKUMA_TIP_READ.description": "从[gold]抽牌堆[/gold]顶查看至多3张牌。\n可以从中选择1张置入[gold]手牌[/gold]，如若此做，选择1张[gold]手牌[/gold]放到[gold]抽牌堆[/gold]底。\n开启简易阅读设置时，查看和放回步骤会按设置自动处理。",
+  "BG_KOAKUMA_TIP_READ.description": "从[gold]抽牌堆[/gold]顶展示至多3张牌。\n可以从中选择1张置入[gold]手牌[/gold]，如若此做，选择1张[gold]手牌[/gold]放到[gold]抽牌堆[/gold]底。\n开启简易阅读设置时，展示和放回步骤会按设置自动处理。",
   "BG_KOAKUMA_TIP_INTERPRET.title": "解读",
   "BG_KOAKUMA_TIP_INTERPRET.description": "带有[purple]解读[/purple]效果的牌通过阅读加入[gold]手牌[/gold]时，进入[purple]解读[/purple]状态。\n若非特殊说明，会在打出后触发[purple]解读[/purple]中的额外效果。\n离开[gold]手牌[/gold]后会失去[purple]解读[/purple]状态。",
   "BG_KOAKUMA_TIP_MAGIC_BOOK_COLLECTION.title": "魔法书收集",

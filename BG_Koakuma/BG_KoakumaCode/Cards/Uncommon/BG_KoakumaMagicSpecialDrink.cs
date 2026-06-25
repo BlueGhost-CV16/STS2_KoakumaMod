@@ -16,7 +16,7 @@ public sealed class BG_KoakumaMagicSpecialDrink : KoakumaUncommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<LoseMagicNextTurnPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<LoseMagicNextTurnPower>();
 
     public BG_KoakumaMagicSpecialDrink() : base(1, CardType.Skill) { }
 

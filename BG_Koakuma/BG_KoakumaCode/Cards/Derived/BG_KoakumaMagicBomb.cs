@@ -19,7 +19,7 @@ using STS2RitsuLib.Scaffolding.Content;
 
 namespace BG_Koakuma.Cards;
 
-[RegisterCard(typeof(BG_KoakumaCardPool))]
+[RegisterCard(typeof(TokenCardPool))]
 public sealed class BG_KoakumaMagicBomb : KoakumaDerivedCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];

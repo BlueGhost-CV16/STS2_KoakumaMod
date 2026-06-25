@@ -16,7 +16,7 @@ public sealed class BG_KoakumaJackBomb : KoakumaUncommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBurn];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [CardTip<BG_KoakumaMagicBomb>(), PowerTip<JackBombPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<JackBombPower>();
 
     public BG_KoakumaJackBomb() : base(1, CardType.Attack, TargetType.AnyEnemy) { }
 

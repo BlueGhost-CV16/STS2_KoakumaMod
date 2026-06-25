@@ -16,7 +16,7 @@ public sealed class BG_KoakumaStoredMagic : KoakumaUncommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<GainMagicNextTurnPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<GainMagicNextTurnPower>();
 
     public BG_KoakumaStoredMagic() : base(1, CardType.Skill) { }
 

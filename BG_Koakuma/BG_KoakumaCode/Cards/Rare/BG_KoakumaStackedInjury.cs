@@ -15,7 +15,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaStackedInjury : KoakumaRareCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<StackedInjuryPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<StackedInjuryPower>();
 
     public BG_KoakumaStackedInjury() : base(2, CardType.Power) { }
 

@@ -13,7 +13,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaManaRecycle : KoakumaCommonCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<KoakumaManaRecyclePower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<KoakumaManaRecyclePower>();
 
     public BG_KoakumaManaRecycle() : base(2, CardType.Skill) { }
 

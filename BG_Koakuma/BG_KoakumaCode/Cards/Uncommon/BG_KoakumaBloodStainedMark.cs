@@ -13,7 +13,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaBloodStainedMark : KoakumaUncommonCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<BloodMarkPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<BloodMarkPower>();
 
     public BG_KoakumaBloodStainedMark() : base(1, CardType.Attack, TargetType.AnyEnemy) { }
 

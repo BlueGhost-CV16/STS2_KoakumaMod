@@ -15,7 +15,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaScarletDevilLibraryImp : KoakumaRareCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<ScarletDevilLibraryImpPower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<ScarletDevilLibraryImpPower>();
 
     public BG_KoakumaScarletDevilLibraryImp() : base(2, CardType.Power) { }
 

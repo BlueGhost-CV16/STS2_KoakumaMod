@@ -12,7 +12,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaForbiddenStarfireAnnotation : KoakumaRareCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<ForbiddenImmortalMagicFlamePower>()];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<ForbiddenImmortalMagicFlamePower>();
 
     public BG_KoakumaForbiddenStarfireAnnotation() : base(3, CardType.Power) { }
 

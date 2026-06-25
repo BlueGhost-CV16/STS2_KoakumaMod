@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -13,7 +14,7 @@ using STS2RitsuLib.Scaffolding.Content;
 namespace BG_Koakuma.Powers;
 
 [RegisterPower]
-public sealed class RhodoniteFinalCyclePower : KoakumaPower, IKoakumaAfterMagicSpent
+public sealed class RhodoniteFinalCyclePower : KoakumaPower, IKoakumaAfterMagicSpent, ISecondaryResourceHookListener
 {
     public const int LockedMagicAmount = 999;
 
@@ -25,6 +26,25 @@ public sealed class RhodoniteFinalCyclePower : KoakumaPower, IKoakumaAfterMagicS
     [
         SecondaryResourceVars.For("Magic", KoakumaMagic.MagicId, LockedMagicAmount)
     ];
+
+    public decimal ModifySecondaryResourceGain(SecondaryResourceContext context, decimal amount)
+    {
+        return IsLockedMagicChange(context.Player, context.Definition)
+            ? 0
+            : amount;
+    }
+
+    public async Task AfterSecondaryResourceChanged(SecondaryResourceChangeContext context)
+    {
+        if (!IsLockedMagicChange(context.Player, context.Definition)
+            || context.Source == this
+            || context.NewAmount == LockedMagicAmount)
+        {
+            return;
+        }
+
+        await KoakumaMechanics.SetMagic(context.Player, LockedMagicAmount, this);
+    }
 
     public async Task AfterMagicSpent(PlayerChoiceContext choiceContext, int amount, AbstractModel? source)
     {
@@ -43,5 +63,10 @@ public sealed class RhodoniteFinalCyclePower : KoakumaPower, IKoakumaAfterMagicS
 
         await KoakumaMechanics.SetMagic(Owner.Player, 0, this);
         await PowerCmd.Remove(this);
+    }
+
+    private bool IsLockedMagicChange(Player player, SecondaryResourceDefinition definition)
+    {
+        return Owner.Player == player && KoakumaMagic.IsMagic(definition);
     }
 }
