@@ -3,6 +3,8 @@ using STS2RitsuLib.Data;
 using STS2RitsuLib.RunData;
 using STS2RitsuLib.Settings;
 using STS2RitsuLib.Utils.Persistence;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace BG_Koakuma.Settings;
 
@@ -81,7 +83,9 @@ public static class KoakumaSettingsPage
 
     private static KoakumaSettings ReadSettings()
     {
-        return CurrentRunSettings ?? ReadLocalSettings();
+        return IsCurrentRunMultiplayer()
+            ? ReadMultiplayerRunSettings()
+            : ReadLocalSettings();
     }
 
     private static KoakumaSettings ReadLocalSettings()
@@ -94,6 +98,47 @@ public static class KoakumaSettingsPage
         };
     }
 
+    private static KoakumaSettings ReadMultiplayerRunSettings()
+    {
+        if (CurrentRunSettings != null)
+        {
+            return CurrentRunSettings;
+        }
+
+        var runState = RunManager.Instance.State;
+        if (runState != null && HostRunSettings.TryGet(runState, out var settings))
+        {
+            CurrentRunSettings = Snapshot(settings);
+            return CurrentRunSettings;
+        }
+
+        CurrentRunSettings = new KoakumaSettings();
+        return CurrentRunSettings;
+    }
+
+    private static bool IsCurrentRunMultiplayer()
+    {
+        try
+        {
+            return RunManager.Instance.IsInProgress
+                && RunManager.Instance.NetService.Type.IsMultiplayer();
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private static KoakumaSettings Snapshot(KoakumaSettings settings)
+    {
+        return new KoakumaSettings
+        {
+            EasyMagicBookCollection = settings.EasyMagicBookCollection,
+            EasyReadLook = settings.EasyReadLook,
+            EasyReadPut = settings.EasyReadPut
+        };
+    }
+
     private static void StageHostSettings(RunSavedDataLobbyStagingEvent evt)
     {
         if (!evt.IsMultiplayer || !evt.IsHost)
@@ -101,13 +146,13 @@ public static class KoakumaSettingsPage
             return;
         }
 
-        HostRunSettings.Lobby.Set(evt.Lobby, ReadLocalSettings());
+        HostRunSettings.Lobby.Set(evt.Lobby, Snapshot(ReadLocalSettings()));
     }
 
     private static void UsePreparedRunSettings(RunSavedDataPreparingEvent evt)
     {
         CurrentRunSettings = evt.IsMultiplayer
-            ? HostRunSettings.Get(evt.RunState)
+            ? Snapshot(HostRunSettings.Get(evt.RunState))
             : null;
     }
 }

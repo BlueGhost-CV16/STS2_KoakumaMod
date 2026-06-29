@@ -19,7 +19,7 @@ public sealed class BG_KoakumaScarletDevilGarden : KoakumaUncommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<ManaOverdrivePower>("Power", 2)
+        new PowerVar<ManaOverdrivePower>("Power", 1)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

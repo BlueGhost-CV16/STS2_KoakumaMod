@@ -4,5 +4,9 @@
   "NEOW.talk.BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.0-1.ancient": "Go... build your character from this template...",
   "DARV.talk.BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.0-0.char": "This place is still empty.",
   "DARV.talk.BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.0-0.next": "Continue",
-  "DARV.talk.BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.0-1.ancient": "Empty is useful! Take something and fill it in!"
+  "DARV.talk.BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.0-1.ancient": "Empty is useful! Take something and fill it in!",
+  "THE_ARCHITECT.talk.BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.0-0r.char": "Can I take all the books here back to the library?!",
+  "THE_ARCHITECT.talk.BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.0-0r.next": "Continue",
+  "THE_ARCHITECT.talk.BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.0-1r.ancient": "Impudent! Where do you think you are?",
+  "THE_ARCHITECT.talk.BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.0-attack": "..."
 }

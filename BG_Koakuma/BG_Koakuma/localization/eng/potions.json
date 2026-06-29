@@ -2,7 +2,7 @@
   "BG_KOAKUMA_POTION_BG_KOAKUMA_MAGIC_POTION.title": "Magic Potion",
   "BG_KOAKUMA_POTION_BG_KOAKUMA_MAGIC_POTION.description": "Gain {Magic:secondaryResourceIcons()}.",
   "BG_KOAKUMA_POTION_BG_KOAKUMA_BOTTLED_BOMB.title": "Bottled Bomb",
-  "BG_KOAKUMA_POTION_BG_KOAKUMA_BOTTLED_BOMB.description": "Add [blue]{Cards}[/blue] [purple]Magic Bombs[/purple] to your hand.",
+  "BG_KOAKUMA_POTION_BG_KOAKUMA_BOTTLED_BOMB.description": "Add [blue]{Cards}[/blue] [red]Magic Bombs[/red] to your [gold]Hand[/gold].",
   "BG_KOAKUMA_POTION_BG_KOAKUMA_LIQUID_MAGIC_BOOK.title": "Liquid Magic Book",
-  "BG_KOAKUMA_POTION_BG_KOAKUMA_LIQUID_MAGIC_BOOK.description": "Add random [gold]Magic Book[/gold] cards to your hand until your hand is full."
+  "BG_KOAKUMA_POTION_BG_KOAKUMA_LIQUID_MAGIC_BOOK.description": "Add random [gold]Magic Book[/gold] cards to your [gold]Hand[/gold] until it is full."
 }

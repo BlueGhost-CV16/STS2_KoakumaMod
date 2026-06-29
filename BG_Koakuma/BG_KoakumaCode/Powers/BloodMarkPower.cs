@@ -17,15 +17,16 @@ public sealed class BloodMarkPower : KoakumaPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
+    public override PowerInstanceType InstanceType => PowerInstanceType.InstancedPerApplier;
 
     public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (target == Owner && props.IsPoweredAttack() && dealer != null && dealer != Owner && result.UnblockedDamage + result.OverkillDamage > 0)
         {
             await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unblockable | ValueProp.Unpowered, dealer, cardSource);
-            if (dealer.Player != null)
+            if (Applier?.Player != null)
             {
-                await KoakumaMechanics.GainMagic(dealer.Player, Amount, cardSource);
+                await KoakumaMechanics.GainMagic(Applier.Player, Amount, cardSource);
             }
         }
     }
