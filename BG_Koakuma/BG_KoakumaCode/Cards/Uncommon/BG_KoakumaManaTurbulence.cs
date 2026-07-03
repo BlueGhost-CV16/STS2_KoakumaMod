@@ -30,7 +30,7 @@ public sealed class BG_KoakumaManaTurbulence : KoakumaUncommonCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this, cardPlay);
         var card = KoakumaMechanics.RandomOtherCharacterCards(this, Amount("GeneratedCards"), Amount("UpgradeGenerated") > 0).FirstOrDefault();
         if (card != null)
         {

@@ -16,7 +16,7 @@ public sealed class BG_KoakumaDepletionMist : KoakumaUncommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<DepletionMistPower>();
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<DepletionMistPower>(), PowerTip<WeakPower>()];
 
     public BG_KoakumaDepletionMist() : base(1, CardType.Power) { }
 

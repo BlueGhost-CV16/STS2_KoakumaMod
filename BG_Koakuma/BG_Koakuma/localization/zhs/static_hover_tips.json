@@ -3,6 +3,8 @@
   "BG_KOAKUMA_SECONDARY_RESOURCE_MAGIC.description": "部分卡牌会[gold]消耗[/gold][orange]魔力[/orange]触发额外效果；[orange]魔力[/orange]不足时卡牌仍可打出，但不会触发额外效果。",
   "BG_KOAKUMA_MAGIC_COST.title": "魔力N",
   "BG_KOAKUMA_MAGIC_COST.description": "[gold]消耗[/gold]对应数量的[orange]魔力[/orange]来触发额外效果。",
+  "BG_KOAKUMA_TIP_BLOCK.title": "格挡",
+  "BG_KOAKUMA_TIP_BLOCK.description": "[gold]格挡[/gold]会抵消受到的攻击伤害。\n回合结束时，失去所有[gold]格挡[/gold]。",
   "BG_KOAKUMA_TIP_READ.title": "阅读",
   "BG_KOAKUMA_TIP_READ.description": "从[gold]抽牌堆[/gold]顶展示至多3张牌。\n可以从中选择1张置入[gold]手牌[/gold]，如若此做，选择1张[gold]手牌[/gold]放到[gold]抽牌堆[/gold]底。\n开启简易阅读设置时，展示和放回步骤会按设置自动处理。",
   "BG_KOAKUMA_TIP_INTERPRET.title": "解读",

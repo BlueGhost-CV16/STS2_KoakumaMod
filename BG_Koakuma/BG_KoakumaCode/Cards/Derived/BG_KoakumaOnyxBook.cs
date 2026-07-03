@@ -40,7 +40,7 @@ public sealed class BG_KoakumaOnyxBook : KoakumaMagicBookCard
         
         var enemies = CombatState.HittableEnemies.ToList();
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState)
             .Execute(choiceContext);
         await PowerCmd.Apply<OnyxCursePower>(choiceContext, enemies, Amount("Curse"), Owner.Creature, this);

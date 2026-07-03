@@ -12,8 +12,6 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaWitchAssistant : KoakumaUncommonCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<ManaAnnotationPower>();
-
     public BG_KoakumaWitchAssistant() : base(1, CardType.Power) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [MagicVar("Power", 1)];

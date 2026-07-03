@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Characters;
 using BG_Koakuma.Tooltips;
 using BG_Koakuma.Powers;
+using BG_Koakuma.Vfx;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace BG_Koakuma.Cards;
@@ -16,7 +17,7 @@ public sealed class BG_KoakumaJackBomb : KoakumaUncommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBurn];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<JackBombPower>();
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [CardTip<BG_KoakumaMagicBomb>()];
 
     public BG_KoakumaJackBomb() : base(1, CardType.Attack, TargetType.AnyEnemy) { }
 
@@ -30,7 +31,8 @@ public sealed class BG_KoakumaJackBomb : KoakumaUncommonCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this);
+        await KoakumaVfx.PlayMagicBombThrowAsync(Owner.Creature, cardPlay.Target);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this, cardPlay);
         await PowerCmd.Apply<MagicBurnPower>(choiceContext, cardPlay.Target, Amount("MagicBurn"), Owner.Creature, this);
         await PowerCmd.Apply<JackBombPower>(choiceContext, Owner.Creature, Amount("Power"), Owner.Creature, this);
     }

@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -27,25 +28,20 @@ public sealed class KoakumaSingleTurnRetainPower : KoakumaPower
             : PowerCmd.Apply<KoakumaSingleTurnRetainPower>(choiceContext, player.Creature, duration, player.Creature, source);
     }
 
-    public override bool ShouldFlush(Player player)
+    public override Task BeforeFlushLate(PlayerChoiceContext choiceContext, Player player)
     {
-        return player != Owner.Player || !HasZeroCostCardInHand(player);
-    }
-
-    public override async Task AfterFlush(PlayerChoiceContext choiceContext, Player player, IReadOnlyCollection<CardModel> flushedCards, IReadOnlyCollection<CardModel> retainedCards)
-    {
-        if (player != Owner.Player || retainedCards.Count == 0)
+        var combatState = player.Creature.CombatState;
+        if (player != Owner.Player || combatState == null || !Hook.ShouldFlush(combatState, player))
         {
-            return;
+            return Task.CompletedTask;
         }
 
-        var cardsToDiscard = retainedCards
-            .Where(card => !IsZeroCost(card) && !card.ShouldRetainThisTurn)
-            .ToList();
-        if (cardsToDiscard.Count > 0)
+        foreach (var card in PileType.Hand.GetPile(player).Cards.Where(card => IsZeroCost(card) && !card.ShouldRetainThisTurn))
         {
-            await CardPileCmd.Add(cardsToDiscard, PileType.Discard);
+            card.GiveSingleTurnRetain();
         }
+
+        return Task.CompletedTask;
     }
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
@@ -54,11 +50,6 @@ public sealed class KoakumaSingleTurnRetainPower : KoakumaPower
         {
             await PowerCmd.Decrement(this);
         }
-    }
-
-    private static bool HasZeroCostCardInHand(Player player)
-    {
-        return PileType.Hand.GetPile(player).Cards.Any(IsZeroCost);
     }
 
     private static bool IsZeroCost(CardModel card)

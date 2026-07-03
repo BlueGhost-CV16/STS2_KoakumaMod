@@ -20,7 +20,7 @@ public sealed class PureFocusMachinePower : KoakumaPower
         if (cardPlay.Card.Owner == Owner.Player && cardPlay.Card.Type == CardType.Attack && cardPlay.Target != null
             && await KoakumaMechanics.SpendMagic(choiceContext, cardPlay.Card, 1))
         {
-            await CreatureCmd.Damage(choiceContext, cardPlay.Target, Amount, ValueProp.Unblockable | ValueProp.Unpowered, Owner, cardPlay.Card);
+            await CreatureCmd.Damage(choiceContext, cardPlay.Target, Amount, ValueProp.Unblockable | ValueProp.Unpowered, Owner, cardPlay.Card, cardPlay);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaHalloweenFireworkPrank : KoakumaUncommonCard
 {
-    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic, KoakumaHoverTips.MagicBurn];
 
     public BG_KoakumaHalloweenFireworkPrank() : base(2, CardType.Attack, TargetType.AllEnemies)
     {
@@ -38,14 +38,14 @@ public sealed class BG_KoakumaHalloweenFireworkPrank : KoakumaUncommonCard
 
         var enemies = CombatState.HittableEnemies.ToList();
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState)
             .Execute(choiceContext);
         await PowerCmd.Apply<MagicBurnPower>(choiceContext, enemies, Amount("MagicBurn"), Owner.Creature, this);
         if (KoakumaMechanics.MagicPaid(cardPlay))
         {
             await DamageCmd.Attack(DynamicVars["BonusDamage"].BaseValue)
-                .FromCard(this)
+                .FromCard(this, cardPlay)
                 .TargetingAllOpponents(CombatState)
                 .Execute(choiceContext);
             await PowerCmd.Apply<MagicBurnPower>(choiceContext, enemies, Amount("BonusMagicBurn"), Owner.Creature, this);

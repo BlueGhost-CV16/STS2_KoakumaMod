@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Characters;
 using BG_Koakuma.Powers;
+using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace BG_Koakuma.Cards;
@@ -13,7 +14,9 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaBloodStainedMark : KoakumaUncommonCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<BloodMarkPower>();
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
+
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<BloodMarkPower>()];
 
     public BG_KoakumaBloodStainedMark() : base(1, CardType.Attack, TargetType.AnyEnemy) { }
 
@@ -26,7 +29,7 @@ public sealed class BG_KoakumaBloodStainedMark : KoakumaUncommonCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this, cardPlay);
         await PowerCmd.Apply<BloodMarkPower>(choiceContext, cardPlay.Target, Amount("Mark"), Owner.Creature, this);
     }
 

@@ -41,7 +41,7 @@ public sealed class BG_KoakumaOnyxAbsence : KoakumaMagicBookCard
 
         var enemies = CombatState.HittableEnemies.ToList();
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState)
             .Execute(choiceContext);
         await PowerCmd.Apply<OnyxAbsenceProofPower>(choiceContext, enemies, Amount("Proof"), Owner.Creature, this);

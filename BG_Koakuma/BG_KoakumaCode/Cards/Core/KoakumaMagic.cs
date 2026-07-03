@@ -42,6 +42,7 @@ internal static class KoakumaMagic
                     RowSeparation = 0,
                     FormatAmount = (amount,
                         max) => amount.ToString(),
+                    GainFeedback = SecondaryResourceCounterGainFeedback.StarCounterLike,
                     IconStyle = SecondaryResourceIconStyle.Default with
                     {
                         Size = new Vector2(64,
@@ -67,6 +68,7 @@ internal static class KoakumaMagic
                 {
                     IconSize = new Vector2(56, 56),
                     LabelOffset = new Vector2(4, 4),
+                    ReserveVanillaStarCostSlot = true,
                     FontSize = 32,
                     OutlineSize = 12,
                     AffordableColor = Colors.LightPink,

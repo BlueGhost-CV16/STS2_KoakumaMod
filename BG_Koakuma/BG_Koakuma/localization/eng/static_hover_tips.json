@@ -3,6 +3,8 @@
   "BG_KOAKUMA_SECONDARY_RESOURCE_MAGIC.description": "Some cards spend [orange]Magic[/orange] to trigger bonus effects. If you do not have enough [orange]Magic[/orange], the card can still be played, but the bonus effect will not trigger.",
   "BG_KOAKUMA_MAGIC_COST.title": "Magic Cost",
   "BG_KOAKUMA_MAGIC_COST.description": "Spend that much [orange]Magic[/orange] to trigger the effect after the colon.",
+  "BG_KOAKUMA_TIP_BLOCK.title": "Block",
+  "BG_KOAKUMA_TIP_BLOCK.description": "[gold]Block[/gold] prevents attack damage.\nLose all [gold]Block[/gold] at end of turn.",
   "BG_KOAKUMA_TIP_READ.title": "Read",
   "BG_KOAKUMA_TIP_READ.description": "Look at up to 3 cards from the top of your [gold]Draw Pile[/gold], choose 1 to put into your [gold]Hand[/gold], then put 1 card from your [gold]Hand[/gold] on the bottom of your [gold]Draw Pile[/gold].\nWhen easy read settings are enabled, the look and return steps are handled automatically.",
   "BG_KOAKUMA_TIP_INTERPRET.title": "Interpret",

@@ -15,7 +15,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaOtherworldGrandSummon : KoakumaRareCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<OtherworldGrandSummonPower>();
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<OtherworldGrandSummonPower>(), KeywordTip(CardKeyword.Exhaust)];
 
     public BG_KoakumaOtherworldGrandSummon() : base(2, CardType.Power) { }
 

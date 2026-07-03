@@ -16,14 +16,15 @@
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_EFFICIENT_MANA_CIRCUIT.flavor": "没有浪费，只有尚未被回收的魔力。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_MAGIC_INK.title": "魔力墨水",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_MAGIC_INK.description": "打出耗能为{energyPrefix:energyIcons(0)}的[gold]消耗[/gold]牌时，获得{Magic:secondaryResourceIcons()}。",
-  "BG_KOAKUMA_RELIC_BG_KOAKUMA_MAGIC_INK.flavor": "墨迹会抢先读完句子。",
+  "BG_KOAKUMA_RELIC_BG_KOAKUMA_MAGIC_INK.flavor": "饱含着魔力的墨水，它写出的字会带有主人的一丝魔力。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_FEATHER_PEN.title": "魔力羽毛笔",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_FEATHER_PEN.description": "每回合[blue]{Cards}[/blue]次，当你抽取到带有[purple]解读[/purple]效果的牌时，令其进入[purple]解读[/purple]状态。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_FEATHER_PEN.flavor": "笔尖会替主人补完还没读到的注释。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_MAGIC_ROSE.title": "魔力蔷薇",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_MAGIC_ROSE.description": "每回合开始时，获得{Magic:secondaryResourceIcons()}。",
-  "BG_KOAKUMA_RELIC_BG_KOAKUMA_MAGIC_ROSE.flavor": "花瓣间渗出的不是露水，而是甜腻的魔力。",
+  "BG_KOAKUMA_RELIC_BG_KOAKUMA_MAGIC_ROSE.flavor": "帕秋莉赠与小恶魔的蔷薇花，是最珍贵的宝物。",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_IMPROVED_MAGIC_BOMB.title": "改良型魔力爆弹",
   "BG_KOAKUMA_RELIC_BG_KOAKUMA_IMPROVED_MAGIC_BOMB.description": "[red]魔力爆弹[/red]会额外给敌人施加[blue]{MagicBurn}[/blue]层[red]魔力烧灼[/red]。",
-  "BG_KOAKUMA_RELIC_BG_KOAKUMA_IMPROVED_MAGIC_BOMB.flavor": "改良内容包括更响、更亮，以及更烫。"
+  "BG_KOAKUMA_RELIC_BG_KOAKUMA_IMPROVED_MAGIC_BOMB.flavor": "改良内容包括更响、更亮，以及更烫。",
+  "SEA_GLASS.BG_KOAKUMA_CHARACTER_BG_KOAKUMA_CHARACTER.title": "小恶魔玻璃"
 }

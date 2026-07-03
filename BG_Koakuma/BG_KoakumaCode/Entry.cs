@@ -7,6 +7,7 @@ using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
 using BG_Koakuma.Cards;
 using BG_Koakuma.Settings;
+using BG_Koakuma.Vfx;
 using Logger = MegaCrit.Sts2.Core.Logging.Logger;
 
 namespace BG_Koakuma;
@@ -42,6 +43,7 @@ public partial class Entry
         KoakumaMechanics.Register();
         KoakumaMagic.Register();
         KoakumaHandOutlines.Register();
+        KoakumaVfx.PreloadScenes();
         RitsuLibFramework.CreateContentPack(ModId)
             .SharedCardPool<BG_KoakumaMagicBookCardPool>()
             .CardLibraryCompendiumSharedPoolFilter<BG_KoakumaMagicBookCardPool>(

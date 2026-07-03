@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using BG_Koakuma.Characters;
 using BG_Koakuma.Powers;
+using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Combat.SecondaryResources;
 using STS2RitsuLib.Interop.AutoRegistration;
 
@@ -15,7 +16,9 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaStackedInjury : KoakumaRareCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<StackedInjuryPower>();
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBurn];
+
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<StackedInjuryPower>()];
 
     public BG_KoakumaStackedInjury() : base(2, CardType.Power) { }
 

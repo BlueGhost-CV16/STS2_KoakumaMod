@@ -11,7 +11,7 @@ export_presets.cfg
 bin/
 obj/
 .dotnet-cli-home/
-.codex/
+KoakumaMod_0.107/
 
 # IDEs
 .vs/
@@ -27,3 +27,8 @@ Desktop.ini
 log.txt
 *.tmp
 *.temp
+
+# Codex
+.codex/
+.agents/
+AGENTS.md

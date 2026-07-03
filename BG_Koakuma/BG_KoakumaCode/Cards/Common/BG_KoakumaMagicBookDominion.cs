@@ -27,7 +27,7 @@ public sealed class BG_KoakumaMagicBookDominion : KoakumaInterpretableCommonCard
         var hits = 1 + PileType.Hand.GetPile(Owner).Cards.Count(card => card.EnergyCost.GetWithModifiers(CostModifiers.Local) == 0);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(hits)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
         KoakumaMechanics.ConsumeInterpret(this);

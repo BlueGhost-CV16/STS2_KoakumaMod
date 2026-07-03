@@ -27,7 +27,7 @@ public sealed class BG_KoakumaMoonlitDance : KoakumaUncommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(12, ValueProp.Move),
+        new BlockVar(14, ValueProp.Move),
         new BlockVar("BonusBlock", 6, ValueProp.Move),
         MagicVar("MagicCost", 2)
     ];

@@ -27,7 +27,7 @@ public sealed class BG_KoakumaBookshelfCollapse : KoakumaUncommonCard
         }
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState)
             .Execute(choiceContext);
     }

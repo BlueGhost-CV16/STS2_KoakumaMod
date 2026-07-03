@@ -12,7 +12,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaHeatConduction : KoakumaUncommonCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<HeatConductionPower>();
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [PowerTip<HeatConductionPower>(), CardTip<BG_KoakumaMagicBomb>()];
 
     public BG_KoakumaHeatConduction() : base(1, CardType.Power) { }
 

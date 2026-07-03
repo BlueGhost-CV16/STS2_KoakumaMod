@@ -1,10 +1,11 @@
 using Godot;
+using STS2RitsuLib.Scaffolding.Characters;
 using STS2RitsuLib.Scaffolding.Content;
 using STS2RitsuLib.Utils;
 
 namespace BG_Koakuma.Characters;
 
-public sealed class BG_KoakumaCardPool : TypeListCardPoolModel
+public sealed class BG_KoakumaCardPool : TypeListCardPoolModel, IModColorfulPhilosophersCardPool
 {
     private static readonly Material? PoolFrameTintMaterial =
         MaterialUtils.CreateHsvShaderMaterial(0.975f, 0.850f, 1.35f);

@@ -25,7 +25,7 @@ public sealed class BG_KoakumaMoonlitCycle : KoakumaUncommonCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(16, ValueProp.Move),
+        new DamageVar(18, ValueProp.Move),
         new DamageVar("BonusDamage", 8, ValueProp.Move),
         MagicVar("MagicCost", 2)
     ];
@@ -33,10 +33,10 @@ public sealed class BG_KoakumaMoonlitCycle : KoakumaUncommonCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this, cardPlay);
         if (KoakumaMechanics.MagicPaid(cardPlay))
         {
-            await CreatureCmd.Damage(choiceContext, cardPlay.Target, (DamageVar)DynamicVars["BonusDamage"], Owner.Creature, this);
+            await CreatureCmd.Damage(choiceContext, cardPlay.Target, (DamageVar)DynamicVars["BonusDamage"], Owner.Creature, this, cardPlay);
         }
     }
 

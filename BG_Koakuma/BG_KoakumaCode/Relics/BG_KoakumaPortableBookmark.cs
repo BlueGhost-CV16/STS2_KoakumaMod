@@ -25,7 +25,7 @@ public sealed class BG_KoakumaPortableBookmark : KoakumaRelic, IKoakumaAfterRead
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(4, ValueProp.Move)
+        new DamageVar(4, ValueProp.Unpowered)
     ];
 
     public async Task AfterRead(PlayerChoiceContext choiceContext, CardModel? readCard)
@@ -54,7 +54,7 @@ public sealed class BG_KoakumaPortableBookmark : KoakumaRelic, IKoakumaAfterRead
         Flash();
         for (var i = 0; i < cost; i++)
         {
-            await CreatureCmd.Damage(choiceContext, enemies, DynamicVars.Damage, Owner.Creature, null);
+            await CreatureCmd.Damage(choiceContext, enemies, DynamicVars.Damage, Owner.Creature, null, null);
         }
     }
 }

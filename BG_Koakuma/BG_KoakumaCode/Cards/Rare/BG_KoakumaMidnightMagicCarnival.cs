@@ -16,7 +16,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaMidnightMagicCarnival : KoakumaRareCard
 {
-    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicBurn];
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.MagicCost, KoakumaHoverTips.MagicBurn];
 
     protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [CardTip<BG_KoakumaMagicBomb>()];
 
@@ -30,7 +30,7 @@ public sealed class BG_KoakumaMidnightMagicCarnival : KoakumaRareCard
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(15, ValueProp.Move),
+        new DamageVar(12, ValueProp.Move),
         new PowerVar<MagicBurnPower>("MagicBurn", 3)
     ];
 
@@ -43,7 +43,7 @@ public sealed class BG_KoakumaMidnightMagicCarnival : KoakumaRareCard
 
         var enemies = CombatState.HittableEnemies.ToList();
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .TargetingAllOpponents(CombatState)
             .Execute(choiceContext);
         await PowerCmd.Apply<MagicBurnPower>(choiceContext, enemies, Amount("MagicBurn"), Owner.Creature, this);
@@ -57,7 +57,7 @@ public sealed class BG_KoakumaMidnightMagicCarnival : KoakumaRareCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(5);
+        DynamicVars.Damage.UpgradeValueBy(4);
         UpgradeAmount("MagicBurn", 1);
     }
 }

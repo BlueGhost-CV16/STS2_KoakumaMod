@@ -5,11 +5,6 @@
 
 [node name="BG_KoakumaCharacterRestSite" type="Node2D"]
 
-[node name="Visuals" type="Sprite2D" parent="."]
-position = Vector2(86.5, 59.75)
-scale = Vector2(-1.5, 1.5)
-texture = ExtResource("1_smd2m")
-
 [node name="Shadow" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(0.25, 0.25, 0.25, 0.45)
@@ -26,6 +21,12 @@ offset_top = 200.75
 offset_right = 66.5
 offset_bottom = 200.75
 metadata/_edit_use_anchors_ = true
+
+[node name="Visuals" type="Sprite2D" parent="ControlRoot"]
+position = Vector2(20, -141)
+rotation = 3.1415927
+scale = Vector2(1.5, -1.5)
+texture = ExtResource("1_smd2m")
 
 [node name="SelectionReticle" type="Control" parent="ControlRoot"]
 unique_name_in_owner = true

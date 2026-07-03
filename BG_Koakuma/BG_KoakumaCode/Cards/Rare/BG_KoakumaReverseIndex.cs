@@ -12,8 +12,6 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaReverseIndex : KoakumaRareCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<ReverseIndexPower>();
-
     public BG_KoakumaReverseIndex() : base(1, CardType.Power) { }
 
     //protected override IEnumerable<DynamicVar> CanonicalVars => [AmountVar("Show", 3)];

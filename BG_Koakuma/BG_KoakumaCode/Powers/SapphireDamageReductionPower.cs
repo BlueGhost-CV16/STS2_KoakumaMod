@@ -83,7 +83,7 @@ public abstract class SapphireDamageReductionPower : KoakumaPower, IPowerExtraIc
         ];
     }
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         return target == Owner || dealer == Owner ? DamageMultiplier : 1m;
     }

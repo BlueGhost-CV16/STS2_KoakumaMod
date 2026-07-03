@@ -20,7 +20,6 @@ public sealed class BG_KoakumaApatiteBook : KoakumaMagicBookCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];
 
-
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new CardsVar(1),

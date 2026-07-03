@@ -10,7 +10,7 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaFamiliarSupport : KoakumaUncommonCard
 {
-    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Read];
+    protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Read, KoakumaHoverTips.Magic];
 
     public BG_KoakumaFamiliarSupport() : base(0, CardType.Skill) { }
 

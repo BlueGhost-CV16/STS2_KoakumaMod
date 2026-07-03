@@ -23,7 +23,7 @@ public sealed class BloodMarkPower : KoakumaPower
     {
         if (target == Owner && props.IsPoweredAttack() && dealer != null && dealer != Owner && result.UnblockedDamage + result.OverkillDamage > 0)
         {
-            await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unblockable | ValueProp.Unpowered, dealer, cardSource);
+            await CreatureCmd.Damage(choiceContext, Owner, Amount, ValueProp.Unblockable | ValueProp.Unpowered, dealer, cardSource, null);
             if (Applier?.Player != null)
             {
                 await KoakumaMechanics.GainMagic(Applier.Player, Amount, cardSource);

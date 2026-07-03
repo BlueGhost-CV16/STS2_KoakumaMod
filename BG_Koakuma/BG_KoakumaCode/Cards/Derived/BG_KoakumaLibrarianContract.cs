@@ -22,7 +22,7 @@ public sealed class BG_KoakumaLibrarianContract : KoakumaDerivedCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Interpret];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [.. PowerExtraTips<LibrarianContractPower>(), CardTip<BG_KoakumaLapisBook>(), KeywordTip(CardKeyword.Retain)];
+    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => [CardTip<BG_KoakumaLapisBook>(), KeywordTip(CardKeyword.Retain)];
 
     public BG_KoakumaLibrarianContract() : base(0, CardType.Power)
     {

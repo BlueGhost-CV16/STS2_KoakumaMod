@@ -17,7 +17,7 @@ public sealed class ManaOverdrivePower : KoakumaPower
 
     public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
-        if (player == Owner.Player && await KoakumaMechanics.SpendMagic(choiceContext, player, this, 2))
+        if (player == Owner.Player && await KoakumaMechanics.SpendMagic(choiceContext, player, this, 1))
         {
             await PowerCmd.Apply<ManaOverdriveTemporaryStrengthPower>(choiceContext, Owner, Amount, Owner, null);
             await PowerCmd.Apply<ManaOverdriveTemporaryDexterityPower>(choiceContext, Owner, Amount, Owner, null);

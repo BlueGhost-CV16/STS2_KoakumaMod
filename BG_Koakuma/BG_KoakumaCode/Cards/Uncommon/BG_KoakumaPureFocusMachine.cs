@@ -15,8 +15,6 @@ public sealed class BG_KoakumaPureFocusMachine : KoakumaUncommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Magic];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<PureFocusMachinePower>();
-
     public BG_KoakumaPureFocusMachine() : base(0, CardType.Power) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

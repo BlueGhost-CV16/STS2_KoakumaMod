@@ -43,7 +43,7 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 
@@ -52,7 +52,7 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
         if (KoakumaMechanics.MagicPaid(cardPlay))
         {
             await DamageCmd.Attack(DynamicVars["ManaDamage"].BaseValue)
-                .FromCard(this)
+                .FromCard(this, cardPlay)
                 .Targeting(cardPlay.Target)
                 .Execute(choiceContext);
         }
@@ -60,7 +60,7 @@ public sealed class BG_KoakumaMagicBookCollect : KoakumaCard, IKoakumaInterpreta
         if (KoakumaMechanics.ConsumeInterpret(this))
         {
             await DamageCmd.Attack(DynamicVars["ManaDamage"].BaseValue)
-                .FromCard(this)
+                .FromCard(this, cardPlay)
                 .Targeting(cardPlay.Target)
                 .Execute(choiceContext);
         }

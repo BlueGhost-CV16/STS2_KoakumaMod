@@ -12,8 +12,6 @@ namespace BG_Koakuma.Cards;
 [RegisterCard(typeof(BG_KoakumaCardPool))]
 public sealed class BG_KoakumaOverreadSyndrome : KoakumaUncommonCard
 {
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<OverreadSyndromePower>();
-
     public BG_KoakumaOverreadSyndrome() : base(1, CardType.Power) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<OverreadSyndromePower>("Power", 2)];

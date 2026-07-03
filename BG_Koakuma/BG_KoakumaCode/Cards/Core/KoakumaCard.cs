@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
-using BG_Koakuma.Powers;
 using BG_Koakuma.Tooltips;
 using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Combat.SecondaryResources;
@@ -53,9 +52,6 @@ public abstract class KoakumaCard : ModCardTemplate
 
     protected static IHoverTip PowerTip<TPower>() where TPower : PowerModel =>
         HoverTipFactory.FromPower<TPower>();
-
-    protected static IEnumerable<IHoverTip> PowerExtraTips<TPower>() where TPower : KoakumaPower, new() =>
-        KoakumaPower.CreateAdditionalHoverTips<TPower>();
 
     protected static IHoverTip KeywordTip(CardKeyword keyword) =>
         HoverTipFactory.FromKeyword(keyword);

@@ -14,6 +14,7 @@ using BG_Koakuma.Characters;
 using BG_Koakuma.Powers;
 using BG_Koakuma.Tooltips;
 using BG_Koakuma.Relics;
+using BG_Koakuma.Vfx;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
@@ -39,7 +40,8 @@ public sealed class BG_KoakumaMagicBomb : KoakumaDerivedCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+        await KoakumaVfx.PlayMagicBombThrowAsync(Owner.Creature, cardPlay.Target);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, cardPlay).Targeting(cardPlay.Target).Execute(choiceContext);
         await PowerCmd.Apply<MagicBurnPower>(choiceContext, cardPlay.Target, Amount("MagicBurn"), Owner.Creature, this);
         if (Owner.GetRelic<BG_KoakumaImprovedMagicBomb>() is { } improvedMagicBomb)
         {

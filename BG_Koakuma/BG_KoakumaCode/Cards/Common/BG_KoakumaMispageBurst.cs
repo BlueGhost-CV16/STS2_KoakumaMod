@@ -26,7 +26,7 @@ public sealed class BG_KoakumaMispageBurst : KoakumaCommonCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this, cardPlay);
         if (PileType.Draw.GetPile(Owner).Cards.LastOrDefault()?.EnergyCost.GetWithModifiers(CostModifiers.Local) == 0)
         {
             await PowerCmd.Apply<MagicBurnPower>(choiceContext, cardPlay.Target, Amount("MagicBurn"), Owner.Creature, this);

@@ -31,7 +31,7 @@ public sealed class BG_KoakumaChainBomb : KoakumaUncommonCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
         var hadPlayedMagicBomb = KoakumaMechanics.HasPlayedMagicBombThisTurn(Owner);
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this, cardPlay);
         await PowerCmd.Apply<MagicBurnPower>(choiceContext, cardPlay.Target, Amount("MagicBurn"), Owner.Creature, this);
         if (hadPlayedMagicBomb)
         {

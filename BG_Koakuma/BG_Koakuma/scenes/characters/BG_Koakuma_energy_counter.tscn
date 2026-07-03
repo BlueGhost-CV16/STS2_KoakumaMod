@@ -1,6 +1,56 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwk1c7h3rydpy"]
+[gd_scene load_steps=12 format=3 uid="uid://bwk1c7h3rydpy"]
 
 [ext_resource type="Texture2D" uid="uid://bqsxwkv6rvqll" path="res://BG_Koakuma/images/characters/BG_Koakuma_energy_orb_layer_1.png" id="1_layer1"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_back_pulse"]
+
+[sub_resource type="Gradient" id="Gradient_back_pulse"]
+offsets = PackedFloat32Array(0, 0.32, 0.76, 1)
+colors = PackedColorArray(0.95, 0.82, 0.58, 0.18, 0.88, 0.48, 0.78, 0.14, 0.56, 0.36, 0.9, 0.06, 0.28, 0.18, 0.48, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_back_pulse"]
+gradient = SubResource("Gradient_back_pulse")
+
+[sub_resource type="Curve" id="Curve_back_pulse_scale"]
+_data = [Vector2(0, 0.35), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.35), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_back_pulse_scale"]
+curve = SubResource("Curve_back_pulse_scale")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_back_pulse"]
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.45
+scale_max = 1.45
+scale_curve = SubResource("CurveTexture_back_pulse_scale")
+color_ramp = SubResource("GradientTexture1D_back_pulse")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_front_flash"]
+
+[sub_resource type="Gradient" id="Gradient_front_flash"]
+offsets = PackedFloat32Array(0, 0.18, 0.58, 1)
+colors = PackedColorArray(1, 1, 0.9, 0.7, 1, 0.86, 0.52, 0.52, 0.95, 0.46, 1, 0.22, 0.42, 0.18, 0.65, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_front_flash"]
+gradient = SubResource("Gradient_front_flash")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_front_flash"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 28.0
+initial_velocity_max = 78.0
+angular_velocity_min = -120.0
+angular_velocity_max = 120.0
+radial_velocity_min = 44.0
+radial_velocity_max = 96.0
+gravity = Vector3(0, 0, 0)
+damping_min = 16.0
+damping_max = 32.0
+scale_min = 0.22
+scale_max = 0.52
+color_ramp = SubResource("GradientTexture1D_front_flash")
 
 [node name="TemplateEnergyCounter" type="Control"]
 layout_mode = 3
@@ -12,6 +62,17 @@ metadata/_edit_lock_ = true
 [node name="EnergyVfxBack" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(64, 64)
+
+[node name="BackPulseParticles" type="GPUParticles2D" parent="EnergyVfxBack"]
+material = SubResource("CanvasItemMaterial_back_pulse")
+emitting = false
+amount = 1
+texture = ExtResource("1_layer1")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_back_pulse")
 
 [node name="Layers" type="Control" parent="."]
 unique_name_in_owner = true
@@ -44,6 +105,18 @@ grow_vertical = 2
 [node name="EnergyVfxFront" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(64, 64)
+
+[node name="FrontFlashParticles" type="GPUParticles2D" parent="EnergyVfxFront"]
+material = SubResource("CanvasItemMaterial_front_flash")
+emitting = false
+amount = 18
+texture = ExtResource("1_layer1")
+lifetime = 1.35
+one_shot = true
+explosiveness = 1.0
+randomness = 0.62
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_front_flash")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

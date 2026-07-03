@@ -16,6 +16,7 @@
         <GodotExportPreset>Windows Desktop</GodotExportPreset>
         <Sts2Dir Condition="'$(Sts2Dir)' == ''">$(MSBuildProgramFiles32)\Steam\steamapps\common\Slay the Spire 2</Sts2Dir>
         <Sts2DataDir Condition="'$(Sts2DataDir)' == ''">$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
+        <Sts2DataDir108 Condition="'$(Sts2DataDir108)' == ''">$(Sts2DataDir)</Sts2DataDir108>
         <ModOutputDir>$(Sts2Dir)\mods\$(MSBuildProjectName)\</ModOutputDir>
         <ModPckPath>$(ModOutputDir)$(MSBuildProjectName).pck</ModPckPath>
         <!-- 本机测试时 RitsuLib 包/构建逻辑会使用这个目录把 RitsuLib 部署到游戏 mods/STS2-RitsuLib。 -->
@@ -24,7 +25,20 @@
         <CopyModOnBuild Condition="'$(CopyModOnBuild)' == ''">true</CopyModOnBuild>
         <RunPckExport Condition="'$(RunPckExport)' == '' and '$(DesignTimeBuild)' != 'true'">true</RunPckExport>
         <RunPckExport Condition="'$(RunPckExport)' == ''">false</RunPckExport>
+        <SyncManifestDependenciesOnBuild Condition="'$(SyncManifestDependenciesOnBuild)' == ''">true</SyncManifestDependenciesOnBuild>
+
+        <JmcDispatchModName>BG_Koakuma</JmcDispatchModName>
+        <JmcDispatchRuntimeAssemblyName>BG_Koakuma.Runtime</JmcDispatchRuntimeAssemblyName>
+        <JmcDispatchRuntimeFileName>BG_Koakuma.Runtime.dll</JmcDispatchRuntimeFileName>
+        <JmcDispatchInitializerType>BG_Koakuma.Entry</JmcDispatchInitializerType>
+        <JmcDispatchInitializerMethod>Initialize</JmcDispatchInitializerMethod>
+        <JmcDispatchPublishDir>$(MSBuildProjectDirectory)\bin\$(Configuration)\$(TargetFramework)\modPublish</JmcDispatchPublishDir>
+        <KoakumaDispatchRuntimeBaseDir>$(MSBuildProjectDirectory)\bin\$(Configuration)\$(TargetFramework)</KoakumaDispatchRuntimeBaseDir>
+        <KoakumaRuntime108OutputDir>$(KoakumaDispatchRuntimeBaseDir)\sts2-0.108\</KoakumaRuntime108OutputDir>
+        <KoakumaGodotTempOutputDir>$(MSBuildProjectDirectory)\.godot\mono\temp\bin\$(Configuration)\</KoakumaGodotTempOutputDir>
     </PropertyGroup>
+
+    <Import Project="build\JmcDispatch\JmcModLib.Dispatch.targets" Condition="Exists('build\JmcDispatch\JmcModLib.Dispatch.targets')"/>
 
     <ItemGroup>
         <PackageReference Include="Krafs.Publicizer" Version="2.2.1" PrivateAssets="all"/>
@@ -46,9 +60,9 @@
     <ItemGroup>
         <!-- 中文：排除 Godot、IDE 和构建输出目录，避免本地生成文件参与编译。 -->
         <!-- English: Exclude Godot, IDE, and build output directories so local generated files are not compiled. -->
-        <Compile Remove=".godot/**;.idea/**;.vs/**;bin/**;obj/**"/>
-        <EmbeddedResource Remove=".godot/**;.idea/**;.vs/**;bin/**;obj/**"/>
-        <None Remove=".godot/**;.idea/**;.vs/**;bin/**;obj/**"/>
+        <Compile Remove=".godot/**;.idea/**;.vs/**;bin/**;obj/**;build/**"/>
+        <EmbeddedResource Remove=".godot/**;.idea/**;.vs/**;bin/**;obj/**;build/**"/>
+        <None Remove=".godot/**;.idea/**;.vs/**;bin/**;obj/**;build/**"/>
 
         <AdditionalFiles Include="BG_Koakuma/localization/**/*.json"/>
 
@@ -60,6 +74,7 @@
         <None Include="export_presets.cfg"/>
         <None Include=".gitignore"/>
         <None Include="local.props.template"/>
+        <None Include="build/**"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -80,20 +95,59 @@
         <Error Condition="!Exists('$(Sts2DataDir)\sts2.dll')" Text="Could not find sts2.dll under '$(Sts2DataDir)'. Copy local.props.template to local.props and set Sts2Dir/Sts2DataDir for your local game install."/>
     </Target>
 
-    <Target Name="CopyMod" AfterTargets="Build" Condition="'$(CopyModOnBuild)' != 'false'">
+    <Target Name="BuildKoakumaDispatchRuntime"
+            BeforeTargets="JmcDispatchCopyRuntimes"
+            Condition="'$(JmcDispatchEnabled)' == 'true' and '$(KoakumaDispatchInnerBuild)' != 'true'">
+        <Error Condition="'$(Sts2DataDir108)' == ''"
+               Text="Sts2DataDir108 is required to build the STS2 0.108 runtime."/>
+        <Error Condition="!Exists('$(Sts2DataDir108)\sts2.dll')"
+               Text="Could not find sts2.dll under Sts2DataDir108='$(Sts2DataDir108)'."/>
+
+        <MSBuild Projects="$(MSBuildProjectFullPath)"
+                 Targets="Restore;Rebuild"
+                 Properties="Configuration=$(Configuration);Platform=$(Platform);TargetFramework=$(TargetFramework);Sts2DataDir=$(Sts2DataDir108);JmcDispatchEnabled=false;CopyModOnBuild=false;RunPckExport=false;AssemblyName=$(JmcDispatchRuntimeAssemblyName);KoakumaDispatchInnerBuild=true"/>
+        <RemoveDir Directories="$(KoakumaRuntime108OutputDir)" Condition="Exists('$(KoakumaRuntime108OutputDir)')"/>
+        <MakeDir Directories="$(KoakumaRuntime108OutputDir)"/>
+        <ItemGroup>
+            <_KoakumaRuntime108Files Include="$(KoakumaGodotTempOutputDir)$(JmcDispatchRuntimeFileName)"/>
+            <_KoakumaRuntime108Files Include="$(KoakumaGodotTempOutputDir)$(JmcDispatchRuntimeAssemblyName).*"/>
+        </ItemGroup>
+        <Copy SourceFiles="@(_KoakumaRuntime108Files)"
+              DestinationFiles="@(_KoakumaRuntime108Files -> '$(KoakumaRuntime108OutputDir)%(Filename)%(Extension)')"
+              SkipUnchangedFiles="true"/>
+
+        <RemoveDir Directories="$(JmcDispatchPublishDir)\runtimes\0.108" Condition="Exists('$(JmcDispatchPublishDir)\runtimes\0.108')"/>
+    </Target>
+
+    <Target Name="CopyMod" AfterTargets="JmcDispatchPublish" Condition="'$(CopyModOnBuild)' != 'false' and '$(JmcDispatchEnabled)' == 'true'">
         <MakeDir Directories="$(ModOutputDir)"/>
-        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModOutputDir)"/>
+        <ItemGroup>
+            <_KoakumaDispatchPublishFiles Include="$(JmcDispatchPublishDir)\**\*.*"/>
+        </ItemGroup>
+        <Copy SourceFiles="@(_KoakumaDispatchPublishFiles)"
+              DestinationFiles="@(_KoakumaDispatchPublishFiles -> '$(ModOutputDir)%(RecursiveDir)%(Filename)%(Extension)')"
+              SkipUnchangedFiles="true"/>
         <Copy SourceFiles="$(MSBuildProjectDirectory)\$(MSBuildProjectName).json" DestinationFolder="$(ModOutputDir)"/>
     </Target>
 
     <Target Name="ExportPCK" AfterTargets="Build" Condition="'$(RunPckExport)' == 'true' and '$(STS2_SKIP_PCK_EXPORT)' != '1'">
         <Error Condition="'$(GodotExe)' == '' or !Exists('$(GodotExe)')" Text="GodotExe is required for PCK export. Copy local.props.template to local.props and set GodotExe, or build with /p:RunPckExport=false."/>
         <MakeDir Directories="$(ModOutputDir)"/>
-        <Exec WorkingDirectory="$(MSBuildProjectDirectory)" Command="&quot;$(GodotExe)&quot; --headless --path &quot;$(MSBuildProjectDirectory)&quot; --export-pack &quot;$(GodotExportPreset)&quot; &quot;$(ModPckPath)&quot;" EnvironmentVariables="STS2_SKIP_PCK_EXPORT=1"/>
+        <Exec WorkingDirectory="$(MSBuildProjectDirectory)"
+              Command="&quot;$(GodotExe)&quot; --headless --path &quot;$(MSBuildProjectDirectory)&quot; --export-pack &quot;$(GodotExportPreset)&quot; &quot;$(ModPckPath)&quot;"
+              EnvironmentVariables="STS2_SKIP_PCK_EXPORT=1"
+              IgnoreExitCode="true"
+              IgnoreStandardErrorWarningFormat="true">
+            <Output TaskParameter="ExitCode" PropertyName="GodotExportExitCode"/>
+        </Exec>
+        <Warning Condition="'$(GodotExportExitCode)' != '0' and Exists('$(ModPckPath)')"
+                 Text="Godot PCK export returned exit code $(GodotExportExitCode), but the PCK was generated at '$(ModPckPath)'."/>
+        <Error Condition="'$(GodotExportExitCode)' != '0' and !Exists('$(ModPckPath)')"
+               Text="Godot PCK export failed with exit code $(GodotExportExitCode), and no PCK was generated at '$(ModPckPath)'."/>
     </Target>
 
     <Target Name="SyncManifestDependencies" AfterTargets="Build" BeforeTargets="CopyMod"
-            Condition="'$(DesignTimeBuild)' != 'true' and '$(PkgSTS2_RitsuLib)' != ''">
+            Condition="'$(DesignTimeBuild)' != 'true' and '$(KoakumaDispatchInnerBuild)' != 'true' and '$(SyncManifestDependenciesOnBuild)' != 'false' and '$(PkgSTS2_RitsuLib)' != ''">
         <PropertyGroup>
             <RitsuLibVersion>$([System.IO.Path]::GetFileName('$(PkgSTS2_RitsuLib)'))</RitsuLibVersion>
             <ManifestFile>$(MSBuildProjectDirectory)\$(MSBuildProjectName).json</ManifestFile>

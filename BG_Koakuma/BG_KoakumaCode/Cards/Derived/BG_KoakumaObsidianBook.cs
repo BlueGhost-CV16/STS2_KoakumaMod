@@ -29,10 +29,16 @@ public sealed class BG_KoakumaObsidianBook : KoakumaMagicBookCard
     ];
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        var min = Amount("Min");
+        var max = Amount("Max");
+        var prefs = min == max
+            ? new CardSelectorPrefs(SelectionScreenPrompt, max) { Cancelable = true }
+            : new CardSelectorPrefs(SelectionScreenPrompt, min, max) { Cancelable = true, RequireManualConfirmation = true };
+
         var selected = await CardSelectCmd.FromHand(
             choiceContext,
             Owner,
-            new CardSelectorPrefs(SelectionScreenPrompt, Amount("Min"), Amount("Max")) { Cancelable = true, RequireManualConfirmation = true },
+            prefs,
             card => card != this && KoakumaMechanics.CanTransformToTrueName(card),
             this);
         foreach (var card in selected)

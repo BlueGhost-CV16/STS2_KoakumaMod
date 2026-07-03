@@ -26,7 +26,7 @@ public sealed class BG_KoakumaMagicBookHeavyStrike : KoakumaUncommonCard
     {
         if (card == this)
         {
-            EnergyCost.AddThisCombat(-KoakumaMechanics.GetMagicBookCollectionCount(Owner), reduceOnly: true);
+            EnergyCost.AddUntilPlayed(-KoakumaMechanics.GetMagicBookCollectionCount(Owner), reduceOnly: true);
         }
         return Task.CompletedTask;
     }
@@ -34,7 +34,7 @@ public sealed class BG_KoakumaMagicBookHeavyStrike : KoakumaUncommonCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this);
+        await CreatureCmd.Damage(choiceContext, cardPlay.Target, DynamicVars.Damage, Owner.Creature, this, cardPlay);
         await KoakumaMechanics.CollectMagicBook(choiceContext, this);
         await KoakumaMechanics.Read(choiceContext, this);
     }

@@ -10,6 +10,7 @@ internal static class KoakumaHoverTips
     public const string Magic = "BG_KOAKUMA_SECONDARY_RESOURCE_MAGIC";
     public const string MagicCost = "BG_KOAKUMA_MAGIC_COST";
     public const string MagicBook = KoakumaCard.MagicBookKeywordId;
+    public const string Block = "BG_KOAKUMA_TIP_BLOCK";
     public const string Read = "BG_KOAKUMA_TIP_READ";
     public const string Interpret = "BG_KOAKUMA_TIP_INTERPRET";
     public const string MagicBookCollection = "BG_KOAKUMA_TIP_MAGIC_BOOK_COLLECTION";

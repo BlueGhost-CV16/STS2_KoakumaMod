@@ -15,8 +15,6 @@ public sealed class BG_KoakumaMagicPages : KoakumaCommonCard
 {
     protected override IEnumerable<string> ExtraKoakumaHoverTipIds => [KoakumaHoverTips.Read];
 
-    protected override IEnumerable<IHoverTip> ExtraKoakumaHoverTips => PowerExtraTips<MagicPagesPower>();
-
     public BG_KoakumaMagicPages() : base(1, CardType.Skill) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

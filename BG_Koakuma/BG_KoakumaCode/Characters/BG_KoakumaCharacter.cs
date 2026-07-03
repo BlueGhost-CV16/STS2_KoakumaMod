@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Characters;
+using STS2RitsuLib.Scaffolding.Content;
 using STS2RitsuLib.Scaffolding.Godot;
 
 namespace BG_Koakuma.Characters;
@@ -19,6 +20,7 @@ public sealed class BG_KoakumaCharacter : ModCharacterTemplate<BG_KoakumaCardPoo
     private const string MerchantScenePath = $"{SceneRoot}/BG_Koakuma_merchant.tscn";
     private const string RestSiteScenePath = $"{SceneRoot}/BG_Koakuma_rest_site.tscn";
     private const string CharacterSelectBgScenePath = $"{SceneRoot}/BG_Koakuma_character_select_bg.tscn";
+    private const string TransitionMaterialPath = $"{Entry.ResPath}/materials/transitions/BG_Koakuma_character_select_transition.tres";
 
     // 角色名称颜色。
     public override Color NameColor => ThemeColor;
@@ -59,13 +61,24 @@ public sealed class BG_KoakumaCharacter : ModCharacterTemplate<BG_KoakumaCardPoo
             CharacterSelectIconPath: $"{ImageRoot}/BG_Koakuma_character_select.png",
             // 人物选择图标-锁定状态。
             CharacterSelectLockedIconPath: $"{ImageRoot}/BG_Koakuma_character_select_locked.png",
+            // 人物选择过渡动画材质。
+            CharacterSelectTransitionPath: TransitionMaterialPath,
             // 地图上的角色标记图标、表情轮盘上的角色头像。
             MapMarkerPath: $"{ImageRoot}/BG_Koakuma_map_marker.png"),
         Multiplayer: new CharacterMultiplayerAssetSet(
             ArmPointingTexturePath: $"{ImageRoot}/BG_Koakuma_character_armpointing.png",
             ArmRockTexturePath: $"{ImageRoot}/BG_Koakuma_character_rock.png",
             ArmPaperTexturePath: $"{ImageRoot}/BG_Koakuma_character_paper.png",
-            ArmScissorsTexturePath: $"{ImageRoot}/BG_Koakuma_character_scissors.png"));
+            ArmScissorsTexturePath: $"{ImageRoot}/BG_Koakuma_character_scissors.png"),
+        VanillaRelicVisualOverrides:
+        [
+            new(
+                CharacterOwnedVanillaRelicModelId.YummyCookie,
+                new RelicAssetProfile(
+                    IconPath: $"{Entry.ResPath}/images/relics/BG_KoakumaYummyCookie.png",
+                    IconOutlinePath: $"{Entry.ResPath}/images/relics/outline/BG_KoakumaYummyCookie.png",
+                    BigIconPath: $"{Entry.ResPath}/images/relics/big/BG_KoakumaYummyCookie.png"))
+        ]);
 
     // 某个字段没写时，RitsuLib 会从占位角色配置里补齐。
     public override string? PlaceholderCharacterId => "ironclad";

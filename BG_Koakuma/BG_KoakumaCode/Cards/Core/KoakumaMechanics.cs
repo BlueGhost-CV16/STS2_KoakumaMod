@@ -630,10 +630,9 @@ internal static class KoakumaMechanics
             choiceContext,
             books,
             owner,
-            new CardSelectorPrefs(sourceCard.SelectionScreenPrompt, 1, 1)
+            new CardSelectorPrefs(sourceCard.SelectionScreenPrompt, 1)
             {
-                Cancelable = true,
-                RequireManualConfirmation = true
+                Cancelable = true
             })).FirstOrDefault();
         if (selected == null)
         {
@@ -858,15 +857,16 @@ internal static class KoakumaMechanics
             return selected == null ? [] : [selected];
         }
 
+        var cappedChooseCount = Math.Min(chooseCount, options.Count);
+        var prefs = requireManualConfirmation
+            ? new CardSelectorPrefs(prompt, 0, cappedChooseCount) { Cancelable = true, RequireManualConfirmation = true }
+            : new CardSelectorPrefs(prompt, cappedChooseCount) { Cancelable = true };
+
         return (await CardSelectCmd.FromSimpleGrid(
             choiceContext,
             options,
             owner,
-            new CardSelectorPrefs(prompt, Math.Min(chooseCount, options.Count))
-            {
-                Cancelable = true,
-                RequireManualConfirmation = requireManualConfirmation
-            })).ToList();
+            prefs)).ToList();
     }
 
     public static async Task MoveRandomExhaustCardsToHand(PlayerChoiceContext choiceContext, CardModel sourceCard, int showCount, int chooseCount, Func<CardModel, bool>? filter = null)
@@ -1098,7 +1098,7 @@ internal static class KoakumaMechanics
                      .SelectMany(pile => pile.Cards)
                      .OfType<BG_KoakumaMagicBookHeavyStrike>())
         {
-            card.EnergyCost.AddThisCombat(-1, reduceOnly: true);
+            card.EnergyCost.AddUntilPlayed(-1, reduceOnly: true);
         }
     }
 
